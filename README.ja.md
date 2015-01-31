@@ -74,7 +74,7 @@ ComposerでBoostCakeとSearchプラグインをインストールします。
 
 ## ライセンス
 
-[MIT](https://github.com/taqueci/cakemoney/blob/master/LICENCE)
+[MIT](https://github.com/taqueci/cakemoney/blob/master/LICENSE)
 
 
 ## 作者

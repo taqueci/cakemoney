@@ -76,7 +76,7 @@ If you want to know the summary, open "Reports" page.
 
 ## Licence
 
-[MIT](https://github.com/taqueci/cakemoney/blob/master/LICENCE)
+[MIT](https://github.com/taqueci/cakemoney/blob/master/LICENSE)
 
 
 ## Author
