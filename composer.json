@@ -1,0 +1,17 @@
+{
+    "name": "Cake Money",
+    "repositories": [
+        {
+            "type": "pear",
+            "url": "http://pear.cakephp.org"
+        }
+    ],
+    "require": {
+        "cakephp/cakephp": ">=2.5.6",
+		"cakedc/search": "dev-master",
+		"slywalker/boost_cake": "*"
+    },
+    "config": {
+        "vendor-dir": "Vendor/"
+    }
+}
