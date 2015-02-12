@@ -137,7 +137,7 @@ FROM (
 	SELECT
 		Journal.credit_id AS category_id,
 		Journal.amount
-	FROM money.journals AS Journal
+	FROM journals AS Journal
 	WHERE DATE_FORMAT(Journal.date, '$format') = '$date'
 
 	UNION ALL
@@ -145,11 +145,11 @@ FROM (
 	SELECT
 		Journal.debit_id AS category_id,
 		-1 * Journal.amount
-	FROM money.journals AS Journal
+	FROM journals AS Journal
 	WHERE DATE_FORMAT(Journal.date, '$format') = '$date'
 ) AS Journal
 
-LEFT JOIN money.categories AS Category ON (Journal.category_id = Category.id) 
+LEFT JOIN categories AS Category ON (Journal.category_id = Category.id) 
 
 GROUP BY Category.id
 END_OF_SQL;
