@@ -26,7 +26,7 @@
 			<td><?php echo h($journal['Debit']['name']); ?></td>
 			<td><?php echo h($journal['Credit']['name']); ?></td>
 			<td align="right"><?php echo number_format($journal['Journal']['amount']); ?></td>
-			<td><?php echo h($journal['Journal']['description']); ?></td>
+			<td><?php echo nl2br(h($journal['Journal']['description'])); ?></td>
 			<td class="actions">
 			  <?php echo $this->Html->link($this->element('glyphicon', array('name' => 'edit')), array('action' => 'edit', $journal['Journal']['id']), array('escape' => false)); ?>
 			  <?php echo $this->Form->postLink($this->element('glyphicon', array('name' => 'remove')), array('action' => 'delete', $journal['Journal']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $journal['Journal']['id'])); ?>
@@ -42,7 +42,7 @@
 		<li class="list-group-item">
 		  <span class="badge"><?php echo number_format($journal['Journal']['amount']); ?></span>
 		  <h4 class="list-group-item-heading"><?php echo h($journal['Journal']['date']); ?></h4>
-		  <p><?php echo h($journal['Journal']['description']); ?></p>
+		  <p><?php echo nl2br(h($journal['Journal']['description'])); ?></p>
 		  <p><?php echo $journal['Debit']['name'] . ' / ' . $journal['Credit']['name']; ?>
 			<span style="float: right">
 			  <?php echo $this->Html->link($this->element('glyphicon', array('name' => 'edit')), array('action' => 'edit', $journal['Journal']['id']), array('escape' => false)); ?>
