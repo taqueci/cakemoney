@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Entity;
 
+use DateTime;
 use Cake\ORM\Entity;
 
 /**
@@ -40,4 +41,16 @@ class Journal extends Entity
         '*' => true,
         'id' => false
     ];
+
+    protected function _setDate($date)
+    {
+        $d = new DateTime($date);
+
+        $this->set('year',  $d->format('Y'));
+        $this->set('month', $d->format('m'));
+        $this->set('day',   $d->format('d'));
+        $this->set('week',  $d->format('W'));
+
+        return $date;
+    }
 }

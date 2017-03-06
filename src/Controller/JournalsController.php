@@ -1,7 +1,6 @@
 <?php
 namespace App\Controller;
 
-use DateTime;
 use Cake\Core\Configure;
 use App\Controller\AppController;
 
@@ -80,13 +79,6 @@ class JournalsController extends AppController
             $journal->expense   = $data['expense'];
             $journal->equity    = $data['equity'];
 
-            $d = new DateTime($journal->date);
-
-            $journal->year  = $d->format('Y');
-            $journal->month = $d->format('m');
-            $journal->day   = $d->format('d');
-            $journal->week  = $d->format('W');
-
             if ($this->Journals->save($journal)) {
                 $this->Flash->success(__('The journal has been saved.'));
 
@@ -132,13 +124,6 @@ class JournalsController extends AppController
             $journal->expense   = $data['expense'];
             $journal->equity    = $data['equity'];
 
-            $d = new DateTime($journal->date);
-
-            $journal->year  = $d->format('Y');
-            $journal->month = $d->format('m');
-            $journal->day   = $d->format('d');
-            $journal->week  = $d->format('W');
-
             if ($this->Journals->save($journal)) {
                 $this->Flash->success(__('The journal has been saved.'));
 
@@ -182,13 +167,6 @@ class JournalsController extends AppController
             $journal->income    = $data['income'];
             $journal->expense   = $data['expense'];
             $journal->equity    = $data['equity'];
-
-            $d = new DateTime($journal->date);
-
-            $journal->year  = $d->format('Y');
-            $journal->month = $d->format('m');
-            $journal->day   = $d->format('d');
-            $journal->week  = $d->format('W');
 
             if ($this->Journals->save($journal)) {
                 $this->Flash->success(__('The journal has been saved.'));
