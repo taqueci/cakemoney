@@ -71,13 +71,11 @@ class JournalsController extends AppController
         if ($this->request->is('post')) {
             $journal = $this->Journals->patchEntity($journal, $this->request->data);
 
-            $data = $this->journal_data();
-
-            $journal->asset     = $data['asset'];
-            $journal->liability = $data['liability'];
-            $journal->income    = $data['income'];
-            $journal->expense   = $data['expense'];
-            $journal->equity    = $data['equity'];
+            $journal->set($this->journal_data(
+                $journal->amount,
+                $journal->debit_id,
+                $journal->credit_id
+            ));
 
             if ($this->Journals->save($journal)) {
                 $this->Flash->success(__('The journal has been saved.'));
@@ -116,13 +114,11 @@ class JournalsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $journal = $this->Journals->patchEntity($journal, $this->request->data);
 
-            $data = $this->journal_data();
-
-            $journal->asset     = $data['asset'];
-            $journal->liability = $data['liability'];
-            $journal->income    = $data['income'];
-            $journal->expense   = $data['expense'];
-            $journal->equity    = $data['equity'];
+            $journal->set($this->journal_data(
+                $journal->amount,
+                $journal->debit_id,
+                $journal->credit_id
+            ));
 
             if ($this->Journals->save($journal)) {
                 $this->Flash->success(__('The journal has been saved.'));
@@ -160,13 +156,11 @@ class JournalsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $journal = $this->Journals->patchEntity($journal, $this->request->data);
 
-            $data = $this->journal_data();
-
-            $journal->asset     = $data['asset'];
-            $journal->liability = $data['liability'];
-            $journal->income    = $data['income'];
-            $journal->expense   = $data['expense'];
-            $journal->equity    = $data['equity'];
+            $journal->set($this->journal_data(
+                $journal->amount,
+                $journal->debit_id,
+                $journal->credit_id
+            ));
 
             if ($this->Journals->save($journal)) {
                 $this->Flash->success(__('The journal has been saved.'));
@@ -215,9 +209,8 @@ class JournalsController extends AppController
     }
 
     private function find_category() {
-        $categories = $this->Journals->Debits->find('all', [
-            'fields' => ['id', 'name', 'account']
-        ])->toArray();
+        $categories = $this->Journals->Debits
+            ->find()->select(['id', 'name', 'account'])->toArray();
 
         $c = array();
 
@@ -249,13 +242,9 @@ class JournalsController extends AppController
         return $a->account;
 	}
 
-	private function journal_data() {
-		$r = $this->request;
-
-		$amount = $r->getData('amount');
-
-		$d_id = $this->account_id($r->getData('debit_id'));
-		$c_id = $this->account_id($r->getData('credit_id'));
+	private function journal_data($amount, $debit_id, $credit_id) {
+		$d_id = $this->account_id($debit_id);
+		$c_id = $this->account_id($credit_id);
 
         $data = array();
 
