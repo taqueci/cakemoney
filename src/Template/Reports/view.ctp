@@ -2,6 +2,8 @@
 /**
   * @var \App\View\AppView $this
   */
+
+use Cake\Core\Configure;
 ?>
 <div class="row">
   <div class="col-md-12">
@@ -28,11 +30,11 @@
 			<td align="center"><small><span class="label label-default"><?= __('Balance') ?></span></small></td>
 		  </tr>
 		  <tr>
-			<td align="center"><font size="4"><?= number_format($sum->income) ?></font></td>
+			<td align="center"><span class="font-large"><?= number_format($sum->income) ?></span></td>
 			<td align="center"><tt>-</tt></td>
-			<td align="center"><font size="4"><?= number_format($sum->expense) ?></font></td>
+			<td align="center"><span class="font-large"><?= number_format($sum->expense) ?></span></td>
 			<td align="center"><tt>=</tt></td>
-			<td align="center"><font size="5"><?= number_format($sum->income - $sum->expense) ?></font></td>
+			<td align="center"><span class="font-xlarge"><?= $this->element('Format/numberWithStatus', ['value' => $sum->income - $sum->expense]) ?></span></td>
 		  </tr>
 		</table>
 		<h4><?= __('Net Assets') ?></h4>
@@ -45,11 +47,11 @@
 			<td align="center"><small><span class="label label-default"><?= __('Net Assets') ?></span></small></td>
 		  </tr>
 		  <tr>
-			<td align="center"><font size="4"><?= number_format($sum->asset) ?></font></td>
+			<td align="center"><span class="font-large"><?= number_format($sum->asset) ?></span></td>
 			<td align="center"><tt>-</tt></td>
-			<td align="center"><font size="4"><?= number_format($sum->liability) ?></font></td>
+			<td align="center"><span class="font-large"><?= number_format($sum->liability) ?></span></td>
 			<td align="center"><tt>=</tt></td>
-			<td align="center"><font size="5"><?= number_format($sum->asset - $sum->liability) ?></font></td>
+			<td align="center"><span class="font-xlarge"><?= $this->element('Format/numberWithStatus', ['value' => $sum->asset - $sum->liability]) ?></span></td>
 		  </tr>
 		</table>
 		<h4><?= __('Equities') ?></h4>
@@ -58,7 +60,7 @@
 			<td align="center"><small><span class="label label-default"><?= __('Equities') ?></span></small></td>
 		  </tr>
 		  <tr>
-			<td align="center"><font size="5"><?= number_format($sum->equity) ?></font></td>
+			<td align="center"><span class="font-xlarge"><?= number_format($sum->equity) ?></span></td>
 		  </tr>
 		</table>
 	  </div>
@@ -79,14 +81,16 @@
 	  <div class="col-md-12">
 		<h3><?= __('Chart') ?></h3>
 		<div align="right">
-		  <div id="chart-sel" class="btn-group" role="group" aria-label="Chart selector">
+		  <div id="chart-sel" class="btn-group btn-group-sm" role="group" aria-label="Chart selector">
 			<button id="chart-btn-y" type="button" class="btn btn-default"><?= __('Year') ?></button>
 			<button id="chart-btn-m" type="button" class="btn btn-default"><?= __('Month') ?></button>
+			<button id="chart-btn-w" type="button" class="btn btn-default"><?= __('Week') ?></button>
 			<button id="chart-btn-d" type="button" class="btn btn-default"><?= __('Day') ?></button>
 		  </div>
 		</div>
 		<div id="chart-lines">
 		  <canvas id="canvas-line-d" width="100"></canvas>
+		  <canvas id="canvas-line-w" width="100"></canvas>
 		  <canvas id="canvas-line-m" width="100"></canvas>
 		  <canvas id="canvas-line-y" width="100"></canvas>
 		</div>
@@ -116,8 +120,8 @@
 </div>
 
 <?php
-$this->prepend('css', $this->Html->css($css));
-$this->prepend('script', $this->Html->script($js));
+$this->prepend('css', $this->Html->css([Configure::read('Css.bootstrapDatepicker')]));
+$this->prepend('script', $this->Html->script([Configure::read('Js.bootstrapDatepicker'), Configure::read('Js.chartjs')]));
 ?>
 
 <?php $this->Html->scriptStart(['block' => true]) ?>
@@ -206,6 +210,22 @@ $label = array();
 $incoming = array();
 $outgoing = array();
 
+foreach ($chart_weekly as $x) {
+	$label[] = sprintf('%04d-W%02d', $x->year, $x->week);
+	$incoming[] = $x->income;
+	$outgoing[] = $x->expense;
+}
+
+$this->Html->scriptStart(['block' => true]);
+echo $this->element('Chart/line', ['id' => 'canvas-line-w', 'label' => $label, 'incoming' => $incoming, 'outgoing' => $outgoing]);
+$this->Html->scriptEnd();
+?>
+
+<?php
+$label = array();
+$incoming = array();
+$outgoing = array();
+
 foreach ($chart_monthly as $x) {
 	$label[] = sprintf('%04d-%02d', $x->year, $x->month);
 	$incoming[] = $x->income;
@@ -248,6 +268,10 @@ $(function() {
 
 	$('#chart-btn-d').click(function() {
 		$('#canvas-line-d').show();
+	});
+
+	$('#chart-btn-w').click(function() {
+		$('#canvas-line-w').show();
 	});
 
 	$('#chart-btn-m').click(function() {

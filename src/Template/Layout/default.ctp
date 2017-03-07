@@ -128,6 +128,12 @@ body {
 .xs-icon {
   font-size: 110%;
 }
+.font-large {
+  font-size: large;
+}
+.font-xlarge {
+  font-size: x-large;
+}
 </style>
 HTML;
 $this->prepend('css', $this->Html->css([Configure::read('Css.bootstrap'), Configure::read('Css.fontawesome')]));

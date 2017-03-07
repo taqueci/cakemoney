@@ -2,6 +2,8 @@
 /**
   * @var \App\View\AppView $this
   */
+
+use Cake\Core\Configure;
 ?>
 <div class="row">
   <div class="col-md-12">
@@ -37,7 +39,7 @@
 			<td><?= h($x->debit->name) ?></td>
 			<td><?= h($x->credit->name) ?></td>
 			<td align="right"><?= number_format($x->amount) ?></td>
-			<td><?= nl2br(h($x->summary)) ?></td>
+			<td><?= h($x->summary) ?></td>
 			<td>
 			  <?= $this->Html->link('<i class="fa fa-list-alt" aria-hidden="true"></i>', ['action' => 'view', $x->id], ['escape' => false]) ?>
 			  &nbsp;
@@ -71,7 +73,7 @@
 		<li class="list-group-item">
 		  <span class="badge"><?= number_format($x->amount) ?></span>
 		  <h4 class="list-group-item-heading"><?= h($x->date) ?></h4>
-		  <p><?= nl2br(h($x->summary)) ?></p>
+		  <p><?= h($x->summary) ?></p>
 		  <p><?= h($x->debit->name) . ' / ' . h($x->credit->name) ?>
 			<span class="xs-icon" style="float: right">
 			  <?= $this->Html->link('<i class="fa fa-list-alt" aria-hidden="true"></i>', ['action' => 'view', $x->id], ['escape' => false]) ?>
@@ -112,8 +114,8 @@
 <?= $this->fetch('postLink') ?>
 
 <?php
-$this->prepend('css', $this->Html->css($css));
-$this->prepend('script', $this->Html->script($js));
+$this->prepend('css', $this->Html->css([Configure::read('Css.bootstrapDatepicker')]));
+$this->prepend('script', $this->Html->script([Configure::read('Js.bootstrapDatepicker')]));
 ?>
 
 <?php $this->Html->scriptStart(['block' => true]); ?>

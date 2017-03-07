@@ -24,7 +24,7 @@
 		</dl>
 		<dl class="dl-horizontal">
 		  <dt><?= __('Description') ?></dt>
-          <dd><?= h($journal->description) ?></dd>
+          <dd><?= $this->Text->autoParagraph($this->Text->autoLink($journal->description)) ?></dd>
 		</dl>
 	  </div>
 	  <div class="col-md-6">

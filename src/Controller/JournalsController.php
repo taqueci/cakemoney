@@ -1,7 +1,6 @@
 <?php
 namespace App\Controller;
 
-use Cake\Core\Configure;
 use App\Controller\AppController;
 
 /**
@@ -36,9 +35,6 @@ class JournalsController extends AppController
         ]));
 
         $this->set(compact('journals'));
-
-        $this->set('css', [Configure::read('Css.bootstrapDatepicker')]);
-        $this->set('js', [Configure::read('Js.bootstrapDatepicker')]);
 
         $this->set('_serialize', ['journals']);
     }
@@ -93,9 +89,6 @@ class JournalsController extends AppController
 
         $this->set('selections', $this->popular_selections());
 
-        $this->set('css', [Configure::read('Css.bootstrapDatepicker')]);
-        $this->set('js', [Configure::read('Js.bootstrapDatepicker')]);
-
         $this->set('_serialize', ['journal']);
     }
 
@@ -135,9 +128,6 @@ class JournalsController extends AppController
         $this->set('credits', $category);
 
         $this->set('selections', $this->popular_selections());
-
-        $this->set('css', [Configure::read('Css.bootstrapDatepicker')]);
-        $this->set('js', [Configure::read('Js.bootstrapDatepicker')]);
 
         $this->set('_serialize', ['journal']);
     }
@@ -181,9 +171,6 @@ class JournalsController extends AppController
         $this->set('credits', $category);
 
         $this->set('selections', $this->popular_selections());
-
-        $this->set('css', [Configure::read('Css.bootstrapDatepicker')]);
-        $this->set('js', [Configure::read('Js.bootstrapDatepicker')]);
 
         $this->set('_serialize', ['journal']);
     }

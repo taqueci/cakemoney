@@ -2,6 +2,8 @@
 /**
   * @var \App\View\AppView $this
   */
+
+use Cake\Core\Configure;
 ?>
 <div class="row">
   <div class="col-md-12">
@@ -19,7 +21,10 @@
 			<th><?= __('Incomings') ?></th>
 			<th><?= __('Outgoings') ?></th>
 			<th><?= __('Balance') ?></th>
-			<th><?= __('Actions') ?></th>
+			<th>
+			  <span class="hidden-xs"><?= __('Actions') ?></span>
+			  <span class="visible-xs"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></span>
+			</th>
 		  </tr>
 		</thead>
 		<tbody>
@@ -45,7 +50,10 @@
 			<th><?= __('Incomings') ?></th>
 			<th><?= __('Outgoings') ?></th>
 			<th><?= __('Balance') ?></th>
-			<th><?= __('Actions') ?></th>
+			<th>
+			  <span class="hidden-xs"><?= __('Actions') ?></span>
+			  <span class="visible-xs"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></span>
+			</th>
 		  </tr>
 		</thead>
 		<tbody>
@@ -62,7 +70,7 @@
 			<td><?= sprintf('%4d-W%02d', $x->year, $x->week) ?></td>
 			<td align="right"><?= number_format($x->income) ?></td>
 			<td align="right"><?= number_format($x->expense) ?></td>
-			<td align="right"><?= number_format($x->income - $x->expense) ?></td>
+			<td align="right"><?= $this->element('Format/numberWithStatus', ['value' => $x->income - $x->expense]) ?></td>
 			<td>
 			  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
 			</td>
@@ -78,7 +86,10 @@
 			<th><?= __('Incomings') ?></th>
 			<th><?= __('Outgoings') ?></th>
 			<th><?= __('Balance') ?></th>
-			<th><?= __('Actions') ?></th>
+			<th>
+			  <span class="hidden-xs"><?= __('Actions') ?></span>
+			  <span class="visible-xs"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></span>
+			</th>
 		  </tr>
 		</thead>
 		<tbody>
@@ -93,7 +104,7 @@
 			<td><?= sprintf('%4d-%02d', $x->year, $x->month) ?></td>
 			<td align="right"><?= number_format($x->income) ?></td>
 			<td align="right"><?= number_format($x->expense) ?></td>
-			<td align="right"><?= number_format($x->income - $x->expense) ?></td>
+			<td align="right"><?= $this->element('Format/numberWithStatus', ['value' => $x->income - $x->expense]) ?></td>
 			<td>
 			  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
 			</td>
@@ -109,7 +120,10 @@
 			<th><?= __('Incomings') ?></th>
 			<th><?= __('Outgoings') ?></th>
 			<th><?= __('Balance') ?></th>
-			<th><?= __('Actions') ?></th>
+			<th>
+			  <span class="hidden-xs"><?= __('Actions') ?></span>
+			  <span class="visible-xs"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></span>
+			</th>
 		  </tr>
 		</thead>
 		<tbody>
@@ -122,7 +136,7 @@
 			<td><?= $x->year ?></td>
 			<td align="right"><?= number_format($x->income) ?></td>
 			<td align="right"><?= number_format($x->expense) ?></td>
-			<td align="right"><?= number_format($x->income - $x->expense) ?></td>
+			<td align="right"><?= $this->element('Format/numberWithStatus', ['value' => $x->income - $x->expense]) ?></td>
 			<td>
 			  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
 			</td>
@@ -156,8 +170,8 @@
 </div>
 
 <?php
-$this->prepend('css', $this->Html->css($css));
-$this->prepend('script', $this->Html->script($js));
+$this->prepend('css', $this->Html->css([Configure::read('Css.bootstrapDatepicker')]));
+$this->prepend('script', $this->Html->script([Configure::read('Js.bootstrapDatepicker')]));
 ?>
 
 <?php $this->Html->scriptStart(['block' => true]) ?>

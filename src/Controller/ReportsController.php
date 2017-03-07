@@ -1,7 +1,6 @@
 <?php
 namespace App\Controller;
 
-use Cake\Core\Configure;
 use Cake\ORM\TableRegistry;
 use App\Controller\AppController;
 
@@ -53,9 +52,6 @@ class ReportsController extends AppController
         $this->set('annual', $annual);
 
         $this->set('_serialize', ['daily', 'weekly', 'monthly', 'annual']);
-
-        $this->set('css', [Configure::read('Css.bootstrapDatepicker')]);
-        $this->set('js', [Configure::read('Js.bootstrapDatepicker')]);
     }
 
     /**
@@ -65,7 +61,7 @@ class ReportsController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view()
     {
         list($start, $end) = $this->date_start_end(
             $this->request->getQuery('s'),
@@ -80,6 +76,10 @@ class ReportsController extends AppController
         $chart_daily = $this
             ->query_sum_group($start, $end, ['year', 'month', 'day'])
             ->order(['year' => 'ASC', 'month' => 'ASC', 'day' => 'ASC']);
+
+        $chart_weekly = $this
+            ->query_sum_group($start, $end, ['year', 'week'])
+            ->order(['year' => 'ASC', 'week' => 'ASC']);
 
         $chart_monthly = $this
             ->query_sum_group($start, $end, ['year', 'month'])
@@ -98,14 +98,9 @@ class ReportsController extends AppController
         $this->set('expense_sum', $expense);
 
         $this->set('chart_daily', $chart_daily);
+        $this->set('chart_weekly', $chart_weekly);
         $this->set('chart_monthly', $chart_monthly);
         $this->set('chart_annual', $chart_annual);
-
-        $this->set('css', [Configure::read('Css.bootstrapDatepicker')]);
-        $this->set('js', [
-            Configure::read('Js.bootstrapDatepicker'),
-            Configure::read('Js.chartjs')
-        ]);
     }
 
     public function display()
@@ -126,8 +121,6 @@ class ReportsController extends AppController
         $this->set('sum', $sum);
         $this->set('expense_sum', $expense);
         $this->set(compact('journals'));
-
-        $this->set('js', [Configure::read('Js.chartjs')]);
     }
 
     private function query_sum($start, $end)

@@ -2,6 +2,8 @@
 /**
   * @var \App\View\AppView $this
   */
+
+use Cake\Core\Configure;
 ?>
 <div class="row">
   <div class="col-md-9">
@@ -46,8 +48,8 @@
 </div>
 
 <?php
-$this->prepend('css', $this->Html->css($css));
-$this->prepend('script', $this->Html->script($js));
+$this->prepend('css', $this->Html->css([Configure::read('Css.bootstrapDatepicker')]));
+$this->prepend('script', $this->Html->script([Configure::read('Js.bootstrapDatepicker')]));
 ?>
 
 <?php $this->Html->scriptStart(['block' => true]); ?>

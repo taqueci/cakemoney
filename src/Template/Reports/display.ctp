@@ -2,6 +2,8 @@
 /**
   * @var \App\View\AppView $this
   */
+
+use Cake\Core\Configure;
 ?>
 <div class="row">
   <div class="col-md-12">
@@ -31,11 +33,11 @@
 			<td align="center"><small><span class="label label-default"><?= __('Balance') ?></span></small></td>
 		  </tr>
 		  <tr>
-			<td align="center"><font size="4"><?= number_format($sum->income) ?></font></td>
+			<td align="center"><span class="font-large"><?= number_format($sum->income) ?></span></td>
 			<td align="center"><tt>-</tt></td>
-			<td align="center"><font size="4"><?= number_format($sum->expense) ?></font></td>
+			<td align="center"><span class="font-large"><?= number_format($sum->expense) ?></span></td>
 			<td align="center"><tt>=</tt></td>
-			<td align="center"><font size="5"><?= number_format($sum->income - $sum->expense) ?></font></td>
+			<td align="center"><span class="font-xlarge"><?= $this->element('Format/numberWithStatus', ['value' => $sum->income - $sum->expense]) ?></span></td>
 		  </tr>
 		</table>
 		<h3><?= __('Outgoings') ?></h3>
@@ -50,7 +52,7 @@
 		  <li class="list-group-item">
 			<span class="badge"><?= number_format($x->amount) ?></span>
 			<h4 class="list-group-item-heading"><?= h($x->date) ?></h4>
-			<p><?= nl2br(h($x->summary)) ?></p>
+			<p><?= h($x->summary) ?></p>
 			<p><?= h($x->debit->name) . ' / ' . h($x->credit->name) ?>
 			  <span class="xs-icon" style="float: right">
 				<?= $this->Html->link('<i class="fa fa-list-alt" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'view', $x->id], ['escape' => false]) ?>
@@ -83,7 +85,7 @@
 
 <?= $this->fetch('postLink') ?>
 
-<?php $this->prepend('script', $this->Html->script($js)); ?>
+<?php $this->prepend('script', $this->Html->script([Configure::read('Js.chartjs')])) ?>
 
 <?php
 $label = array();
