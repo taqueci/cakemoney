@@ -13,6 +13,7 @@ class JournalsController extends AppController
     public function initialize()
     {
         parent::initialize();
+        $this->loadComponent('RequestHandler');
         $this->loadComponent('Account');
         $this->loadComponent('Search.Prg', [
             'actions' => ['index']
@@ -52,7 +53,8 @@ class JournalsController extends AppController
             'contain' => ['Debits', 'Credits']
         ]);
 
-        $this->set('journal', $journal);
+        $this->set(compact('journal'));
+
         $this->set('_serialize', ['journal']);
     }
 
@@ -83,10 +85,10 @@ class JournalsController extends AppController
 
         $category = $this->find_category();
 
-        $this->set('journal', $journal);
+        $this->set(compact('journal'));
+
         $this->set('debits', $category);
         $this->set('credits', $category);
-
         $this->set('selections', $this->popular_selections());
 
         $this->set('_serialize', ['journal']);
@@ -101,9 +103,8 @@ class JournalsController extends AppController
      */
     public function edit($id = null)
     {
-        $journal = $this->Journals->get($id, [
-            'contain' => []
-        ]);
+        $journal = $this->Journals->get($id);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $journal = $this->Journals->patchEntity($journal, $this->request->data);
 
@@ -123,10 +124,10 @@ class JournalsController extends AppController
 
         $category = $this->find_category();
 
-        $this->set('journal', $journal);
+        $this->set(compact('journal'));
+
         $this->set('debits', $category);
         $this->set('credits', $category);
-
         $this->set('selections', $this->popular_selections());
 
         $this->set('_serialize', ['journal']);
@@ -160,16 +161,14 @@ class JournalsController extends AppController
             $this->Flash->error(__('The journal could not be saved. Please, try again.'));
         }
 
-        $base = $this->Journals->get($id, [
-            'contain' => []
-        ]);
+        $base = $this->Journals->get($id);
 
         $category = $this->find_category();
 
         $this->set('journal', $base);
+
         $this->set('debits', $category);
         $this->set('credits', $category);
-
         $this->set('selections', $this->popular_selections());
 
         $this->set('_serialize', ['journal']);
@@ -224,7 +223,7 @@ class JournalsController extends AppController
 	private function account_id($category_id) {
         $q = $this->Journals->Debits->find();
 
-        $a = $q->where(['Debits.id =' => $category_id])->first();
+        $a = $q->where(['Debits.id' => $category_id])->first();
 
         return $a->account;
 	}

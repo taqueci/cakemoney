@@ -90,7 +90,7 @@ use Cake\Core\Configure;
 <?php
 $label = array();
 $data = array();
-foreach ($expense_sum as $x) {
+foreach ($expense as $x) {
 	$label[] = $x->name;
 	$data[] = $x->sum;
 }

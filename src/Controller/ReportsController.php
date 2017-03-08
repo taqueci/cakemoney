@@ -13,6 +13,7 @@ class ReportsController extends AppController
 {
     public function initialize()
     {
+        $this->loadComponent('RequestHandler');
         $this->Journals = TableRegistry::get('Journals');
     }
 
@@ -46,10 +47,7 @@ class ReportsController extends AppController
             ->order(['year' => 'DESC'])
             ->limit(REPORT_SUMMARY_NUM);
 
-        $this->set('daily', $daily);
-        $this->set('weekly', $weekly);
-        $this->set('monthly', $monthly);
-        $this->set('annual', $annual);
+        $this->set(compact('daily', 'weekly', 'monthly', 'annual'));
 
         $this->set('_serialize', ['daily', 'weekly', 'monthly', 'annual']);
     }
@@ -73,34 +71,27 @@ class ReportsController extends AppController
         $income  = $this->query_income($start, $end)->order(['sum' => 'DESC']);
         $expense = $this->query_expense($start, $end)->order(['sum' => 'DESC']);
 
-        $chart_daily = $this
+        $daily = $this
             ->query_sum_group($start, $end, ['year', 'month', 'day'])
             ->order(['year' => 'ASC', 'month' => 'ASC', 'day' => 'ASC']);
 
-        $chart_weekly = $this
+        $weekly = $this
             ->query_sum_group($start, $end, ['year', 'week'])
             ->order(['year' => 'ASC', 'week' => 'ASC']);
 
-        $chart_monthly = $this
+        $monthly = $this
             ->query_sum_group($start, $end, ['year', 'month'])
             ->order(['year' => 'ASC', 'month' => 'ASC']);
 
-        $chart_annual = $this
+        $annual = $this
             ->query_sum_group($start, $end, ['year'])
             ->order(['year' => 'ASC']);
 
-        $this->set('start', $start);
-        $this->set('end', $end);
+        $this->set(compact('start', 'end'));
+        $this->set(compact('sum', 'income', 'expense'));
+        $this->set(compact('daily', 'weekly', 'monthly', 'annual'));
 
-        $this->set('sum', $sum);
-
-        $this->set('income_sum', $income);
-        $this->set('expense_sum', $expense);
-
-        $this->set('chart_daily', $chart_daily);
-        $this->set('chart_weekly', $chart_weekly);
-        $this->set('chart_monthly', $chart_monthly);
-        $this->set('chart_annual', $chart_annual);
+        $this->set('_serialize', ['sum', 'income', 'expense', 'daily', 'weekly', 'monthly', 'annual']);
     }
 
     public function display()
@@ -118,9 +109,7 @@ class ReportsController extends AppController
             ->order(['Journals.id' => 'DESC'])
             ->limit(REPORT_RECENT_NUM);
 
-        $this->set('sum', $sum);
-        $this->set('expense_sum', $expense);
-        $this->set(compact('journals'));
+        $this->set(compact('sum', 'expense', 'journals'));
     }
 
     private function query_sum($start, $end)

@@ -142,7 +142,7 @@ $(function() {
 <?php
 $label = array();
 $data = array();
-foreach ($expense_sum as $x) {
+foreach ($expense as $x) {
 	$label[] = $x->name;
 	$data[] = $x->sum;
 }
@@ -167,7 +167,7 @@ $(function() {
 <?php
 $label = array();
 $data = array();
-foreach ($income_sum as $x) {
+foreach ($income as $x) {
 	$label[] = $x->name;
 	$data[] = $x->sum;
 }
@@ -194,7 +194,7 @@ $label = array();
 $incoming = array();
 $outgoing = array();
 
-foreach ($chart_daily as $x) {
+foreach ($daily as $x) {
 	$label[] = sprintf('%04d-%02d-%02d', $x->year, $x->month, $x->day);
 	$incoming[] = $x->income;
 	$outgoing[] = $x->expense;
@@ -210,7 +210,7 @@ $label = array();
 $incoming = array();
 $outgoing = array();
 
-foreach ($chart_weekly as $x) {
+foreach ($weekly as $x) {
 	$label[] = sprintf('%04d-W%02d', $x->year, $x->week);
 	$incoming[] = $x->income;
 	$outgoing[] = $x->expense;
@@ -226,7 +226,7 @@ $label = array();
 $incoming = array();
 $outgoing = array();
 
-foreach ($chart_monthly as $x) {
+foreach ($monthly as $x) {
 	$label[] = sprintf('%04d-%02d', $x->year, $x->month);
 	$incoming[] = $x->income;
 	$outgoing[] = $x->expense;
@@ -242,7 +242,7 @@ $label = array();
 $incoming = array();
 $outgoing = array();
 
-foreach ($chart_annual as $x) {
+foreach ($annual as $x) {
 	$label[] = $x->year;
 	$incoming[] = $x->income;
 	$outgoing[] = $x->expense;

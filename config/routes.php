@@ -80,3 +80,9 @@ Router::scope('/', function (RouteBuilder $routes) {
  * how to customize the loading of plugin routes.
  */
 Plugin::routes();
+
+Router::scope('/api', function ($routes) {
+    $routes->extensions(['json', 'xml']);
+    $routes->resources('Journals');
+    $routes->resources('Reports');
+});
