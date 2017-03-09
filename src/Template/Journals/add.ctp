@@ -6,11 +6,11 @@
 use Cake\Core\Configure;
 ?>
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 has-margin-bottom">
     <?= $this->Form->create($journal) ?>
 	<fieldset>
 	  <legend><?= __('Add Journal') ?></legend>
-	  <div class="form-group" align="right">
+	  <div class="has-margin-bottom" align="right">
 		<div id="category-filter" class="btn-group" role="group" aria-label="Category filter">
 		  <button id="category-filter-btn-outgoings" type="button" class="btn btn-default"><?= __('Outgoings') ?></button>
 		  <button id="category-filter-btn-incomings" type="button" class="btn btn-default"><?= __('Incomings') ?></button>
@@ -34,9 +34,7 @@ use Cake\Core\Configure;
 	  <?= $this->Form->input('summary', ['label' => __('Summary')]) ?>
 	  <?= $this->Form->input('description', ['label' => __('Description'), 'type' => 'textarea']) ?>
 	</fieldset>
-	<div class="form-group">
-	  <?= $this->Form->submit(__('Submit'), ['class' => 'btn btn-primary']) ?>
-	</div>
+	<?= $this->Form->submit(__('Submit'), ['class' => 'btn btn-primary']) ?>
 	<?= $this->Form->end() ?>
   </div>
   <div class="col-md-3">

@@ -4,7 +4,7 @@
   */
 ?>
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 has-margin-bottom">
 	<?= $this->Form->create($category) ?>
 	<fieldset>
 	  <legend><?= __('Edit Category') ?></legend>
@@ -13,9 +13,7 @@
 	  <?= $this->Form->input('account', ['label' => __('Account')]) ?>
 	  <?= $this->Form->input('description', ['label' => __('Description'), 'type' => 'textarea']) ?>
 	</fieldset>
-	<div class="form-group">
-	  <?= $this->Form->submit(__('Submit'), ['class' => 'btn btn-primary']) ?>
-	</div>
+	<?= $this->Form->submit(__('Submit'), ['class' => 'btn btn-primary']) ?>
 	<?= $this->Form->end() ?>
   </div>
   <div class="col-md-3">

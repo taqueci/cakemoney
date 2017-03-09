@@ -125,6 +125,9 @@ body {
 .footer {
   padding: 10px 0;
 }
+.has-margin-bottom {
+  margin-bottom: 15px;
+}
 .xs-icon {
   font-size: 110%;
 }

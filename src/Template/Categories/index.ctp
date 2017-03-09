@@ -62,7 +62,7 @@
 		<?php endforeach; ?>
 	  </ul>
 	</div>
-    <?= $this->Paginator->numbers(['prev' => '<', 'next' => '>']) ?>
+    <?= $this->Paginator->numbers(['prev' => '&lsaquo;', 'next' => '&rsaquo;']) ?>
   </div>
   <div class="col-md-3">
 	<div class="list-group">

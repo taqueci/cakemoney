@@ -13,7 +13,7 @@ use Cake\Core\Configure;
 <div class="row">
   <div class="col-md-9">
 	<div class="visible-xs">
-	  <div class="form-group">
+	  <div class="has-margin-bottom">
 		<?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add'], ['class' => 'btn btn-default', 'escape' => false]) ?>
 	  <?= $this->Html->link('<i class="fa fa-search" aria-hidden="true"></i> ' . __('Search'), ['#' => 'q'], ['class' => 'btn btn-default', 'escape' => false]) ?>
 	  </div>
@@ -89,7 +89,7 @@ use Cake\Core\Configure;
 		<?php endforeach; ?>
 	  </ul>
 	</div>
-    <?= $this->Paginator->numbers(['prev' => '<', 'next' => '>']) ?>
+    <?= $this->Paginator->numbers(['prev' => '&lsaquo;', 'next' => '&rsaquo;']) ?>
   </div>
   <div class="col-md-3">
 	<div class="list-group">

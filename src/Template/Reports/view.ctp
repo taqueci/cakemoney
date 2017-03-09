@@ -24,9 +24,9 @@ use Cake\Core\Configure;
 		<table>
 		  <tr>
 			<td align="center"><small><span class="label label-default"><?= __('Incomings') ?></span></small></td>
-			<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td>&emsp;&emsp;</td>
 			<td align="center"><small><span class="label label-default"><?= __('Outgoings') ?></span></small></td>
-			<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td>&emsp;&emsp;</td>
 			<td align="center"><small><span class="label label-default"><?= __('Balance') ?></span></small></td>
 		  </tr>
 		  <tr>
@@ -41,9 +41,9 @@ use Cake\Core\Configure;
 		<table>
 		  <tr>
 			<td align="center"><small><span class="label label-default"><?= __('Assets') ?></span></small></td>
-			<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td>&emsp;&emsp;</td>
 			<td align="center"><small><span class="label label-default"><?= __('Liabilities') ?></span></small></td>
-			<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td>&emsp;&emsp;</td>
 			<td align="center"><small><span class="label label-default"><?= __('Net Assets') ?></span></small></td>
 		  </tr>
 		  <tr>

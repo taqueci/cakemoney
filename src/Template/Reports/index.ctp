@@ -12,7 +12,7 @@ use Cake\Core\Configure;
 </div>
 <div class="row">
   <div class="col-md-9">
-    <div><!-- div class="hidden-xs" -->
+    <div>
 	  <h3><?= __('Daily') ?></h3>
 	  <table class="table table-striped">
 		<thead>
@@ -144,8 +144,6 @@ use Cake\Core\Configure;
 		  <?php endforeach; ?>
 		</tbody>
 	  </table>
-	</div>
-	<div><!-- div class="visible-xs" -->
 	</div>
   </div>
   <div class="col-md-3">
