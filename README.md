@@ -1,4 +1,4 @@
-*Read this in other languages: [English](README.md), [日本語](README.ja.md).*
+*Read this in other languages: [日本語](README.ja.md)*
 
 # CakeMoney
 
@@ -7,11 +7,12 @@ This application is implemented by CakePHP 3.
 
 The way of booking is based on double-entry bookkeeping system.
 
-![Dashboard Large](webroot/img/screenshots/dashboard-l-en.png)
-![Report Large](webroot/img/screenshots/report-l-en.png)
+![Dashboard](webroot/img/screenshots/dashboard-l-en-s.png)
 
-![Dashboard Small](webroot/img/screenshots/dashboard-s-en.png)
-![Report Small](webroot/img/screenshots/report-s-en.png)
+![Report](webroot/img/screenshots/report-l-en-s.png)
+
+[Dashboard on mobile](webroot/img/screenshots/dashboard-s-en.png)
+[Report on mobile](webroot/img/screenshots/report-s-en.png)
 
 ## Requirements
 
@@ -29,6 +30,8 @@ CakeMoney refers via CDN:
 
 ## Installation
 
+### CakeMoney
+
 1. Download or install [Composer](http://getcomposer.org/doc/00-intro.md).
 2. Clone or copy files of CakeMoney.
 3. Change directory to CakeMoney directory and
@@ -37,13 +40,19 @@ execute `composer install` to install necessary libraries.
 cd /var/www/html/cakemoney
 php composer.phar install
 ```
-4. Create database for CakeMoney.
-5. Copy `config/app.default.php` to `config/app.php` and edit it.
-6. Create database tables by executing the following:
+
+### Database
+
+1. Create database for CakeMoney.
+2. Copy `config/app.default.php` to `config/app.php` and edit it.
+3. Create database tables by executing the following:
 ```bash
 ./bin/cake migrations migrate
 ```
-7. Configure web server. (e.g. Apache and mod_rewrite)
+
+### Web server
+
+Configure web server. (e.g. Apache and mod_rewrite)
 See CakePHP [Docuemnt](https://book.cakephp.org/3.0/en/installation.html#url-rewriting).
 
 ## Usage
