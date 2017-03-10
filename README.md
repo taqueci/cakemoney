@@ -11,8 +11,10 @@ The way of booking is based on double-entry bookkeeping system.
 
 ![Report](webroot/img/screenshots/report-l-en-s.png)
 
-[Dashboard on mobile](webroot/img/screenshots/dashboard-s-en.png)
-[Report on mobile](webroot/img/screenshots/report-s-en.png)
+* [Dashboard](webroot/img/screenshots/dashboard-l-en.png)
+* [Report](webroot/img/screenshots/report-l-en.png)
+* [Dashboard on mobile](webroot/img/screenshots/dashboard-s-en.png)
+* [Report on mobile](webroot/img/screenshots/report-s-en.png)
 
 ## Requirements
 

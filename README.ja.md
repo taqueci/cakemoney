@@ -11,8 +11,10 @@ CakeMoneyはCakePHP 3で作られたシンプルな家計簿です。(妻のた�
 
 ![Report](webroot/img/screenshots/report-l-ja-s.png)
 
-[Dashboard on mobile](webroot/img/screenshots/dashboard-s-ja.png)
-[Report on mobile](webroot/img/screenshots/report-s-ja.png)
+* [Dashboard](webroot/img/screenshots/dashboard-l-ja.png)
+* [Report](webroot/img/screenshots/report-l-ja.png)
+* [Dashboard on mobile](webroot/img/screenshots/dashboard-s-ja.png)
+* [Report on mobile](webroot/img/screenshots/report-s-ja.png)
 
 ## 要件
 
