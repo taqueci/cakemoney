@@ -1,83 +1,92 @@
+*Read this in other languages: [日本語](README.ja.md)*
+
 # CakeMoney
 
-CakeMoney is a simple household account book for my wife.
-This application is implemented by CakePHP.
+CakeMoney is a simple household account book (for my wife).
+This application is implemented by CakePHP 3.
 
 The way of booking is based on double-entry bookkeeping system.
 
-*Read this in other languages: [English](README.md), [日本語](README.ja.md).*
+![Dashboard](webroot/img/screenshots/dashboard-l-en-s.png)
 
+![Report](webroot/img/screenshots/report-l-en-s.png)
+
+* [Dashboard](webroot/img/screenshots/dashboard-l-en.png)
+* [Report](webroot/img/screenshots/report-l-en.png)
+* [Dashboard on mobile](webroot/img/screenshots/dashboard-s-en.png)
+* [Report on mobile](webroot/img/screenshots/report-s-en.png)
 
 ## Requirements
 
-CakeMoney requires MySQL as a database.
+* PHP 5.6 or later
+* MySQL or PostgreSQL
 
-CakeMoney uses BoostCake and Search plugins, and bootstrap-datepicker.
+For more detail, see CakePHP
+[Document](https://book.cakephp.org/3.0/en/installation.html).
 
+CakeMoney refers via CDN:
+* Font Awesome
+* Twitter Bootstrap
+* Bootstrap Datepicker
+* Chart.js
 
 ## Installation
 
-Clone the repository using git.
+### CakeMoney
 
-    $ git clone https://github.com/taqueci/cakemoney.git
+1. Download or install [Composer](http://getcomposer.org/doc/00-intro.md).
+2. Clone or copy files of CakeMoney.
+3. Change directory to CakeMoney directory and
+execute `composer install` to install necessary libraries.
+```bash
+cd /var/www/html/cakemoney
+php composer.phar install
+```
 
-Install BoostCake and Search plugins by using Composer.
+### Database
 
-    $ cd cakemoney
-    $ composer install
+1. Create database for CakeMoney.
+2. Copy `config/app.default.php` to `config/app.php` and edit it.
+3. Create database tables by executing the following:
+```bash
+./bin/cake migrations migrate
+```
 
-Put `bootstrap-datepicker.js` into the directory `webroot/js`.
+### Web server
 
-Execute the following SQL statements into your database.
-
-    CREATE TABLE categories (
-      id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-      name VARCHAR(255) NOT NULL,
-      account_id INT UNSIGNED NOT NULL,
-      description TEXT DEFAULT NULL,
-      PRIMARY KEY (id),
-      UNIQUE KEY name (name)
-    ) DEFAULT CHARSET=utf8;
-
-    CREATE TABLE journals (
-      id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-      date date NOT NULL,
-      debit_id INT UNSIGNED NOT NULL,
-      credit_id INT UNSIGNED NOT NULL,
-      amount INT NOT NULL,
-      description TEXT DEFAULT NULL,
-      asset INT NOT NULL,
-      liability INT NOT NULL,
-      income INT NOT NULL,
-      expense INT NOT NULL,
-      equity INT NOT NULL,
-      created DATETIME NOT NULL,
-      modified DATETIME NOT NULL,
-      PRIMARY KEY (id),
-      UNIQUE KEY id (id)
-    ) DEFAULT CHARSET=utf8;
-
-Finally, make a CakePHP's database configuration file `Config/database.php`.
-
+Configure web server. (e.g. Apache and mod_rewrite)
+See CakePHP [Docuemnt](https://book.cakephp.org/3.0/en/installation.html#url-rewriting).
 
 ## Usage
+
+### Category setting
 
 First, add categories.
 Open "Categories" page from navigation bar and click "New Category" on the
 right side of the page.
-(Or access to http://www.example.com/cakemoney/categories/add)
+
+Add categories as the following:
+
+| Name           | Account |
+|----------------|---------|
+| Salary         | Income  |
+| Cash           | Asset   |
+| Foods          | Expense |
+| Clothes/Beauty | Expense |
+| ...            | ...     |
+
+### Journal
 
 In order to book giving and taking of money,
 open "New Journal" on the right side of "Journals" page.
-(Or access to http://www.example.com/cakemoney/journals/add)
+
+### Report
 
 If you want to know the summary, open "Reports" page.
 
+## License
 
-## Licence
-
-[MIT](https://github.com/taqueci/cakemoney/blob/master/LICENSE)
-
+[MIT](LICENSE)
 
 ## Author
 

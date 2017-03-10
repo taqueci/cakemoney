@@ -1,81 +1,95 @@
+*Read this in other languages: [English](README.md)*
+
 # CakeMoney
 
-CakeMoneyはCakePHPで作られたシンプルな家計簿です。(妻のために作りました。)
+CakeMoneyはCakePHP 3で作られたシンプルな家計簿です。(妻のために作りました。)
 
-複式簿記の考え方が取り入れられています。(素人なので、何かが間違っているかもしれません。)
+複式簿記の考え方が取り入れられています。
+(素人なので、何かが間違っているかもしれません。)
 
-*Read this in other languages: [English](README.md), [日本語](README.ja.md).*
+![Dashboard](webroot/img/screenshots/dashboard-l-ja-s.png)
 
+![Report](webroot/img/screenshots/report-l-ja-s.png)
+
+* [Dashboard](webroot/img/screenshots/dashboard-l-ja.png)
+* [Report](webroot/img/screenshots/report-l-ja.png)
+* [Dashboard on mobile](webroot/img/screenshots/dashboard-s-ja.png)
+* [Report on mobile](webroot/img/screenshots/report-s-ja.png)
 
 ## 要件
 
-CakeMoneyはデータベースとしてMySQLを使用します。
-MySQL以外では動作しません。
+* PHP 5.6以上
+* MySQL または PostgreSQL
 
-あと、BoostCake, Searchプラグイン、bootstrap-datepickerを使用します。
+詳細はCakePHPの
+[ドキュメント](https://book.cakephp.org/3.0/ja/installation.html)
+をご覧ください。
 
+CakeMoney はCDN経由で以下を参照します。
+* Font Awesome
+* Twitter Bootstrap
+* Bootstrap Datepicker
+* Chart.js
 
 ## インストール
 
-まずはgitでCakeMoneyのリポジトリをcloneします。
+### CakeMoney
 
-    $ git clone https://github.com/taqueci/cakemoney.git
+1. [Composer](http://getcomposer.org/doc/00-intro.md)
+をダウンロードまたはインストールしてください。
+2. CakeMoneyをクローンまたはコピーしてください。
+3. CakeMoneyのディレクトリに移動して、
+`composer install` を実行して、必要なファイルをインストールしてください。
+```bash
+cd /var/www/html/cakemoney
+php composer.phar install
+```
 
-ComposerでBoostCakeとSearchプラグインをインストールします。
+### データベース
 
-    $ cd cakemoney
-    $ composer install
+1. CakeMoney用のデータベースを用意してください。
+2. `config/app.default.php` をコピーして `config/app.php` を作成してください。
+3. 以下のコマンドを実行して、データベースのテーブルを作成します。
+```bash
+./bin/cake migrations migrate
+```
 
-`bootstrap-datepicker.js` をディレクトリ `webroot/js` に置きます。
+### Webサーバ
 
-以下のSQLを実行して、データベースをセットアップします。
-
-    CREATE TABLE categories (
-      id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-      name VARCHAR(255) NOT NULL,
-      account_id INT UNSIGNED NOT NULL,
-      description TEXT DEFAULT NULL,
-      PRIMARY KEY (id),
-      UNIQUE KEY name (name)
-    ) DEFAULT CHARSET=utf8;
-
-    CREATE TABLE journals (
-      id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-      date date NOT NULL,
-      debit_id INT UNSIGNED NOT NULL,
-      credit_id INT UNSIGNED NOT NULL,
-      amount INT NOT NULL,
-      description TEXT DEFAULT NULL,
-      asset INT NOT NULL,
-      liability INT NOT NULL,
-      income INT NOT NULL,
-      expense INT NOT NULL,
-      equity INT NOT NULL,
-      created DATETIME NOT NULL,
-      modified DATETIME NOT NULL,
-      PRIMARY KEY (id),
-      UNIQUE KEY id (id)
-    ) DEFAULT CHARSET=utf8;
-
-最後に、CakePHPのデータベース設定ファイル `Config/database.php` を作成してください。
-
+Apache, mod_rewriteなど、Webサーバを設定してください。
+CakePHPの [ドキュメント](https://book.cakephp.org/3.0/ja/installation.html#url-rewriting)
+を参考にしましょう。
 
 ## 使い方
 
-まずはカテゴリを追加してください。
-ナビゲーションバーから「カテゴリ」ページを開き、右側の「新しいカテゴリ」をクリックします。
-(または http://www.example.com/cakemoney/categories/add にアクセスします。)
+### カテゴリの設定
 
-お金のやりとりが発生したら、「仕訳帳」ページの右側にある「新しい仕訳」をクリックします。
-(または http://www.example.com/cakemoney/journals/add にアクセスします。)
+まずはカテゴリを追加してください。
+ナビゲーションバーにある歯車をクリックして「カテゴリ」ページを開き、
+右側の「新しいカテゴリ」をクリックします。
+
+以下のカテゴリを追加しましょう。
+
+| 名前       | 科目 |
+|------------|------|
+| 給料       | 収入 |
+| 現金       | 資産 |
+| 食費       | 支出 |
+| 衣服・美容 | 支出 |
+| ...        | ...  |
+
+### 記録
+
+お金のやりとりが発生したら、
+「記録」ページの右側にある「新しい記録」をクリックして、データを入力します。
+
+### レポート
 
 まとめが知りたくなったら、「レポート」ページを開いてください。
 
-
 ## ライセンス
 
-[MIT](https://github.com/taqueci/cakemoney/blob/master/LICENSE)
-
+[MIT](LICENSE)
 
 ## 作者
 
