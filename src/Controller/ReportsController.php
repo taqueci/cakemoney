@@ -157,8 +157,7 @@ class ReportsController extends AppController
             ->contain(['Credits'])
             ->where(['date >=' => $start, 'date <=' => $end,
             'Credits.account' => ACCOUNT_INCOME])
-            ->group(['credit_id']);
-
+            ->group(['credit_id', 'name', 'Credits.account']);
     }
 
     private function query_expense($start, $end)
@@ -175,7 +174,7 @@ class ReportsController extends AppController
             ->contain(['Debits'])
             ->where(['date >=' => $start, 'date <=' => $end,
             'Debits.account' => ACCOUNT_EXPENSE])
-            ->group(['debit_id']);
+            ->group(['debit_id', 'name', 'Debits.account']);
     }
 
     private function date_start_end($start, $end)
