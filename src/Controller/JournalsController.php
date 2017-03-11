@@ -215,7 +215,7 @@ class JournalsController extends AppController
             ->contain(['Debits', 'Credits'])
             ->select(['debit_id', 'Debits.name', 'credit_id', 'Credits.name',
             'count' => $q->func()->count('*')])
-            ->group(['debit_id', 'credit_id'])
+            ->group(['debit_id', 'Debits.name', 'credit_id', 'Credits.name'])
             ->order(['count' => 'DESC'])
             ->limit(JOURNAL_POPULAR_NUM);
     }
