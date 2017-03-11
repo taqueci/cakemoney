@@ -1,7 +1,7 @@
 {
-    "name": "cakephp/app",
-    "description": "CakePHP skeleton app",
-    "homepage": "http://cakephp.org",
+    "name": "CakeMoney",
+    "description": "Simple household account book",
+    "homepage": "https://github.com/taqueci/cakemoney",
     "type": "project",
     "license": "MIT",
     "require": {

@@ -11,10 +11,10 @@ CakeMoneyはCakePHP 3で作られたシンプルな家計簿です。(妻のた�
 
 ![Report](webroot/img/screenshots/report-l-ja-s.png)
 
-* [Dashboard](webroot/img/screenshots/dashboard-l-ja.png)
-* [Report](webroot/img/screenshots/report-l-ja.png)
-* [Dashboard on mobile](webroot/img/screenshots/dashboard-s-ja.png)
-* [Report on mobile](webroot/img/screenshots/report-s-ja.png)
+* [ダッシュボード](webroot/img/screenshots/dashboard-l-ja.png)
+* [レポート](webroot/img/screenshots/report-l-ja.png)
+* [モバイル向けダッシュボード](webroot/img/screenshots/dashboard-s-ja.png)
+* [モバイル向けレポート](webroot/img/screenshots/report-s-ja.png)
 
 ## 要件
 
@@ -48,7 +48,8 @@ php composer.phar install
 ### データベース
 
 1. CakeMoney用のデータベースを用意してください。
-2. `config/app.default.php` をコピーして `config/app.php` を作成してください。
+2. `config/app.php` を作成して、
+`Datasources.default` 配列の値を書き換えてください。
 3. 以下のコマンドを実行して、データベースのテーブルを作成します。
 ```bash
 ./bin/cake migrations migrate

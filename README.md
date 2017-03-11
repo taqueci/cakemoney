@@ -46,7 +46,8 @@ php composer.phar install
 ### Database
 
 1. Create database for CakeMoney.
-2. Copy `config/app.default.php` to `config/app.php` and edit it.
+2. Create `config/app.php` and set suitable values in
+`Datasources.default` array.
 3. Create database tables by executing the following:
 ```bash
 ./bin/cake migrations migrate
