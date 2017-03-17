@@ -1,6 +1,9 @@
 var myChart = new Chart(
 	document.getElementById('<?= $id ?>').getContext('2d'), {
 		type: 'line',
+		options: {
+			maintainAspectRatio: false
+		},
 		data: {
 			labels: <?= json_encode($label) ?>,
 			datasets: [{

@@ -42,7 +42,7 @@ use Cake\Core\Configure;
 		</table>
 		<h3><?= __('Outgoings') ?></h3>
 		<div id="chart-outgoings">
-		  <canvas id="canvas-outgoings" width="100" height="100"></canvas>
+		  <canvas id="canvas-outgoings" width="400" height="400"></canvas>
 		</div>
 	  </div>
 	  <div class="col-md-6">

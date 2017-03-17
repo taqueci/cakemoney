@@ -13,7 +13,6 @@ class JournalsController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->loadComponent('RequestHandler');
         $this->loadComponent('Account');
         $this->loadComponent('Search.Prg', [
             'actions' => ['index']
@@ -32,7 +31,7 @@ class JournalsController extends AppController
             'contain' => ['Debits', 'Credits']
         ];
         $journals = $this->paginate($this->Journals->find('search', [
-            'search' => $this->request->query
+            'search' => $this->request->getQueryParams()
         ]));
 
         $this->set(compact('journals'));

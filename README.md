@@ -21,8 +21,8 @@ The way of booking is based on double-entry bookkeeping system.
 * PHP 5.6 or later
 * MySQL or PostgreSQL
 
-For more detail, see CakePHP
-[Document](https://book.cakephp.org/3.0/en/installation.html).
+For more detail, see
+[CakePHP Cookbook](https://book.cakephp.org/3.0/en/installation.html#requirements).
 
 CakeMoney refers via CDN:
 * Font Awesome
@@ -56,7 +56,7 @@ php composer.phar install
 ### Web server
 
 Configure web server. (e.g. Apache and mod_rewrite)
-See CakePHP [Docuemnt](https://book.cakephp.org/3.0/en/installation.html#url-rewriting).
+See [CakePHP Cookbook](https://book.cakephp.org/3.0/en/installation.html#url-rewriting).
 
 ## Usage
 
@@ -68,18 +68,19 @@ right side of the page.
 
 Add categories as the following:
 
-| Name           | Account |
-|----------------|---------|
-| Salary         | Income  |
-| Cash           | Asset   |
-| Foods          | Expense |
-| Clothes/Beauty | Expense |
-| ...            | ...     |
+| Name           | Account   |
+|----------------|-----------|
+| Salary         | Income    |
+| Cash           | Asset     |
+| Credit card    | Liability |
+| Foods          | Expense   |
+| Clothes/Beauty | Expense   |
+| ...            | ...       |
 
 ### Journal
 
 In order to book giving and taking of money,
-open "New Journal" on the right side of "Journals" page.
+open "New Journal" on the right side of the page.
 
 ### Report
 

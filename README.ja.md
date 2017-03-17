@@ -21,8 +21,8 @@ CakeMoneyはCakePHP 3で作られたシンプルな家計簿です。(妻のた�
 * PHP 5.6以上
 * MySQL または PostgreSQL
 
-詳細はCakePHPの
-[ドキュメント](https://book.cakephp.org/3.0/ja/installation.html)
+詳細は
+[CakePHP Cookbook](https://book.cakephp.org/3.0/ja/installation.html#id2)
 をご覧ください。
 
 CakeMoney はCDN経由で以下を参照します。
@@ -38,7 +38,7 @@ CakeMoney はCDN経由で以下を参照します。
 1. [Composer](http://getcomposer.org/doc/00-intro.md)
 をダウンロードまたはインストールしてください。
 2. CakeMoneyをクローンまたはコピーしてください。
-3. CakeMoneyのディレクトリに移動して、
+3. CakeMoneyのディレクトリに移動し、
 `composer install` を実行して、必要なファイルをインストールしてください。
 ```bash
 cd /var/www/html/cakemoney
@@ -58,7 +58,7 @@ php composer.phar install
 ### Webサーバ
 
 Apache, mod_rewriteなど、Webサーバを設定してください。
-CakePHPの [ドキュメント](https://book.cakephp.org/3.0/ja/installation.html#url-rewriting)
+[CakePHP Cookbook](https://book.cakephp.org/3.0/ja/installation.html#url-rewriting)
 を参考にしましょう。
 
 ## 使い方
@@ -71,18 +71,19 @@ CakePHPの [ドキュメント](https://book.cakephp.org/3.0/ja/installation.htm
 
 以下のカテゴリを追加しましょう。
 
-| 名前       | 科目 |
-|------------|------|
-| 給料       | 収入 |
-| 現金       | 資産 |
-| 食費       | 支出 |
-| 衣服・美容 | 支出 |
-| ...        | ...  |
+| 名前             | 科目 |
+|------------------|------|
+| 給料             | 収入 |
+| 現金             | 資産 |
+| クレジットカード | 負債 |
+| 食費             | 支出 |
+| 衣服・美容       | 支出 |
+| ...              | ...  |
 
 ### 記録
 
 お金のやりとりが発生したら、
-「記録」ページの右側にある「新しい記録」をクリックして、データを入力します。
+ページの右側にある「新しい記録」をクリックして、データを入力します。
 
 ### レポート
 

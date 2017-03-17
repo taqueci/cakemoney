@@ -13,7 +13,7 @@ class ReportsController extends AppController
 {
     public function initialize()
     {
-        $this->loadComponent('RequestHandler');
+        parent::initialize();
         $this->Journals = TableRegistry::get('Journals');
     }
 

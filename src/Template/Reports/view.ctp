@@ -67,13 +67,13 @@ use Cake\Core\Configure;
 	  <div class="col-md-4">
 		<h3><?= __('Incomings') ?></h3>
 		<div id="chart-incomings">
-		  <canvas id="canvas-incomings" width="100" height="100"></canvas>
+		  <canvas id="canvas-incomings" width="400" height="400"></canvas>
 		</div>
 	  </div>
 	  <div class="col-md-4">
 		<h3><?= __('Outgoings') ?></h3>
 		<div id="chart-outgoings">
-		  <canvas id="canvas-outgoings" width="100" height="100"></canvas>
+		  <canvas id="canvas-outgoings" width="400" height="400"></canvas>
 		</div>
 	  </div>
 	</div>
@@ -89,10 +89,10 @@ use Cake\Core\Configure;
 		  </div>
 		</div>
 		<div id="chart-lines">
-		  <canvas id="canvas-line-d" width="100"></canvas>
-		  <canvas id="canvas-line-w" width="100"></canvas>
-		  <canvas id="canvas-line-m" width="100"></canvas>
-		  <canvas id="canvas-line-y" width="100"></canvas>
+		  <canvas id="canvas-line-d" width="400" height="100"></canvas>
+		  <canvas id="canvas-line-w" width="400" height="100"></canvas>
+		  <canvas id="canvas-line-m" width="400" height="100"></canvas>
+		  <canvas id="canvas-line-y" width="400" height="100"></canvas>
 		</div>
 	  </div>
 	</div>
