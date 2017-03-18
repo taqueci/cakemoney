@@ -1,6 +1,9 @@
 var myDoughnutChart = new Chart(
     document.getElementById('<?= $id ?>').getContext('2d'), {
 		type: 'doughnut',
+		options: {
+			maintainAspectRatio: false
+		},
 		data: {
 			labels: <?= json_encode($label) ?>,
 			datasets: [{

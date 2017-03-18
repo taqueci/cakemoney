@@ -42,7 +42,7 @@ use Cake\Core\Configure;
 		</table>
 		<h3><?= __('Outgoings') ?></h3>
 		<div id="chart-outgoings">
-		  <canvas id="canvas-outgoings" width="100" height="100"></canvas>
+		  <canvas id="canvas-outgoings" width="400" height="400"></canvas>
 		</div>
 	  </div>
 	  <div class="col-md-6">
@@ -68,10 +68,12 @@ use Cake\Core\Configure;
   </div>
   <div class="col-md-3">
 	<div class="list-group">
+		<?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i> ' . __('View Report'), ['controller' => 'reports', 'action' => 'view'], ['class' => 'list-group-item', 'escape' => false]) ?>
+	</div>
+	<div class="list-group">
 	  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i> ' . __('List Journals'), ['controller' => 'journals', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
 		<?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add'], ['class' => 'list-group-item', 'escape' => false]) ?>
 		<?= $this->Html->link('<i class="fa fa-list-ol" aria-hidden="true"></i> ' . __('List Reports'), ['controller' => 'reports', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
-		<?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i> ' . __('View Report'), ['controller' => 'reports', 'action' => 'view'], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
 	<div class="well">
       <?= $this->Form->create(null, ['url' => ['controller' => 'journals', 'action' => 'index']]) ?>

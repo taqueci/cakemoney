@@ -10,8 +10,8 @@
         "mobiledetect/mobiledetectlib": "2.*",
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "*",
-        "friendsofcake/search": "*",
-        "friendsofcake/bootstrap-ui": "*"
+        "friendsofcake/search": "2.3.*",
+        "friendsofcake/bootstrap-ui": "v0.6.*"
     },
     "require-dev": {
         "psy/psysh": "@stable",

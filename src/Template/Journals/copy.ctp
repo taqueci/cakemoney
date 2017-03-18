@@ -11,16 +11,12 @@ use Cake\Core\Configure;
 	<fieldset>
 	  <legend><?= __('Copy Journal') ?></legend>
 	  <div class="has-margin-bottom" align="right">
-		<div id="category-filter" class="btn-group" role="group" aria-label="Category filter">
-		  <button id="category-filter-btn-outgoings" type="button" class="btn btn-default"><?= __('Outgoings') ?></button>
-		  <button id="category-filter-btn-incomings" type="button" class="btn btn-default"><?= __('Incomings') ?></button>
-		  <button id="category-filter-btn-all" type="button" class="btn btn-default"><?= __('Other') ?></button>
-		</div>
+		<?= $this->element('Category/filter', ['debit_id' => '#debit-id', 'credit_id' => '#credit-id']) ?>
 		<div class="btn-group">
 		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<?= __('Popular selections') ?> <span class="caret"></span>
 		  </button>
-		  <ul class="dropdown-menu">
+		  <ul class="dropdown-menu dropdown-menu-right">
 			<?php foreach ($selections as $x): ?>
 			<li><a href="#" onClick="setCategory(<?= $x->debit_id ?>, <?= $x->credit_id ?>)"><?= h($x->debit->name) ?> / <?= h($x->credit->name) ?></a></li>
 			<?php endforeach; ?>
@@ -62,56 +58,8 @@ $(function() {
 	});
 });
 
-$(function() {
-	$('body').after('<select id="attic"></select>');
-	$('#attic').hide();
-	$('#debit-id optgroup').clone().appendTo('#attic');
-
-	$('#category-filter-btn-all').addClass('active');
-});
-
-$('#category-filter button').click(function() {
-	$('#category-filter button').removeClass('active');
-	$(this).addClass('active');
-});
-
-$('#category-filter-btn-outgoings').click(function() {
-	$('#debit-id optgroup').remove();
-	$('#attic optgroup[label="<?= __('Expense') ?>"]').clone().appendTo('#debit-id');
-
-	$('#credit-id optgroup').remove();
-	$('#attic optgroup[label="<?= __('Asset') ?>"]').clone().appendTo('#credit-id');
-	$('#attic optgroup[label="<?= __('Liability') ?>"]').clone().appendTo('#credit-id');
-	$('#attic optgroup[label="<?= __('Income') ?>"]').clone().appendTo('#credit-id');
-});
-
-$('#category-filter-btn-incomings').click(function() {
-	$('#debit-id optgroup').remove();
-	$('#attic optgroup[label="<?= __('Asset') ?>"]').clone().appendTo('#debit-id');
-	$('#attic optgroup[label="<?= __('Liability') ?>"]').clone().appendTo('#debit-id');
-	$('#attic optgroup[label="<?= __('Expense') ?>"]').clone().appendTo('#debit-id');
-
-	$('#credit-id optgroup').remove();
-	$('#attic optgroup[label="<?= __('Income') ?>"]').clone().appendTo('#credit-id');
-});
-
-$('#category-filter-btn-all').click(function() {
-	$('#debit-id optgroup').remove();
-	$('#attic optgroup').clone().appendTo('#debit-id');
-
-	$('#credit-id optgroup').remove();
-	$('#attic optgroup').clone().appendTo('#credit-id');
-});
-
 function setCategory(did, cid) {
-	$('#category-filter button').removeClass('active');
-	$('#category-filter-btn-all').addClass('active');
-
-	$('#debit-id optgroup').remove();
-	$('#attic optgroup').clone().appendTo('#debit-id');
-
-	$('#credit-id optgroup').remove();
-	$('#attic optgroup').clone().appendTo('#credit-id');
+	category_filter_reset();
 
 	$('#debit-id').val(did);
 	$('#credit-id').val(cid);

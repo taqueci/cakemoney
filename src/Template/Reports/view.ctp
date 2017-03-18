@@ -12,6 +12,16 @@ use Cake\Core\Configure;
 </div>
 <div class="row">
   <div class="col-md-9">
+	<div class="visible-xs">
+	  <div class="row">
+		<div class="col-md-12">
+		  <div class="has-margin-bottom" align="right">
+			<?= $this->Html->link('<i class="fa fa-arrow-left" aria-hidden="true"></i> ' . __('Previous'), ['?' => ['s' => $report['prev']['start'], 'e' => $report['prev']['end']]], ['class' => 'btn btn-default', 'escape' => false]) ?>
+			<?= $this->Html->link('<i class="fa fa-arrow-right" aria-hidden="true"></i> ' . __('Next'), ['?' => ['s' => $report['next']['start'], 'e' => $report['next']['end']]], ['class' => 'btn btn-default', 'escape' => false]) ?>
+		  </div>
+		</div>
+	  </div>
+	</div>
 	<div class="row">
 	  <div class="col-md-12">
 		<legend><?= $start ?> &ndash; <?= $end ?></legend>
@@ -67,18 +77,18 @@ use Cake\Core\Configure;
 	  <div class="col-md-4">
 		<h3><?= __('Incomings') ?></h3>
 		<div id="chart-incomings">
-		  <canvas id="canvas-incomings" width="100" height="100"></canvas>
+		  <canvas id="canvas-incomings" width="400" height="400"></canvas>
 		</div>
 	  </div>
 	  <div class="col-md-4">
 		<h3><?= __('Outgoings') ?></h3>
 		<div id="chart-outgoings">
-		  <canvas id="canvas-outgoings" width="100" height="100"></canvas>
+		  <canvas id="canvas-outgoings" width="400" height="400"></canvas>
 		</div>
 	  </div>
 	</div>
 	<div class="row">
-	  <div class="col-md-12">
+	  <div class="col-md-12 has-margin-bottom">
 		<h3><?= __('Chart') ?></h3>
 		<div align="right">
 		  <div id="chart-sel" class="btn-group btn-group-sm" role="group" aria-label="Chart selector">
@@ -89,15 +99,19 @@ use Cake\Core\Configure;
 		  </div>
 		</div>
 		<div id="chart-lines">
-		  <canvas id="canvas-line-d" width="100"></canvas>
-		  <canvas id="canvas-line-w" width="100"></canvas>
-		  <canvas id="canvas-line-m" width="100"></canvas>
-		  <canvas id="canvas-line-y" width="100"></canvas>
+		  <canvas id="canvas-line-d" width="400" height="100"></canvas>
+		  <canvas id="canvas-line-w" width="400" height="100"></canvas>
+		  <canvas id="canvas-line-m" width="400" height="100"></canvas>
+		  <canvas id="canvas-line-y" width="400" height="100"></canvas>
 		</div>
 	  </div>
 	</div>
   </div>
   <div class="col-md-3">
+	<div class="list-group">
+		<?= $this->Html->link('<i class="fa fa-arrow-right" aria-hidden="true"></i> ' . __('Next Report'), ['?' => ['s' => $report['next']['start'], 'e' => $report['next']['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
+		<?= $this->Html->link('<i class="fa fa-arrow-left" aria-hidden="true"></i> ' . __('Previous Report'), ['?' => ['s' => $report['prev']['start'], 'e' => $report['prev']['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
+	</div>
 	<div class="list-group">
 		<?= $this->Html->link('<i class="fa fa-list-ol" aria-hidden="true"></i> ' . __('List Reports'), ['controller' => 'reports', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
 	  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i> ' . __('List Journals'), ['controller' => 'journals', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>

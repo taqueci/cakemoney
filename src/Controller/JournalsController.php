@@ -13,7 +13,6 @@ class JournalsController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->loadComponent('RequestHandler');
         $this->loadComponent('Account');
         $this->loadComponent('Search.Prg', [
             'actions' => ['index']
@@ -27,15 +26,34 @@ class JournalsController extends AppController
      */
     public function index()
     {
+        $start = $this->param_date($this->request->getQuery('s'));
+        $end   = $this->param_date($this->request->getQuery('e'));
+
+        $debit  = $this->request->getQuery('d');
+        $credit = $this->request->getQuery('c');
+
         $this->paginate = [
             'order' => ['date' => 'DESC', 'created' => 'DESC'],
             'contain' => ['Debits', 'Credits']
         ];
-        $journals = $this->paginate($this->Journals->find('search', [
-            'search' => $this->request->query
-        ]));
 
-        $this->set(compact('journals'));
+        $q = $this->Journals->find('search', [
+            'search' => $this->request->getQueryParams()
+        ]);
+
+        if ($start) $q->where(['date >=' => $start]);
+        if ($end)   $q->where(['date <=' => $end]);
+
+        if ($debit)  $q->where(['debit_id IN' => $debit]);
+        if ($credit) $q->where(['credit_id IN' => $credit]);
+
+        $category = $this->find_category();
+
+        $this->set(compact('start', 'end'));
+        $this->set('journals', $this->paginate($q));
+
+        $this->set('debits', $category);
+        $this->set('credits', $category);
 
         $this->set('_serialize', ['journals']);
     }
@@ -256,4 +274,10 @@ class JournalsController extends AppController
 
 		return $data;
 	}
+
+    private function param_date($str)
+    {
+        return ($str && ($str === date('Y-m-d', strtotime($str)))) ?
+            $str : null;
+    }
 }

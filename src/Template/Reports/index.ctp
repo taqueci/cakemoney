@@ -29,12 +29,18 @@ use Cake\Core\Configure;
 		</thead>
 		<tbody>
 		  <?php foreach ($daily as $x): ?>
+		  <?php
+		  $start = sprintf('%4d-%02d-%02d', $x->year, $x->month, $x->day);
+		  $end = $start;
+		  ?>
 		  <tr>
 			<td><?= sprintf('%4d-%02d-%02d', $x->year, $x->month, $x->day) ?></td>
 			<td align="right"><?= number_format($x->income) ?></td>
 			<td align="right"><?= number_format($x->expense) ?></td>
 			<td align="right"><?= number_format($x->income - $x->expense) ?></td>
 			<td>
+			  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
+			  &nbsp;
 			  <!-- <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i>', ['action' => 'view', $x->id], ['escape' => false]) ?> -->
 			  <i class="fa fa-bar-chart" aria-hidden="true"></i>
 			</td>
@@ -72,6 +78,8 @@ use Cake\Core\Configure;
 			<td align="right"><?= number_format($x->expense) ?></td>
 			<td align="right"><?= $this->element('Format/numberWithStatus', ['value' => $x->income - $x->expense]) ?></td>
 			<td>
+			  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
+			  &nbsp;
 			  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
 			</td>
 		  </tr>
@@ -106,6 +114,8 @@ use Cake\Core\Configure;
 			<td align="right"><?= number_format($x->expense) ?></td>
 			<td align="right"><?= $this->element('Format/numberWithStatus', ['value' => $x->income - $x->expense]) ?></td>
 			<td>
+			  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
+			  &nbsp;
 			  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
 			</td>
 		  </tr>
@@ -138,6 +148,8 @@ use Cake\Core\Configure;
 			<td align="right"><?= number_format($x->expense) ?></td>
 			<td align="right"><?= $this->element('Format/numberWithStatus', ['value' => $x->income - $x->expense]) ?></td>
 			<td>
+			  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
+			  &nbsp;
 			  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
 			</td>
 		  </tr>
@@ -177,8 +189,9 @@ $(function() {
 	$('#datepicker').datepicker({
 		format: "yyyy-mm-dd",
 		todayBtn: "linked",
-		autoclose: true,
 		calendarWeeks: true,
+		orientation: "bottom auto",
+		autoclose: true,
 		todayHighlight: true
 	});
 
