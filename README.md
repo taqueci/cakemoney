@@ -29,6 +29,7 @@ CakeMoney refers via CDN:
 * Twitter Bootstrap
 * Bootstrap Datepicker
 * Chart.js
+* Select2
 
 ## Installation
 

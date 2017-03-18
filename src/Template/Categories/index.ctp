@@ -68,12 +68,10 @@
 	<div class="list-group">
 		<?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Category'), array('action' => 'add'), array('class' => 'list-group-item', 'escape' => false)) ?>
 	</div>
-	<div class="well">
-      <?= $this->Form->create() ?>
-	  <fieldset>
-		<?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>']) ?>
-	  </fieldset>
-	  <?= $this->Form->end() ?>
-	</div>
+    <?= $this->Form->create() ?>
+	<fieldset>
+	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>']) ?>
+	</fieldset>
+	<?= $this->Form->end() ?>
   </div>
 </div>

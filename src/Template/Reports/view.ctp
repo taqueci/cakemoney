@@ -12,6 +12,16 @@ use Cake\Core\Configure;
 </div>
 <div class="row">
   <div class="col-md-9">
+	<div class="visible-xs">
+	  <div class="row">
+		<div class="col-md-12">
+		  <div class="has-margin-bottom" align="right">
+			<?= $this->Html->link('<i class="fa fa-arrow-left" aria-hidden="true"></i> ' . __('Previous'), ['?' => ['s' => $report['prev']['start'], 'e' => $report['prev']['end']]], ['class' => 'btn btn-default', 'escape' => false]) ?>
+			<?= $this->Html->link('<i class="fa fa-arrow-right" aria-hidden="true"></i> ' . __('Next'), ['?' => ['s' => $report['next']['start'], 'e' => $report['next']['end']]], ['class' => 'btn btn-default', 'escape' => false]) ?>
+		  </div>
+		</div>
+	  </div>
+	</div>
 	<div class="row">
 	  <div class="col-md-12">
 		<legend><?= $start ?> &ndash; <?= $end ?></legend>
@@ -78,7 +88,7 @@ use Cake\Core\Configure;
 	  </div>
 	</div>
 	<div class="row">
-	  <div class="col-md-12">
+	  <div class="col-md-12 has-margin-bottom">
 		<h3><?= __('Chart') ?></h3>
 		<div align="right">
 		  <div id="chart-sel" class="btn-group btn-group-sm" role="group" aria-label="Chart selector">
@@ -98,6 +108,10 @@ use Cake\Core\Configure;
 	</div>
   </div>
   <div class="col-md-3">
+	<div class="list-group">
+		<?= $this->Html->link('<i class="fa fa-arrow-right" aria-hidden="true"></i> ' . __('Next Report'), ['?' => ['s' => $report['next']['start'], 'e' => $report['next']['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
+		<?= $this->Html->link('<i class="fa fa-arrow-left" aria-hidden="true"></i> ' . __('Previous Report'), ['?' => ['s' => $report['prev']['start'], 'e' => $report['prev']['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
+	</div>
 	<div class="list-group">
 		<?= $this->Html->link('<i class="fa fa-list-ol" aria-hidden="true"></i> ' . __('List Reports'), ['controller' => 'reports', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
 	  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i> ' . __('List Journals'), ['controller' => 'journals', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>

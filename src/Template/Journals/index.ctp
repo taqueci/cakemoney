@@ -16,6 +16,7 @@ use Cake\Core\Configure;
 	  <div class="has-margin-bottom">
 		<?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add'], ['class' => 'btn btn-default', 'escape' => false]) ?>
 	  <?= $this->Html->link('<i class="fa fa-search" aria-hidden="true"></i> ' . __('Search'), ['#' => 'q'], ['class' => 'btn btn-default', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fa fa-filter" aria-hidden="true"></i> ' . __('Filter'), ['#' => 's'], ['class' => 'btn btn-default', 'escape' => false]) ?>
 	  </div>
 	</div>
 	<div class="hidden-xs">
@@ -95,18 +96,25 @@ use Cake\Core\Configure;
 	<div class="list-group">
 		<?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['action' => 'add'], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
+    <?= $this->Form->create() ?>
+	<fieldset>
+	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>']) ?>
+	</fieldset>
+	<?= $this->Form->end() ?>
 	<div class="well">
-      <?= $this->Form->create() ?>
-	  <fieldset>
-		<?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>']) ?>
-	  </fieldset>
-	  <?= $this->Form->end() ?>
-	  <?= $this->Form->create(null, ['id' => 'form-date']) ?>
-	  <?= $this->Form->input('date', ['type' => 'hidden']) ?>
-	  <?= $this->Form->end() ?>
-	  <div align="center">
-		<div id="datepicker"></div>
+	  <?= $this->Form->create(null, ['id' => 'form-date', 'type' => 'get']) ?>
+	  <div class="form-group">
+		<label for="s"><?= __('Scope') ?></label>
+		<div class="input-daterange input-group" id="datepicker">
+		  <input id="s" type="text" class="input-sm form-control" name="s" />
+		  <span class="input-group-addon">&ndash;</span>
+		  <input id="e" type="text" class="input-sm form-control" name="e" />
+		</div>
 	  </div>
+	  <?= $this->Form->input('d', ['label' => __('Debit'), 'showParents' => true, 'options' => $debits, 'multiple' => true]) ?>
+	  <?= $this->Form->input('c', ['label' => __('Credit'), 'showParents' => true, 'options' => $credits, 'multiple' => true]) ?>
+	  <?= $this->Form->submit(__('Submit'), ['class' => 'btn btn-primary']) ?>
+	  <?= $this->Form->end() ?>
 	</div>
   </div>
 </div>
@@ -114,8 +122,8 @@ use Cake\Core\Configure;
 <?= $this->fetch('postLink') ?>
 
 <?php
-$this->prepend('css', $this->Html->css([Configure::read('Css.bootstrapDatepicker')]));
-$this->prepend('script', $this->Html->script([Configure::read('Js.bootstrapDatepicker')]));
+$this->prepend('css', $this->Html->css([Configure::read('Css.bootstrapDatepicker'), Configure::read('Css.select2'), Configure::read('Css.select2bootstrap')]));
+$this->prepend('script', $this->Html->script([Configure::read('Js.bootstrapDatepicker'), Configure::read('Js.select2')]));
 ?>
 
 <?php $this->Html->scriptStart(['block' => true]); ?>
@@ -123,12 +131,18 @@ $(function() {
 	$('#datepicker').datepicker({
 		format: "yyyy-mm-dd",
 		todayBtn: "linked",
+		clearBtn: true,
 		calendarWeeks: true,
+		orientation: "bottom auto",
+		autoclose: true,
 		todayHighlight: true
 	});
-	$('#datepicker').on("changeDate", function() {
-		$('#date').val($('#datepicker').datepicker('getFormattedDate'));
-		$('#form-date').submit();
-	});
+
+	$('#s').val('<?= $start ?>');
+	$('#e').val('<?= $end ?>');
+
+	$.fn.select2.defaults.set("theme", "bootstrap");
+	$('#d').select2();
+	$('#c').select2();
 });
 <?php $this->Html->scriptEnd(); ?>

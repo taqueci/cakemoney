@@ -30,6 +30,7 @@ CakeMoney はCDN経由で以下を参照します。
 * Twitter Bootstrap
 * Bootstrap Datepicker
 * Chart.js
+* Select2
 
 ## インストール
 

@@ -38,7 +38,6 @@ class JournalsTable extends Table
         $this->addBehavior('Search.Search');
 
         $this->searchManager()
-             ->value('date')
              ->add('q', 'Search.Like', [
                  'before' => true,
                  'after' => true,

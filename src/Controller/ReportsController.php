@@ -87,9 +87,12 @@ class ReportsController extends AppController
             ->query_sum_group($start, $end, ['year'])
             ->order(['year' => 'ASC']);
 
+        $report = $this->report_next_prev($start, $end);
+
         $this->set(compact('start', 'end'));
         $this->set(compact('sum', 'income', 'expense'));
         $this->set(compact('daily', 'weekly', 'monthly', 'annual'));
+        $this->set(compact('report'));
 
         $this->set('_serialize', ['sum', 'income', 'expense', 'daily', 'weekly', 'monthly', 'annual']);
     }
@@ -185,5 +188,74 @@ class ReportsController extends AppController
             (($end && ($end === date('Y-m-d', strtotime($end)))) ?
             $end : date('Y-m-t'))
         ];
+    }
+
+    private function report_next_prev($start, $end)
+    {
+        $s = date_create($start);
+        $e = date_create($end);
+
+        $days = date_diff($s, $e)->days + 1;
+
+        if ($days >= 356) {
+            $unit = 'year';
+            $num = intval($days / 365);
+        }
+        else if ($days >= 28) {
+            $unit = 'month';
+            $num = intval($days / 28);
+        }
+        else if ($days >= 7) {
+            $unit = 'week';
+            $num = intval($days / 7);
+        }
+        else {
+            $unit = 'day';
+            $num = $days;
+        }
+
+        return ($unit == 'month') ? [
+            'next' => [
+                'start' => $this->next_month($start, $num),
+                'end'   => $this->next_month($end, $num),
+            ],
+            'prev' => [
+                'start' => $this->prev_month($start, $num),
+                'end'   => $this->prev_month($end, $num),
+            ]
+        ] : [
+            'next' => [
+                'start' => date('Y-m-d', strtotime("$start + $num $unit")),
+                'end'   => date('Y-m-d', strtotime("$end   + $num $unit"))
+            ],
+            'prev' => [
+                'start' => date('Y-m-d', strtotime("$start - $num $unit")),
+                'end'   => date('Y-m-d', strtotime("$end   - $num $unit"))
+            ]
+        ];
+    }
+
+    private function next_month($date, $num)
+    {
+        if ($date === date('Y-m-t', strtotime($date))) {
+            $first = date('Y-m-01', strtotime($date));
+
+            return date("Y-m-t", strtotime("$first + $num month"));
+        }
+        else {
+            return date('Y-m-d', strtotime("$date + $num month"));
+        }
+    }
+
+    private function prev_month($date, $num)
+    {
+        if ($date === date('Y-m-t', strtotime($date))) {
+            $first = date('Y-m-01', strtotime($date));
+
+            return date('Y-m-t', strtotime("$first - $num month"));
+        }
+        else {
+            return date('Y-m-d', strtotime("$date - $num month"));
+        }
     }
 }
