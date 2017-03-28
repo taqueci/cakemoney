@@ -13,7 +13,7 @@ class JournalsController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->loadComponent('Account');
+        $this->loadComponent('Category');
         $this->loadComponent('Search.Prg', [
             'actions' => ['index']
         ]);
@@ -26,11 +26,13 @@ class JournalsController extends AppController
      */
     public function index()
     {
-        $start = $this->param_date($this->request->getQuery('s'));
-        $end   = $this->param_date($this->request->getQuery('e'));
+        $category = $this->Category->lists();
 
-        $debit  = $this->request->getQuery('d');
-        $credit = $this->request->getQuery('c');
+        $s = $this->param_date($this->request->getQuery('s'));
+        $e = $this->param_date($this->request->getQuery('e'));
+
+        $d = $this->param_category($category, $this->request->getQuery('d'));
+        $c = $this->param_category($category, $this->request->getQuery('c'));
 
         $this->paginate = [
             'order' => ['date' => 'DESC', 'created' => 'DESC'],
@@ -41,19 +43,22 @@ class JournalsController extends AppController
             'search' => $this->request->getQueryParams()
         ]);
 
-        if ($start) $q->where(['date >=' => $start]);
-        if ($end)   $q->where(['date <=' => $end]);
+        if ($s) $q->where(['date >=' => $s]);
+        if ($e) $q->where(['date <=' => $e]);
 
-        if ($debit)  $q->where(['debit_id IN' => $debit]);
-        if ($credit) $q->where(['credit_id IN' => $credit]);
+        if ($d) $q->where(['debit_id IN' => array_keys($d)]);
+        if ($c) $q->where(['credit_id IN' => array_keys($c)]);
 
-        $category = $this->find_category();
+        $options = $this->Category->options();
 
-        $this->set(compact('start', 'end'));
         $this->set('journals', $this->paginate($q));
 
-        $this->set('debits', $category);
-        $this->set('credits', $category);
+        $this->set('debits', $options);
+        $this->set('credits', $options);
+
+        $this->set('filter', [
+            'start' => $s, 'end' => $e, 'debit' => $d, 'credit' => $c
+        ]);
 
         $this->set('_serialize', ['journals']);
     }
@@ -101,12 +106,12 @@ class JournalsController extends AppController
             $this->Flash->error(__('The journal could not be saved. Please, try again.'));
         }
 
-        $category = $this->find_category();
+        $options = $this->Category->options();
 
         $this->set(compact('journal'));
 
-        $this->set('debits', $category);
-        $this->set('credits', $category);
+        $this->set('debits', $options);
+        $this->set('credits', $options);
         $this->set('selections', $this->popular_selections());
 
         $this->set('_serialize', ['journal']);
@@ -140,12 +145,12 @@ class JournalsController extends AppController
             $this->Flash->error(__('The journal could not be saved. Please, try again.'));
         }
 
-        $category = $this->find_category();
+        $options = $this->Category->options();
 
         $this->set(compact('journal'));
 
-        $this->set('debits', $category);
-        $this->set('credits', $category);
+        $this->set('debits', $options);
+        $this->set('credits', $options);
         $this->set('selections', $this->popular_selections());
 
         $this->set('_serialize', ['journal']);
@@ -181,12 +186,12 @@ class JournalsController extends AppController
 
         $base = $this->Journals->get($id);
 
-        $category = $this->find_category();
+        $options = $this->Category->options();
 
         $this->set('journal', $base);
 
-        $this->set('debits', $category);
-        $this->set('credits', $category);
+        $this->set('debits', $options);
+        $this->set('credits', $options);
         $this->set('selections', $this->popular_selections());
 
         $this->set('_serialize', ['journal']);
@@ -212,19 +217,6 @@ class JournalsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    private function find_category() {
-        $categories = $this->Journals->Debits
-            ->find()->select(['id', 'name', 'account'])->toArray();
-
-        $c = array();
-
-        foreach ($categories as $x) {
-            $c[$this->Account->name($x['account'])][$x['id']] = $x['name'];
-        }
-
-        return $c;
-    }
-
     private function popular_selections()
     {
         $q = $this->Journals->find();
@@ -238,17 +230,9 @@ class JournalsController extends AppController
             ->limit(JOURNAL_POPULAR_NUM);
     }
 
-	private function account_id($category_id) {
-        $q = $this->Journals->Debits->find();
-
-        $a = $q->where(['Debits.id' => $category_id])->first();
-
-        return $a->account;
-	}
-
 	private function journal_data($amount, $debit_id, $credit_id) {
-		$d_id = $this->account_id($debit_id);
-		$c_id = $this->account_id($credit_id);
+		$d_id = $this->Category->account($debit_id);
+		$c_id = $this->Category->account($credit_id);
 
         $data = array();
 
@@ -279,5 +263,20 @@ class JournalsController extends AppController
     {
         return ($str && ($str === date('Y-m-d', strtotime($str)))) ?
             $str : null;
+    }
+
+    private function param_category($category, $ids)
+    {
+        if (!is_array($ids)) return [];
+
+        $c = [];
+
+        foreach ($ids as $id) {
+            if (isset($category[$id])) {
+                $c[$id] = $category[$id];
+            }
+        }
+
+        return $c;
     }
 }

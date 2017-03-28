@@ -70,7 +70,7 @@
 	</div>
     <?= $this->Form->create() ?>
 	<fieldset>
-	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>']) ?>
+	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>']) ?>
 	</fieldset>
 	<?= $this->Form->end() ?>
   </div>

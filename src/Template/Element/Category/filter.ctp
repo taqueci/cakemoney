@@ -8,7 +8,7 @@
 $(function() {
 	$('body').after('<select id="attic"></select>');
 	$('#attic').hide();
-	$('<?= $debit_id ?> optgroup').clone().appendTo('#attic');
+	$('<?= h($debit_id) ?> optgroup').clone().appendTo('#attic');
 
 	$('#category-filter-btn-all').addClass('active');
 });
@@ -19,48 +19,48 @@ $('#category-filter button').click(function() {
 });
 
 $('#category-filter-btn-outgoings').click(function() {
-	$('<?= $debit_id ?> optgroup').remove();
-	$('#attic optgroup[label="<?= __('Expense') ?>"]').clone().appendTo('<?= $debit_id ?>');
+	$('<?= h($debit_id) ?> optgroup').remove();
+	$('#attic optgroup[label="<?= __('Expense') ?>"]').clone().appendTo('<?= h($debit_id) ?>');
 
-	$('<?= $credit_id ?> optgroup').remove();
-	$('#attic optgroup[label="<?= __('Asset') ?>"]').clone().appendTo('<?= $credit_id ?>');
-	$('#attic optgroup[label="<?= __('Liability') ?>"]').clone().appendTo('<?= $credit_id ?>');
+	$('<?= h($credit_id) ?> optgroup').remove();
+	$('#attic optgroup[label="<?= __('Asset') ?>"]').clone().appendTo('<?= h($credit_id) ?>');
+	$('#attic optgroup[label="<?= __('Liability') ?>"]').clone().appendTo('<?= h($credit_id) ?>');
 });
 
 $('#category-filter-btn-incomings').click(function() {
-	$('<?= $debit_id ?> optgroup').remove();
-	$('#attic optgroup[label="<?= __('Asset') ?>"]').clone().appendTo('<?= $debit_id ?>');
+	$('<?= h($debit_id) ?> optgroup').remove();
+	$('#attic optgroup[label="<?= __('Asset') ?>"]').clone().appendTo('<?= h($debit_id) ?>');
 
-	$('<?= $credit_id ?> optgroup').remove();
-	$('#attic optgroup[label="<?= __('Income') ?>"]').clone().appendTo('<?= $credit_id ?>');
+	$('<?= h($credit_id) ?> optgroup').remove();
+	$('#attic optgroup[label="<?= __('Income') ?>"]').clone().appendTo('<?= h($credit_id) ?>');
 });
 
 $('#category-filter-btn-repayments').click(function() {
-	$('<?= $debit_id ?> optgroup').remove();
-	$('#attic optgroup[label="<?= __('Liability') ?>"]').clone().appendTo('<?= $debit_id ?>');
+	$('<?= h($debit_id) ?> optgroup').remove();
+	$('#attic optgroup[label="<?= __('Liability') ?>"]').clone().appendTo('<?= h($debit_id) ?>');
 
-	$('<?= $credit_id ?> optgroup').remove();
-	$('#attic optgroup[label="<?= __('Asset') ?>"]').clone().appendTo('<?= $credit_id ?>');
-	$('#attic optgroup[label="<?= __('Liability') ?>"]').clone().appendTo('<?= $credit_id ?>');
+	$('<?= h($credit_id) ?> optgroup').remove();
+	$('#attic optgroup[label="<?= __('Asset') ?>"]').clone().appendTo('<?= h($credit_id) ?>');
+	$('#attic optgroup[label="<?= __('Liability') ?>"]').clone().appendTo('<?= h($credit_id) ?>');
 });
 
 $('#category-filter-btn-all').click(function() {
-	$('<?= $debit_id ?> optgroup').remove();
-	$('#attic optgroup').clone().appendTo('<?= $debit_id ?>');
+	$('<?= h($debit_id) ?> optgroup').remove();
+	$('#attic optgroup').clone().appendTo('<?= h($debit_id) ?>');
 
-	$('<?= $credit_id ?> optgroup').remove();
-	$('#attic optgroup').clone().appendTo('<?= $credit_id ?>');
+	$('<?= h($credit_id) ?> optgroup').remove();
+	$('#attic optgroup').clone().appendTo('<?= h($credit_id) ?>');
 });
 
 function category_filter_reset() {
 	$('#category-filter button').removeClass('active');
 	$('#category-filter-btn-all').addClass('active');
 
-	$('<?= $debit_id ?> optgroup').remove();
-	$('#attic optgroup').clone().appendTo('<?= $debit_id ?>');
+	$('<?= h($debit_id) ?> optgroup').remove();
+	$('#attic optgroup').clone().appendTo('<?= h($debit_id) ?>');
 
-	$('<?= $credit_id ?> optgroup').remove();
-	$('#attic optgroup').clone().appendTo('<?= $credit_id ?>');
+	$('<?= h($credit_id) ?> optgroup').remove();
+	$('#attic optgroup').clone().appendTo('<?= h($credit_id) ?>');
 }
 
 <?php $this->Html->scriptEnd(); ?>

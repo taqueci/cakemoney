@@ -15,10 +15,52 @@ use Cake\Core\Configure;
 	<div class="visible-xs">
 	  <div class="has-margin-bottom">
 		<?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add'], ['class' => 'btn btn-default', 'escape' => false]) ?>
-	  <?= $this->Html->link('<i class="fa fa-search" aria-hidden="true"></i> ' . __('Search'), ['#' => 'q'], ['class' => 'btn btn-default', 'escape' => false]) ?>
-	  <?= $this->Html->link('<i class="fa fa-filter" aria-hidden="true"></i> ' . __('Filter'), ['#' => 's'], ['class' => 'btn btn-default', 'escape' => false]) ?>
+	  <a href="#q" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> <?= __('Search') ?></a>
+	  <a href="#filter" class="btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i> <?= __('Filter') ?></a>
 	  </div>
 	</div>
+	<?php if ($filter['start'] || $filter['end'] || $filter['debit'] || $filter['credit']): ?>
+	<div class="panel panel-info">
+	  <div class="panel-body">
+		<?php if ($filter['start'] || $filter['end']): ?>
+		<div style="display: inline-block; margin: 0 0.5em">
+		  <small>
+			<strong>
+			  <i class="fa fa-filter" aria-hidden="true"></i>
+			  <?= __('Scope') ?>
+			</strong>
+			&nbsp;
+			<?= h($filter['start']) ?> &ndash; <?= h($filter['end']) ?>
+		  </small>
+		</div>
+		<?php endif; ?>
+		<?php if ($filter['debit']): ?>
+		<div style="display: inline-block; margin: 0 0.5em">
+		  <small>
+			<strong>
+			  <i class="fa fa-filter" aria-hidden="true"></i>
+			  <?= __('Debit') ?>
+			</strong>
+			&nbsp;
+			<?= join('&ensp;', array_values($filter['debit'])) ?>
+		  </small>
+		</div>
+		<?php endif; ?>
+		<?php if ($filter['credit']): ?>
+		<div style="display: inline-block; margin: 0 0.5em">
+		  <small>
+			<strong>
+			  <i class="fa fa-filter" aria-hidden="true"></i>
+			  <?= __('Credit') ?>
+			</strong>
+			&nbsp;
+			<?= join('&ensp;', array_values($filter['credit'])) ?>
+		  </small>
+		</div>
+		<?php endif; ?>
+	  </div>
+	</div>
+	<?php endif; ?>
 	<div class="hidden-xs">
 	  <table class="table table-striped">
 		<thead>
@@ -98,10 +140,10 @@ use Cake\Core\Configure;
 	</div>
     <?= $this->Form->create() ?>
 	<fieldset>
-	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>']) ?>
+	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>']) ?>
 	</fieldset>
 	<?= $this->Form->end() ?>
-	<div class="well">
+	<div id="filter" class="well">
 	  <?= $this->Form->create(null, ['id' => 'form-date', 'type' => 'get']) ?>
 	  <div class="form-group">
 		<label for="s"><?= __('Scope') ?></label>
@@ -113,7 +155,7 @@ use Cake\Core\Configure;
 	  </div>
 	  <?= $this->Form->input('d', ['label' => __('Debit'), 'showParents' => true, 'options' => $debits, 'multiple' => true]) ?>
 	  <?= $this->Form->input('c', ['label' => __('Credit'), 'showParents' => true, 'options' => $credits, 'multiple' => true]) ?>
-	  <?= $this->Form->submit(__('Submit'), ['class' => 'btn btn-primary']) ?>
+	  <?= $this->Form->button('<i class="fa fa-filter" aria-hidden="true"></i> ' . __('Filter'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
 	  <?= $this->Form->end() ?>
 	</div>
   </div>
@@ -138,8 +180,8 @@ $(function() {
 		todayHighlight: true
 	});
 
-	$('#s').val('<?= $start ?>');
-	$('#e').val('<?= $end ?>');
+	$('#s').val('<?= h($filter['start']) ?>');
+	$('#e').val('<?= h($filter['end']) ?>');
 
 	$.fn.select2.defaults.set("theme", "bootstrap");
 	$('#d').select2();

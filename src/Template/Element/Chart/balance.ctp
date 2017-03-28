@@ -1,5 +1,16 @@
+<?php
+$label = [];
+$incoming = [];
+$outgoing = [];
+
+foreach ($data as $x) {
+	$label[] = $format($x);
+	$incoming[] = $x->income;
+	$outgoing[] = $x->expense;
+}
+?>
 var myChart = new Chart(
-	document.getElementById('<?= $id ?>').getContext('2d'), {
+	document.getElementById('<?= h($id) ?>').getContext('2d'), {
 		type: 'line',
 		options: {
 			maintainAspectRatio: false

@@ -13,7 +13,7 @@
 	  <?= $this->Form->input('account', ['label' => __('Account')]) ?>
 	  <?= $this->Form->input('description', ['label' => __('Description'), 'type' => 'textarea']) ?>
 	</fieldset>
-	<?= $this->Form->submit(__('Submit'), ['class' => 'btn btn-primary']) ?>
+	<?= $this->Form->button('<i class="fa fa-check" aria-hidden="true"></i> ' . __('Submit'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
 	<?= $this->Form->end() ?>
   </div>
   <div class="col-md-3">

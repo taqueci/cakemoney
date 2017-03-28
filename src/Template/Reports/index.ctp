@@ -160,8 +160,7 @@ use Cake\Core\Configure;
   </div>
   <div class="col-md-3">
 	<div class="list-group">
-	  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i> ' . __('List Journals'), ['controller' => 'journals', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
-		<?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add'], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add'], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
 	<div class="well">
 	  <?= $this->Form->create(null, ['id' => 'form-date', 'type' => 'get', 'url' => ['controller' => 'reports', 'action' => 'view']]) ?>
@@ -173,7 +172,7 @@ use Cake\Core\Configure;
 		  <input id="e" type="text" class="input-sm form-control" name="e" />
 		</div>
 	  </div>
-	  <?= $this->Form->submit(__('Submit'), ['class' => 'btn btn-primary']) ?>
+	  <?= $this->Form->button('<i class="fa fa-bar-chart" aria-hidden="true"></i> ' . __('Report'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
 	  <?= $this->Form->end() ?>
 	</div>
   </div>
@@ -195,7 +194,7 @@ $(function() {
 		todayHighlight: true
 	});
 
-	$('#s').val('<?= $start ?>');
-	$('#e').val('<?= $end ?>');
+	$('#s').val('<?= h($start) ?>');
+	$('#e').val('<?= h($end) ?>');
 });
 <?php $this->Html->scriptEnd() ?>

@@ -17,7 +17,7 @@ use Cake\Core\Configure;
 		<div class="col-md-12">
 		  <?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add'], ['class' => 'btn btn-default', 'escape' => false]) ?>
 		  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i> ' . __('Report'), ['controller' => 'reports', 'action' => 'view'], ['class' => 'btn btn-default', 'escape' => false]) ?>
-		  <?= $this->Html->link('<i class="fa fa-search" aria-hidden="true"></i> ' . __('Search'), ['#' => 'q'], ['class' => 'btn btn-default', 'escape' => false]) ?>
+		  <a href="#q" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> <?= __('Search') ?></a>
 		</div>
 	  </div>
 	</div>
@@ -41,8 +41,8 @@ use Cake\Core\Configure;
 		  </tr>
 		</table>
 		<h3><?= __('Outgoings') ?></h3>
-		<div id="chart-outgoings">
-		  <canvas id="canvas-outgoings" width="400" height="400"></canvas>
+		<div id="outgoings-chart">
+		  <canvas id="outgoings-canvas" width="400" height="400"></canvas>
 		</div>
 	  </div>
 	  <div class="col-md-6">
@@ -75,13 +75,11 @@ use Cake\Core\Configure;
 		<?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add'], ['class' => 'list-group-item', 'escape' => false]) ?>
 		<?= $this->Html->link('<i class="fa fa-list-ol" aria-hidden="true"></i> ' . __('List Reports'), ['controller' => 'reports', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
-	<div class="well">
-      <?= $this->Form->create(null, ['url' => ['controller' => 'journals', 'action' => 'index']]) ?>
-	  <fieldset>
-		<?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>']) ?>
-	  </fieldset>
-	  <?= $this->Form->end() ?>
-	</div>
+    <?= $this->Form->create(null, ['url' => ['controller' => 'journals', 'action' => 'index']]) ?>
+	<fieldset>
+	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>']) ?>
+	</fieldset>
+	<?= $this->Form->end() ?>
   </div>	
 </div>
 
@@ -89,27 +87,6 @@ use Cake\Core\Configure;
 
 <?php $this->prepend('script', $this->Html->script([Configure::read('Js.chartjs')])) ?>
 
-<?php
-$label = array();
-$data = array();
-foreach ($expense as $x) {
-	$label[] = $x->name;
-	$data[] = $x->sum;
-}
-
-if (count($label)) {
-	$this->Html->scriptStart(['block' => true]);
-	echo $this->element('Chart/doughnut', ['id' => 'canvas-outgoings', 'label' => $label, 'data' => $data]);
-	$this->Html->scriptEnd();
-}
-else {
-	$this->Html->scriptStart(['block' => true]);
-?>
-$(function() {
-    $('#chart-outgoings').append('<div class="alert alert-warning" role="alert"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <?= __('No data') ?></div>');
-    $('#canvas-outgoings').hide();
-});
-<?php
-	$this->Html->scriptEnd();
-}
-?>
+<?php $this->Html->scriptStart(['block' => true]); ?>
+<?= $this->element('Chart/doughnut', ['id' => 'outgoings-canvas', 'data' => $expense]) ?>
+<?php $this->Html->scriptEnd(); ?>
