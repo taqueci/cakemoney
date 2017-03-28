@@ -61,40 +61,37 @@ class ReportsController extends AppController
      */
     public function view()
     {
-        list($start, $end) = $this->date_start_end(
-            $this->request->getQuery('s'),
-            $this->request->getQuery('e')
-        );
+        $start = $this->param_date($this->request->getQuery('s'), date('Y-m-01'));
+        $end = $this->param_date($this->request->getQuery('e'), date('Y-m-t'));
 
         $sum = $this->query_sum($start, $end)->first();
 
         $income  = $this->query_income($start, $end)->order(['sum' => 'DESC']);
         $expense = $this->query_expense($start, $end)->order(['sum' => 'DESC']);
 
-        $daily = $this
-            ->query_sum_group($start, $end, ['year', 'month', 'day'])
-            ->order(['year' => 'ASC', 'month' => 'ASC', 'day' => 'ASC']);
-
-        $weekly = $this
-            ->query_sum_group($start, $end, ['year', 'week'])
-            ->order(['year' => 'ASC', 'week' => 'ASC']);
-
-        $monthly = $this
-            ->query_sum_group($start, $end, ['year', 'month'])
-            ->order(['year' => 'ASC', 'month' => 'ASC']);
-
-        $annual = $this
-            ->query_sum_group($start, $end, ['year'])
-            ->order(['year' => 'ASC']);
-
-        $report = $this->report_next_prev($start, $end);
+        $page = $this->page_next_prev($start, $end);
 
         $this->set(compact('start', 'end'));
         $this->set(compact('sum', 'income', 'expense'));
-        $this->set(compact('daily', 'weekly', 'monthly', 'annual'));
-        $this->set(compact('report'));
 
-        $this->set('_serialize', ['sum', 'income', 'expense', 'daily', 'weekly', 'monthly', 'annual']);
+        $this->set(compact('page'));
+
+        $this->set('balance', [
+            'daily' => $this
+                ->query_sum_group($start, $end, ['year', 'month', 'day'])
+                ->order(['year' => 'ASC', 'month' => 'ASC', 'day' => 'ASC']),
+            'weekly' => $this
+                ->query_sum_group($start, $end, ['year', 'week'])
+                ->order(['year' => 'ASC', 'week' => 'ASC']),
+            'monthly' => $this
+                ->query_sum_group($start, $end, ['year', 'month'])
+                ->order(['year' => 'ASC', 'month' => 'ASC']),
+            'annual' => $this
+                ->query_sum_group($start, $end, ['year'])
+                ->order(['year' => 'ASC'])
+        ]);
+
+        $this->set('_serialize', ['sum', 'income', 'expense', 'balance']);
     }
 
     public function display()
@@ -132,18 +129,7 @@ class ReportsController extends AppController
 
     private function query_sum_group($start, $end, $group)
     {
-        $q = $this->Journals->find();
-
-        return $q
-            ->select(array_merge([
-                'asset'     => $q->func()->sum('asset'),
-                'liability' => $q->func()->sum('liability'),
-                'income'    => $q->func()->sum('income'),
-                'expense'   => $q->func()->sum('expense'),
-                'equity'    => $q->func()->sum('equity')
-            ], $group))
-            ->where(['date >=' => $start, 'date <=' => $end])
-            ->group($group);
+        return $this->query_sum($start, $end)->select($group)->group($group);
     }
 
     private function query_income($start, $end)
@@ -180,17 +166,13 @@ class ReportsController extends AppController
             ->group(['debit_id', 'name', 'Debits.account']);
     }
 
-    private function date_start_end($start, $end)
+    private function param_date($date, $default)
     {
-        return [
-            (($start && ($start === date('Y-m-d', strtotime($start)))) ?
-            $start : date('Y-m-01')),
-            (($end && ($end === date('Y-m-d', strtotime($end)))) ?
-            $end : date('Y-m-t'))
-        ];
+        return ($date && ($date === date('Y-m-d', strtotime($date)))) ?
+            $date : $default;
     }
 
-    private function report_next_prev($start, $end)
+    private function page_next_prev($start, $end)
     {
         $s = date_create($start);
         $e = date_create($end);

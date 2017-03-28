@@ -44,32 +44,24 @@ if (!$this->fetch('tb_body_start')) {
  * Default `body` block.
  */
 if (!$this->fetch('tb_nav')) {
-	$a_title = $this->Html->link(Configure::read('App.title'), '/', ['class' => 'navbar-brand']);
-
-	$a_journals = $this->Html->link(__('Journals'), ['controller' => 'journals']);
-	$a_reports = $this->Html->link(__('Reports'), ['controller' => 'reports']);
-    $a_categories = $this->Html->link(__('Categories'), ['controller' => 'categories']);
-
     $this->start('tb_nav');
-echo <<<HTML
+?>
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">
-        <i class="fa fa-money fa-lg" aria-hidden="true"></i>
-      </a>
+	  <?= $this->Html->link('<i class="fa fa-money fa-lg" aria-hidden="true"></i>', '/', ['class' => 'navbar-brand', 'escape' => false]) ?>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 		<span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-	  $a_title
+	  <?= $this->Html->link(Configure::read('App.title'), '/', ['class' => 'navbar-brand']) ?>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li>$a_journals</li>
-        <li>$a_reports</li>
+        <li><?= $this->Html->link(__('Journals'), ['controller' => 'journals']) ?></li>
+        <li><?= $this->Html->link(__('Reports'), ['controller' => 'reports']) ?></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">
@@ -80,7 +72,7 @@ echo <<<HTML
 		  </a>
           <ul class="dropdown-menu">
 			<!-- <li><a>Users</a></li > -->
-			<li>$a_categories</li>
+			<li><?= $this->Html->link(__('Categories'), ['controller' => 'categories']) ?></li>
 			<!-- <li><a>Settings</a></li> -->
           </ul>
         </li>
@@ -88,7 +80,7 @@ echo <<<HTML
     </div>
   </div>
 </nav>
-HTML;
+<?php
     $this->end();
 }
 /**

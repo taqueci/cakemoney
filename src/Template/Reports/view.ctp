@@ -16,15 +16,17 @@ use Cake\Core\Configure;
 	  <div class="row">
 		<div class="col-md-12">
 		  <div class="has-margin-bottom" align="right">
-			<?= $this->Html->link('<i class="fa fa-arrow-left" aria-hidden="true"></i> ' . __('Previous'), ['?' => ['s' => $report['prev']['start'], 'e' => $report['prev']['end']]], ['class' => 'btn btn-default', 'escape' => false]) ?>
-			<?= $this->Html->link('<i class="fa fa-arrow-right" aria-hidden="true"></i> ' . __('Next'), ['?' => ['s' => $report['next']['start'], 'e' => $report['next']['end']]], ['class' => 'btn btn-default', 'escape' => false]) ?>
+			<div class="btn-group" role="group" aria-label="Page navigation">
+			  <?= $this->Html->link('<i class="fa fa-arrow-left" aria-hidden="true"></i>', ['?' => ['s' => $page['prev']['start'], 'e' => $page['prev']['end']]], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fa fa-arrow-right" aria-hidden="true"></i>', ['?' => ['s' => $page['next']['start'], 'e' => $page['next']['end']]], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
+			</div>
 		  </div>
 		</div>
 	  </div>
 	</div>
 	<div class="row">
 	  <div class="col-md-12">
-		<legend><?= $start ?> &ndash; <?= $end ?></legend>
+		<legend><?= h($start) ?> &ndash; <?= h($end) ?></legend>
 	  </div>
 	</div>
 	<div class="row">
@@ -76,14 +78,82 @@ use Cake\Core\Configure;
 	  </div>
 	  <div class="col-md-4">
 		<h3><?= __('Incomings') ?></h3>
-		<div id="chart-incomings">
-		  <canvas id="canvas-incomings" width="400" height="400"></canvas>
+		<div align="right">
+		  <div class="btn-group" role="group" aria-label="Page navigation">
+			<button id="incomings-btn-chart" class="btn btn-default btn-sm" type="button">
+			  <i class="fa fa-pie-chart" aria-hidden="true"></i>
+			</button>
+			<button id="incomings-btn-table" class="btn btn-default btn-sm" type="button">
+			  <i class="fa fa-table" aria-hidden="true"></i>
+			</button>
+		  </div>
+		</div>
+		<div id="incomings-chart">
+		  <canvas id="incomings-canvas" width="400" height="400"></canvas>
+		</div>
+		<div id="incomings-table">
+		  <table class="table table-striped">
+			<thead>
+			  <tr>
+				<th><?= __('Category') ?></th>
+				<th><?= __('Amount') ?></th>
+				<th><?= __('Ratio') ?></th>
+				<th><i class="fa fa-ellipsis-h" aria-hidden="true"></i></th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <?php foreach ($income as $x): ?>
+			  <tr>
+				<td><?= h($x->name) ?></td>
+				<td align="right"><?= number_format($x->sum) ?></td>
+				<td align="right"><?= sprintf('%.1f %%', 100 * $x->sum / $sum->income) ?></td>
+				<td>
+				  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end, 'c[]' => $x->credit_id]], ['escape' => false]) ?>
+				</td>
+			  </tr>
+			  <?php endforeach; ?>
+			</tbody>
+		  </table>
 		</div>
 	  </div>
 	  <div class="col-md-4">
 		<h3><?= __('Outgoings') ?></h3>
-		<div id="chart-outgoings">
-		  <canvas id="canvas-outgoings" width="400" height="400"></canvas>
+		<div align="right">
+		  <div class="btn-group" role="group" aria-label="Page navigation">
+			<button id="outgoings-btn-chart" class="btn btn-default btn-sm" type="button">
+			  <i class="fa fa-pie-chart" aria-hidden="true"></i>
+			</button>
+			<button id="outgoings-btn-table" class="btn btn-default btn-sm" type="button">
+			  <i class="fa fa-table" aria-hidden="true"></i>
+			</button>
+		  </div>
+		</div>
+		<div id="outgogins-chart">
+		  <canvas id="outgoings-canvas" width="400" height="400"></canvas>
+		</div>
+		<div id="outgogins-table">
+		  <table class="table table-striped">
+			<thead>
+			  <tr>
+				<th><?= __('Category') ?></th>
+				<th><?= __('Amount') ?></th>
+				<th><?= __('Ratio') ?></th>
+				<th><i class="fa fa-ellipsis-h" aria-hidden="true"></i></th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <?php foreach ($expense as $x): ?>
+			  <tr>
+				<td><?= h($x->name) ?></td>
+				<td align="right"><?= number_format($x->sum) ?></td>
+				<td align="right"><?= sprintf('%.1f %%', 100 * $x->sum / $sum->expense) ?></td>
+				<td>
+				  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end, 'd[]' => $x->debit_id]], ['escape' => false]) ?>
+				</td>
+			  </tr>
+			  <?php endforeach; ?>
+			</tbody>
+		  </table>
 		</div>
 	  </div>
 	</div>
@@ -98,19 +168,20 @@ use Cake\Core\Configure;
 			<button id="chart-btn-d" type="button" class="btn btn-default"><?= __('Day') ?></button>
 		  </div>
 		</div>
-		<div id="chart-lines">
-		  <canvas id="canvas-line-d" width="400" height="100"></canvas>
-		  <canvas id="canvas-line-w" width="400" height="100"></canvas>
-		  <canvas id="canvas-line-m" width="400" height="100"></canvas>
-		  <canvas id="canvas-line-y" width="400" height="100"></canvas>
+		<div id="chart-canvas">
+		  <canvas id="chart-canvas-y" width="400" height="15"></canvas>
+		  <canvas id="chart-canvas-m" width="400" height="15"></canvas>
+		  <canvas id="chart-canvas-w" width="400" height="15"></canvas>
+		  <canvas id="chart-canvas-d" width="400" height="15"></canvas>
 		</div>
 	  </div>
 	</div>
   </div>
   <div class="col-md-3">
 	<div class="list-group">
-		<?= $this->Html->link('<i class="fa fa-arrow-right" aria-hidden="true"></i> ' . __('Next Report'), ['?' => ['s' => $report['next']['start'], 'e' => $report['next']['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
-		<?= $this->Html->link('<i class="fa fa-arrow-left" aria-hidden="true"></i> ' . __('Previous Report'), ['?' => ['s' => $report['prev']['start'], 'e' => $report['prev']['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
+		<?= $this->Html->link('<i class="fa fa-arrow-right" aria-hidden="true"></i> ' . __('Next Report'), ['?' => ['s' => $page['next']['start'], 'e' => $page['next']['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
+		<?= $this->Html->link('<i class="fa fa-arrow-left" aria-hidden="true"></i> ' . __('Previous Report'), ['?' => ['s' => $page['prev']['start'], 'e' => $page['prev']['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
+		<?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i> ' . __('Related Journals'), ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
 	<div class="list-group">
 		<?= $this->Html->link('<i class="fa fa-list-ol" aria-hidden="true"></i> ' . __('List Reports'), ['controller' => 'reports', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
@@ -127,7 +198,7 @@ use Cake\Core\Configure;
 		  <input id="e" type="text" class="input-sm form-control" name="e" />
 		</div>
 	  </div>
-	  <?= $this->Form->submit(__('Submit'), ['class' => 'btn btn-primary']) ?>
+	  <?= $this->Form->button('<i class="fa fa-bar-chart" aria-hidden="true"></i> ' . __('Report'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
 	  <?= $this->Form->end() ?>
 	</div>
   </div>	
@@ -138,7 +209,7 @@ $this->prepend('css', $this->Html->css([Configure::read('Css.bootstrapDatepicker
 $this->prepend('script', $this->Html->script([Configure::read('Js.bootstrapDatepicker'), Configure::read('Js.chartjs')]));
 ?>
 
-<?php $this->Html->scriptStart(['block' => true]) ?>
+<?php $this->Html->scriptStart(['block' => true]); ?>
 $(function() {
 	$('#datepicker').datepicker({
 		format: "yyyy-mm-dd",
@@ -148,152 +219,90 @@ $(function() {
 		todayHighlight: true
 	});
 
-	$('#s').val('<?= $start ?>');
-	$('#e').val('<?= $end ?>');
+	$('#s').val('<?= h($start) ?>');
+	$('#e').val('<?= h($end) ?>');
 });
-<?php $this->Html->scriptEnd() ?>
-
-<?php
-$label = array();
-$data = array();
-foreach ($expense as $x) {
-	$label[] = $x->name;
-	$data[] = $x->sum;
-}
-
-if (count($label)) {
-	$this->Html->scriptStart(['block' => true]);
-	echo $this->element('Chart/doughnut', ['id' => 'canvas-outgoings', 'label' => $label, 'data' => $data]);
-	$this->Html->scriptEnd();
-}
-else {
-	$this->Html->scriptStart(['block' => true]);
-?>
-$(function() {
-    $('#chart-outgoings').append('<div class="alert alert-warning" role="alert"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <?= __('No data') ?></div>');
-    $('#canvas-outgoings').hide();
-});
-<?php
-	$this->Html->scriptEnd();
-}
-?>
-
-<?php
-$label = array();
-$data = array();
-foreach ($income as $x) {
-	$label[] = $x->name;
-	$data[] = $x->sum;
-}
-
-if (count($label)) {
-	$this->Html->scriptStart(['block' => true]);
-	echo $this->element('Chart/doughnut', ['id' => 'canvas-incomings', 'label' => $label, 'data' => $data]);
-	$this->Html->scriptEnd();
-}
-else {
-	$this->Html->scriptStart(['block' => true]);
-?>
-$(function() {
-    $('#chart-incomings').append('<div class="alert alert-warning" role="alert"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <?= __('No data') ?></div>');
-    $('#canvas-incomings').hide();
-});
-<?php
-	$this->Html->scriptEnd();
-}
-?>
-
-<?php
-$label = array();
-$incoming = array();
-$outgoing = array();
-
-foreach ($daily as $x) {
-	$label[] = sprintf('%04d-%02d-%02d', $x->year, $x->month, $x->day);
-	$incoming[] = $x->income;
-	$outgoing[] = $x->expense;
-}
-
-$this->Html->scriptStart(['block' => true]);
-echo $this->element('Chart/line', ['id' => 'canvas-line-d', 'label' => $label, 'incoming' => $incoming, 'outgoing' => $outgoing]);
-$this->Html->scriptEnd();
-?>
-
-<?php
-$label = array();
-$incoming = array();
-$outgoing = array();
-
-foreach ($weekly as $x) {
-	$label[] = sprintf('%04d-W%02d', $x->year, $x->week);
-	$incoming[] = $x->income;
-	$outgoing[] = $x->expense;
-}
-
-$this->Html->scriptStart(['block' => true]);
-echo $this->element('Chart/line', ['id' => 'canvas-line-w', 'label' => $label, 'incoming' => $incoming, 'outgoing' => $outgoing]);
-$this->Html->scriptEnd();
-?>
-
-<?php
-$label = array();
-$incoming = array();
-$outgoing = array();
-
-foreach ($monthly as $x) {
-	$label[] = sprintf('%04d-%02d', $x->year, $x->month);
-	$incoming[] = $x->income;
-	$outgoing[] = $x->expense;
-}
-
-$this->Html->scriptStart(['block' => true]);
-echo $this->element('Chart/line', ['id' => 'canvas-line-m', 'label' => $label, 'incoming' => $incoming, 'outgoing' => $outgoing]);
-$this->Html->scriptEnd();
-?>
-
-<?php
-$label = array();
-$incoming = array();
-$outgoing = array();
-
-foreach ($annual as $x) {
-	$label[] = $x->year;
-	$incoming[] = $x->income;
-	$outgoing[] = $x->expense;
-}
-
-$this->Html->scriptStart(['block' => true]);
-echo $this->element('Chart/line', ['id' => 'canvas-line-y', 'label' => $label, 'incoming' => $incoming, 'outgoing' => $outgoing]);
-$this->Html->scriptEnd();
-?>
+<?php $this->Html->scriptEnd(); ?>
 
 <?php $this->Html->scriptStart(['block' => true]); ?>
+<?= $this->element('Chart/doughnut', ['id' => 'outgoings-canvas', 'data' => $expense]) ?>
+<?= $this->element('Chart/doughnut', ['id' => 'incomings-canvas', 'data' => $income]) ?>
+
+$(function() {
+	$('#incomings-table').hide();
+	$('#incomings-btn-chart').addClass('active');
+
+	$('#incomings-btn-chart').click(function() {
+		$('#incomings-btn-table').removeClass('active');
+		$('#incomings-btn-chart').addClass('active');
+
+		$('#incomings-table').hide();
+		$('#incomings-chart').show();
+	});
+
+	$('#incomings-btn-table').click(function() {
+		$('#incomings-btn-chart').removeClass('active');
+		$('#incomings-btn-table').addClass('active');
+
+		$('#incomings-chart').hide();
+		$('#incomings-table').show();
+	});
+
+	$('#outgogins-table').hide();
+	$('#outgoings-btn-chart').addClass('active');
+
+	$('#outgoings-btn-chart').click(function() {
+		$('#outgoings-btn-table').removeClass('active');
+		$('#outgoings-btn-chart').addClass('active');
+
+		$('#outgogins-table').hide();
+		$('#outgogins-chart').show();
+	});
+
+	$('#outgoings-btn-table').click(function() {
+		$('#outgoings-btn-chart').removeClass('active');
+		$('#outgoings-btn-table').addClass('active');
+
+		$('#outgogins-chart').hide();
+		$('#outgogins-table').show();
+	});
+});
+<?php $this->Html->scriptEnd(); ?>
+
+<?php $this->Html->scriptStart(['block' => true]); ?>
+<?= $this->element('Chart/balance', ['id' => 'chart-canvas-y', 'data' => $balance['annual'], 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>
+<?= $this->element('Chart/balance', ['id' => 'chart-canvas-m', 'data' => $balance['monthly'], 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>
+<?= $this->element('Chart/balance', ['id' => 'chart-canvas-w', 'data' => $balance['weekly'], 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>
+<?= $this->element('Chart/balance', ['id' => 'chart-canvas-d', 'data' => $balance['daily'], 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
+
 $(function() {
 	$('#chart-btn-d').addClass('active');
-	$('#chart-lines canvas').hide();
-	$('#canvas-line-d').show();
+	$('#chart-canvas canvas').hide();
+	$('#chart-canvas-d').show();
 
 	$('#chart-sel button').click(function() {
 		$('#chart-sel button').removeClass('active');
 		$(this).addClass('active');
-
-		$('#chart-lines canvas').hide();
 	});
 
 	$('#chart-btn-d').click(function() {
-		$('#canvas-line-d').show();
+		$('#chart-canvas canvas').hide();
+		$('#chart-canvas-d').show();
 	});
 
 	$('#chart-btn-w').click(function() {
-		$('#canvas-line-w').show();
+		$('#chart-canvas canvas').hide();
+		$('#chart-canvas-w').show();
 	});
 
 	$('#chart-btn-m').click(function() {
-		$('#canvas-line-m').show();
+		$('#chart-canvas canvas').hide();
+		$('#chart-canvas-m').show();
 	});
 
 	$('#chart-btn-y').click(function() {
-		$('#canvas-line-y').show();
+		$('#chart-canvas canvas').hide();
+		$('#chart-canvas-y').show();
 	});
 });
 <?php $this->Html->scriptEnd(); ?>

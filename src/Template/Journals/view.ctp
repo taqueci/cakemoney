@@ -14,7 +14,7 @@
 	  <div class="col-md-6">
 		<dl class="dl-horizontal">
 		  <dt><?= __('Date') ?></dt>
-          <dd><?= $journal->date ?></dd>
+          <dd><?= h($journal->date) ?></dd>
 		  <dt><?= __('Debit') ?></dt>
 		  <dd><?= h($journal->debit->name) ?></dd>
 		  <dt><?= __('Credit') ?></dt>
@@ -30,7 +30,7 @@
 	  <div class="col-md-6">
 		<dl class="dl-horizontal">
 		  <dt><?= __('ID') ?></dt>
-          <dd><?= $this->Number->format($journal->id) ?></dd>
+          <dd><?= h($journal->id) ?></dd>
           <dt><?= __('Created') ?></dt>
           <dd><?= h($journal->created) ?></dd>
           <dt><?= __('Modified') ?></dt>
@@ -38,15 +38,15 @@
 		</dl>
 		<dl class="dl-horizontal">
           <dt><?= __('Asset') ?></dt>
-          <dd><?= $this->Number->format($journal->asset) ?></dd>
+          <dd><?= number_format($journal->asset) ?></dd>
           <dt><?= __('Liability') ?></dt>
-          <dd><?= $this->Number->format($journal->liability) ?></dd>
+          <dd><?= number_format($journal->liability) ?></dd>
           <dt><?= __('Income') ?></dt>
-          <dd><?= $this->Number->format($journal->income) ?></dd>
+          <dd><?= number_format($journal->income) ?></dd>
             <dt><?= __('Expense') ?></dt>
-          <dd><?= $this->Number->format($journal->expense) ?></dd>
+          <dd><?= number_format($journal->expense) ?></dd>
           <dt><?= __('Equity') ?></dt>
-          <dd><?= $this->Number->format($journal->equity) ?></dd>
+          <dd><?= number_format($journal->equity) ?></dd>
 		</dl>
 	  </div>
 	</div>
