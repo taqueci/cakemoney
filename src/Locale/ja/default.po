@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2017-03-22 13:59+0000\n"
+"POT-Creation-Date: 2017-03-29 15:15+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -121,15 +121,16 @@ msgstr "新しいカテゴリ"
 msgid "Search"
 msgstr "検索"
 
-#: Template/Element/Category/filter.ctp:2 Template/Element/Chart/line.ctp:14
+#: Template/Element/Category/filter.ctp:2
+#: Template/Element/Chart/Data/balance.ctp:19
 #: Template/Reports/display.ctp:31;43 Template/Reports/index.ctp:22;57;95;131
 #: Template/Reports/view.ctp:40;120
 msgid "Outgoings"
 msgstr "支出"
 
-#: Template/Element/Category/filter.ctp:3 Template/Element/Chart/line.ctp:10
-#: Template/Reports/display.ctp:29 Template/Reports/index.ctp:21;56;94;130
-#: Template/Reports/view.ctp:38;80
+#: Template/Element/Category/filter.ctp:3
+#: Template/Element/Chart/Data/balance.ctp:15 Template/Reports/display.ctp:29
+#: Template/Reports/index.ctp:21;56;94;130 Template/Reports/view.ctp:38;80
 msgid "Incomings"
 msgstr "収入"
 
@@ -140,6 +141,10 @@ msgstr "返済"
 #: Template/Element/Category/filter.ctp:5
 msgid "Other"
 msgstr "その他"
+
+#: Template/Element/Chart/doughnut.ctp:46
+msgid "No data"
+msgstr "データがありません"
 
 #: Template/Journals/add.ctp:12
 msgid "Add Journal"
@@ -182,7 +187,7 @@ msgstr "サマリー"
 
 #: Template/Journals/add.ctp:38 Template/Journals/copy.ctp:38
 #: Template/Journals/edit.ctp:39 Template/Journals/view.ctp:61
-#: Template/Reports/display.ctp:74 Template/Reports/view.ctp:188
+#: Template/Reports/display.ctp:74 Template/Reports/view.ctp:185
 msgid "List Journals"
 msgstr "記録一覧"
 
@@ -199,7 +204,7 @@ msgid "Journals"
 msgstr "記録"
 
 #: Template/Journals/index.ctp:17;139 Template/Reports/display.ctp:18;75
-#: Template/Reports/index.ctp:163 Template/Reports/view.ctp:189
+#: Template/Reports/index.ctp:163 Template/Reports/view.ctp:186
 msgid "New Journal"
 msgstr "新しい記録"
 
@@ -208,7 +213,7 @@ msgid "Filter"
 msgstr "フィルタ"
 
 #: Template/Journals/index.ctp:30;149 Template/Reports/index.ctp:168
-#: Template/Reports/view.ctp:194
+#: Template/Reports/view.ctp:191
 msgid "Scope"
 msgstr "スコープ"
 
@@ -245,7 +250,7 @@ msgid "Dashboard"
 msgstr "ダッシュボード"
 
 #: Template/Reports/display.ctp:19 Template/Reports/index.ctp:175
-#: Template/Reports/view.ctp:10;201
+#: Template/Reports/view.ctp:10;198
 msgid "Report"
 msgstr "レポート"
 
@@ -262,13 +267,9 @@ msgstr "最近の記録"
 msgid "View Report"
 msgstr "レポート表示"
 
-#: Template/Reports/display.ctp:76 Template/Reports/view.ctp:187
+#: Template/Reports/display.ctp:76 Template/Reports/view.ctp:184
 msgid "List Reports"
 msgstr "レポート一覧"
-
-#: Template/Reports/display.ctp:107 Template/Reports/view.ctp:244;269
-msgid "No data"
-msgstr "データがありません"
 
 #: Template/Reports/index.ctp:16
 msgid "Daily"
@@ -330,14 +331,14 @@ msgstr "チャート"
 msgid "Day"
 msgstr "日"
 
-#: Template/Reports/view.ctp:182
+#: Template/Reports/view.ctp:179
 msgid "Next Report"
 msgstr "次のレポート"
 
-#: Template/Reports/view.ctp:183
+#: Template/Reports/view.ctp:180
 msgid "Previous Report"
 msgstr "前のレポート"
 
-#: Template/Reports/view.ctp:184
+#: Template/Reports/view.ctp:181
 msgid "Related Journals"
 msgstr "関連する記録"
