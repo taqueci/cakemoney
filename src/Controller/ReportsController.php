@@ -27,29 +27,26 @@ class ReportsController extends AppController
         $start = '1970-01-01';
         $end   = date('Y-12-31');
 
-        $daily = $this
-            ->query_sum_group($start, $end, ['year', 'month', 'day'])
-            ->order(['year' => 'DESC', 'month' => 'DESC', 'day' => 'DESC'])
-            ->limit(REPORT_SUMMARY_NUM);
+        $this->set('summary', [
+            'daily' => $this
+                ->query_sum_group($start, $end, ['year', 'month', 'day'])
+                ->order(['year' => 'DESC', 'month' => 'DESC', 'day' => 'DESC'])
+                ->limit(REPORT_SUMMARY_NUM),
+            'weekly' => $this
+                ->query_sum_group($start, $end, ['year', 'week'])
+                ->order(['year' => 'DESC', 'week' => 'DESC'])
+                ->limit(REPORT_SUMMARY_NUM),
+            'monthly' => $this
+                ->query_sum_group($start, $end, ['year', 'month'])
+                ->order(['year' => 'DESC', 'month' => 'DESC'])
+                ->limit(REPORT_SUMMARY_NUM),
+            'annual' => $this
+                ->query_sum_group($start, $end, ['year'])
+                ->order(['year' => 'DESC'])
+                ->limit(REPORT_SUMMARY_NUM)
+        ]);
 
-        $weekly = $this
-            ->query_sum_group($start, $end, ['year', 'week'])
-            ->order(['year' => 'DESC', 'week' => 'DESC'])
-            ->limit(REPORT_SUMMARY_NUM);
-
-        $monthly = $this
-            ->query_sum_group($start, $end, ['year', 'month'])
-            ->order(['year' => 'DESC', 'month' => 'DESC'])
-            ->limit(REPORT_SUMMARY_NUM);
-
-        $annual = $this
-            ->query_sum_group($start, $end, ['year'])
-            ->order(['year' => 'DESC'])
-            ->limit(REPORT_SUMMARY_NUM);
-
-        $this->set(compact('daily', 'weekly', 'monthly', 'annual'));
-
-        $this->set('_serialize', ['daily', 'weekly', 'monthly', 'annual']);
+        $this->set('_serialize', ['summary']);
     }
 
     /**

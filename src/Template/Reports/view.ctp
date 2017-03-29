@@ -168,11 +168,8 @@ use Cake\Core\Configure;
 			<button id="chart-btn-d" type="button" class="btn btn-default"><?= __('Day') ?></button>
 		  </div>
 		</div>
-		<div id="chart-canvas">
-		  <canvas id="chart-canvas-y" width="400" height="15"></canvas>
-		  <canvas id="chart-canvas-m" width="400" height="15"></canvas>
-		  <canvas id="chart-canvas-w" width="400" height="15"></canvas>
-		  <canvas id="chart-canvas-d" width="400" height="15"></canvas>
+		<div>
+		  <canvas id="chart-canvas" width="400" height="400"></canvas>
 		</div>
 	  </div>
 	</div>
@@ -270,15 +267,25 @@ $(function() {
 <?php $this->Html->scriptEnd(); ?>
 
 <?php $this->Html->scriptStart(['block' => true]); ?>
-<?= $this->element('Chart/balance', ['id' => 'chart-canvas-y', 'data' => $balance['annual'], 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>
-<?= $this->element('Chart/balance', ['id' => 'chart-canvas-m', 'data' => $balance['monthly'], 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>
-<?= $this->element('Chart/balance', ['id' => 'chart-canvas-w', 'data' => $balance['weekly'], 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>
-<?= $this->element('Chart/balance', ['id' => 'chart-canvas-d', 'data' => $balance['daily'], 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
-
 $(function() {
+	var data_b = {
+		annual: <?= $this->element('Chart/Data/balance', ['data' => $balance['annual'], 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
+		monthly: <?= $this->element('Chart/Data/balance', ['data' => $balance['monthly'], 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
+		weekly: <?= $this->element('Chart/Data/balance', ['data' => $balance['weekly'], 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
+		daily: <?= $this->element('Chart/Data/balance', ['data' => $balance['daily'], 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
+	};
+
+	var ctx = document.getElementById('chart-canvas').getContext('2d');
+
+	var chart = new Chart(ctx, {
+		type: 'line',
+		options: {
+			maintainAspectRatio: false
+		},
+		data: data_b.daily
+	});
+
 	$('#chart-btn-d').addClass('active');
-	$('#chart-canvas canvas').hide();
-	$('#chart-canvas-d').show();
 
 	$('#chart-sel button').click(function() {
 		$('#chart-sel button').removeClass('active');
@@ -286,23 +293,47 @@ $(function() {
 	});
 
 	$('#chart-btn-d').click(function() {
-		$('#chart-canvas canvas').hide();
-		$('#chart-canvas-d').show();
+		chart.destroy();
+		chart = new Chart(ctx, {
+			type: 'line',
+			options: {
+				maintainAspectRatio: false
+			},
+			data: data_b.daily
+		});
 	});
 
 	$('#chart-btn-w').click(function() {
-		$('#chart-canvas canvas').hide();
-		$('#chart-canvas-w').show();
+		chart.destroy();
+		chart = new Chart(ctx, {
+			type: 'line',
+			options: {
+				maintainAspectRatio: false
+			},
+			data: data_b.weekly
+		});
 	});
 
 	$('#chart-btn-m').click(function() {
-		$('#chart-canvas canvas').hide();
-		$('#chart-canvas-m').show();
+		chart.destroy();
+		chart = new Chart(ctx, {
+			type: 'line',
+			options: {
+				maintainAspectRatio: false
+			},
+			data: data_b.monthly
+		});
 	});
 
 	$('#chart-btn-y').click(function() {
-		$('#chart-canvas canvas').hide();
-		$('#chart-canvas-y').show();
+		chart.destroy();
+		chart = new Chart(ctx, {
+			type: 'line',
+			options: {
+				maintainAspectRatio: false
+			},
+			data: data_b.annual
+		});
 	});
 });
 <?php $this->Html->scriptEnd(); ?>

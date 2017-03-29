@@ -28,7 +28,7 @@ use Cake\Core\Configure;
 		  </tr>
 		</thead>
 		<tbody>
-		  <?php foreach ($daily as $x): ?>
+		  <?php foreach ($summary['daily'] as $x): ?>
 		  <?php
 		  $start = sprintf('%4d-%02d-%02d', $x->year, $x->month, $x->day);
 		  $end = $start;
@@ -63,7 +63,7 @@ use Cake\Core\Configure;
 		  </tr>
 		</thead>
 		<tbody>
-		  <?php foreach ($weekly as $x): ?>
+		  <?php foreach ($summary['weekly'] as $x): ?>
 		  <?php
 		  $d = new DateTime();
 
@@ -101,7 +101,7 @@ use Cake\Core\Configure;
 		  </tr>
 		</thead>
 		<tbody>
-		  <?php foreach ($monthly as $x): ?>
+		  <?php foreach ($summary['monthly'] as $x): ?>
 		  <?php
 		  $d = new DateTime(sprintf('%4d-%02d-01', $x->year, $x->month));
 
@@ -137,7 +137,7 @@ use Cake\Core\Configure;
 		  </tr>
 		</thead>
 		<tbody>
-		  <?php foreach ($annual as $x): ?>
+		  <?php foreach ($summary['annual'] as $x): ?>
 		  <?php
 		  $start = sprintf('%4d-01-01', $x->year);
 		  $end   = sprintf('%4d-12-31', $x->year);
