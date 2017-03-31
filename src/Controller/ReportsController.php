@@ -88,6 +88,36 @@ class ReportsController extends AppController
                 ->order(['year' => 'ASC'])
         ]);
 
+        $this->set('incomings', [
+            'daily' => $this
+                ->query_income_group($start, $end, ['year', 'month', 'day'])
+                ->order(['year' => 'ASC', 'month' => 'ASC', 'day' => 'ASC']),
+            'weekly' => $this
+                ->query_income_group($start, $end, ['year', 'week'])
+                ->order(['year' => 'ASC', 'week' => 'ASC']),
+            'monthly' => $this
+                ->query_income_group($start, $end, ['year', 'month'])
+                ->order(['year' => 'ASC', 'month' => 'ASC']),
+            'annual' => $this
+                ->query_income_group($start, $end, ['year'])
+                ->order(['year' => 'ASC'])
+        ]);
+
+        $this->set('outgoings', [
+            'daily' => $this
+                ->query_expense_group($start, $end, ['year', 'month', 'day'])
+                ->order(['year' => 'ASC', 'month' => 'ASC', 'day' => 'ASC']),
+            'weekly' => $this
+                ->query_expense_group($start, $end, ['year', 'week'])
+                ->order(['year' => 'ASC', 'week' => 'ASC']),
+            'monthly' => $this
+                ->query_expense_group($start, $end, ['year', 'month'])
+                ->order(['year' => 'ASC', 'month' => 'ASC']),
+            'annual' => $this
+                ->query_expense_group($start, $end, ['year'])
+                ->order(['year' => 'ASC'])
+        ]);
+
         $this->set('_serialize', ['sum', 'income', 'expense', 'balance']);
     }
 
@@ -146,6 +176,14 @@ class ReportsController extends AppController
             ->group(['credit_id', 'name', 'Credits.account']);
     }
 
+    private function query_income_group($start, $end, $group)
+    {
+        return $this
+            ->query_income($start, $end)
+            ->select($group)
+            ->group($group);
+    }
+
     private function query_expense($start, $end)
     {
         $q = $this->Journals->find();
@@ -161,6 +199,14 @@ class ReportsController extends AppController
             ->where(['date >=' => $start, 'date <=' => $end,
             'Debits.account' => ACCOUNT_EXPENSE])
             ->group(['debit_id', 'name', 'Debits.account']);
+    }
+
+    private function query_expense_group($start, $end, $group)
+    {
+        return $this
+            ->query_expense($start, $end)
+            ->select($group)
+            ->group($group);
     }
 
     private function param_date($date, $default)
