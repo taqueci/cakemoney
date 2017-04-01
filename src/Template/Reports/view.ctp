@@ -298,17 +298,28 @@ $(function() {
 		}
 	};
 
+	function number_format(value, index, values) {
+		return value.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+
 	var option = {
 		balance: {
-			maintainAspectRatio: false
+			maintainAspectRatio: false,
+			scales: {yAxes: [{ticks: {userCallback: number_format}}]}
 		},
 		incomings: {
 			maintainAspectRatio: false,
-			scales: {xAxes: [{stacked: true}], yAxes: [{stacked: true}]}
+			scales: {
+				xAxes: [{stacked: true}],
+				yAxes: [{stacked: true, ticks: {userCallback: number_format}}]
+			}
 		},
 		outgoings: {
 			maintainAspectRatio: false,
-			scales: {xAxes: [{stacked: true}], yAxes: [{stacked: true}]}
+			scales: {
+				xAxes: [{stacked: true}],
+				yAxes: [{stacked: true, ticks: {userCallback: number_format}}]
+			}
 		}
 	};
 
