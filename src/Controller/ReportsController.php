@@ -136,6 +136,7 @@ class ReportsController extends AppController
             ->order(['Journals.id' => 'DESC'])
             ->limit(REPORT_RECENT_NUM);
 
+        $this->set(compact('start', 'end'));
         $this->set(compact('sum', 'expense', 'journals'));
     }
 

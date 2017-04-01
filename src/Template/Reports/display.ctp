@@ -41,8 +41,44 @@ use Cake\Core\Configure;
 		  </tr>
 		</table>
 		<h3><?= __('Outgoings') ?></h3>
+		<div align="right">
+		  <div class="btn-group" role="group" aria-label="Page navigation">
+			<button id="outgoings-btn-chart" class="btn btn-default btn-sm" type="button">
+			  <i class="fa fa-pie-chart" aria-hidden="true"></i>
+			</button>
+			<button id="outgoings-btn-table" class="btn btn-default btn-sm" type="button">
+			  <i class="fa fa-table" aria-hidden="true"></i>
+			</button>
+		  </div>
+		</div>
 		<div id="outgoings-chart">
 		  <canvas id="outgoings-canvas" width="400" height="400"></canvas>
+		</div>
+		<div id="outgoings-table">
+		  <table class="table table-striped">
+			<thead>
+			  <tr>
+				<th><?= __('Category') ?></th>
+				<th><?= __('Amount') ?></th>
+				<th><?= __('Ratio') ?></th>
+				<th><i class="fa fa-ellipsis-h" aria-hidden="true"></i></th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <?php $outgoing_category = [] ?>
+			  <?php foreach ($expense as $x): ?>
+			  <?php $outgoing_category[] = $x->name ?>
+			  <tr>
+				<td><?= h($x->name) ?></td>
+				<td align="right"><?= number_format($x->sum) ?></td>
+				<td align="right"><?= sprintf('%.1f %%', 100 * $x->sum / $sum->expense) ?></td>
+				<td>
+				  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end, 'd[]' => $x->debit_id]], ['escape' => false]) ?>
+				</td>
+			  </tr>
+			  <?php endforeach; ?>
+			</tbody>
+		  </table>
 		</div>
 	  </div>
 	  <div class="col-md-6">
@@ -88,5 +124,26 @@ use Cake\Core\Configure;
 <?php $this->prepend('script', $this->Html->script([Configure::read('Js.chartjs')])) ?>
 
 <?php $this->Html->scriptStart(['block' => true]); ?>
-<?= $this->element('Chart/doughnut', ['id' => 'outgoings-canvas', 'data' => $expense]) ?>
+$(function() {
+	<?= $this->element('Chart/doughnut', ['id' => 'outgoings-canvas', 'data' => $expense]) ?>
+
+	$('#outgoings-table').hide();
+	$('#outgoings-btn-chart').addClass('active');
+
+	$('#outgoings-btn-chart').click(function() {
+		$('#outgoings-btn-table').removeClass('active');
+		$('#outgoings-btn-chart').addClass('active');
+
+		$('#outgoings-table').hide();
+		$('#outgoings-chart').show();
+	});
+
+	$('#outgoings-btn-table').click(function() {
+		$('#outgoings-btn-chart').removeClass('active');
+		$('#outgoings-btn-table').addClass('active');
+
+		$('#outgoings-chart').hide();
+		$('#outgoings-table').show();
+	});
+});
 <?php $this->Html->scriptEnd(); ?>
