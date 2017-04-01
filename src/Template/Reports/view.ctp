@@ -130,10 +130,10 @@ use Cake\Core\Configure;
 			</button>
 		  </div>
 		</div>
-		<div id="outgogins-chart">
+		<div id="outgoings-chart">
 		  <canvas id="outgoings-canvas" width="400" height="400"></canvas>
 		</div>
-		<div id="outgogins-table">
+		<div id="outgoings-table">
 		  <table class="table table-striped">
 			<thead>
 			  <tr>
@@ -254,23 +254,23 @@ $(function() {
 		$('#incomings-table').show();
 	});
 
-	$('#outgogins-table').hide();
+	$('#outgoings-table').hide();
 	$('#outgoings-btn-chart').addClass('active');
 
 	$('#outgoings-btn-chart').click(function() {
 		$('#outgoings-btn-table').removeClass('active');
 		$('#outgoings-btn-chart').addClass('active');
 
-		$('#outgogins-table').hide();
-		$('#outgogins-chart').show();
+		$('#outgoings-table').hide();
+		$('#outgoings-chart').show();
 	});
 
 	$('#outgoings-btn-table').click(function() {
 		$('#outgoings-btn-chart').removeClass('active');
 		$('#outgoings-btn-table').addClass('active');
 
-		$('#outgogins-chart').hide();
-		$('#outgogins-table').show();
+		$('#outgoings-chart').hide();
+		$('#outgoings-table').show();
 	});
 });
 <?php $this->Html->scriptEnd(); ?>
