@@ -15,14 +15,14 @@ $color = [
     '#40c4ff', // 07
     '#b2ff59', // 11
     '#ffab40', // 15
-    '#7c4dff', // 04
-    '#18ffff', // 08
-    '#eeff41', // 12
-    '#ff6e40', // 16
     '#ff5252', // 01
     '#536dfe', // 05
     '#64ffda', // 09
     '#ffff00', // 13
+    '#7c4dff', // 04
+    '#18ffff', // 08
+    '#eeff41', // 12
+    '#ff6e40', // 16
 ];
 ?>
 <?php if (count($label)): ?>
@@ -43,8 +43,6 @@ var myDoughnutChart = new Chart(
 	}
 );
 <?php else: ?>
-$(function() {
-    $('#<?= h($id) ?>').after('<div class="alert alert-warning" role="alert"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <?= __('No data') ?></div>');
-    $('#<?= h($id) ?>').hide();
-});
+$('#<?= h($id) ?>').after('<div class="alert alert-warning" role="alert"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <?= __('No data') ?></div>');
+$('#<?= h($id) ?>').hide();
 <?php endif ?>
