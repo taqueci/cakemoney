@@ -302,23 +302,30 @@ $(function() {
 		return value.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 
+	function number_format_tooltip(tooltipItem, data) {
+		return tooltipItem.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+
 	var option = {
 		balance: {
 			maintainAspectRatio: false,
-			scales: {yAxes: [{ticks: {userCallback: number_format}}]}
+			tooltips: {callbacks: {label: number_format_tooltip}},
+			scales: {yAxes: [{ticks: {callback: number_format}}]}
 		},
 		incomings: {
 			maintainAspectRatio: false,
+			tooltips: {callbacks: {label: number_format_tooltip}},
 			scales: {
 				xAxes: [{stacked: true}],
-				yAxes: [{stacked: true, ticks: {userCallback: number_format}}]
+				yAxes: [{stacked: true, ticks: {callback: number_format}}]
 			}
 		},
 		outgoings: {
 			maintainAspectRatio: false,
+			tooltips: {callbacks: {label: number_format_tooltip}},
 			scales: {
 				xAxes: [{stacked: true}],
-				yAxes: [{stacked: true, ticks: {userCallback: number_format}}]
+				yAxes: [{stacked: true, ticks: {callback: number_format}}]
 			}
 		}
 	};
