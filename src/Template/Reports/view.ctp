@@ -102,7 +102,9 @@ use Cake\Core\Configure;
 			  </tr>
 			</thead>
 			<tbody>
+			  <?php $incoming_category = [] ?>
 			  <?php foreach ($income as $x): ?>
+			  <?php $incoming_category[] = $x->name ?>
 			  <tr>
 				<td><?= h($x->name) ?></td>
 				<td align="right"><?= number_format($x->sum) ?></td>
@@ -128,10 +130,10 @@ use Cake\Core\Configure;
 			</button>
 		  </div>
 		</div>
-		<div id="outgogins-chart">
+		<div id="outgoings-chart">
 		  <canvas id="outgoings-canvas" width="400" height="400"></canvas>
 		</div>
-		<div id="outgogins-table">
+		<div id="outgoings-table">
 		  <table class="table table-striped">
 			<thead>
 			  <tr>
@@ -142,7 +144,9 @@ use Cake\Core\Configure;
 			  </tr>
 			</thead>
 			<tbody>
+			  <?php $outgoing_category = [] ?>
 			  <?php foreach ($expense as $x): ?>
+			  <?php $outgoing_category[] = $x->name ?>
 			  <tr>
 				<td><?= h($x->name) ?></td>
 				<td align="right"><?= number_format($x->sum) ?></td>
@@ -161,7 +165,12 @@ use Cake\Core\Configure;
 	  <div class="col-md-12 has-margin-bottom">
 		<h3><?= __('Chart') ?></h3>
 		<div align="right">
-		  <div id="chart-sel" class="btn-group btn-group-sm" role="group" aria-label="Chart selector">
+		  <div id="chart-sel-view" class="btn-group btn-group-sm" role="group" aria-label="Chart selector">
+			<button id="chart-btn-b" type="button" class="btn btn-default"><?= __('Balance') ?></button>
+			<button id="chart-btn-i" type="button" class="btn btn-default"><?= __('Incomings') ?></button>
+			<button id="chart-btn-o" type="button" class="btn btn-default"><?= __('Outgoings') ?></button>
+		  </div>
+		  <div id="chart-sel-scope" class="btn-group btn-group-sm" role="group" aria-label="Chart selector">
 			<button id="chart-btn-y" type="button" class="btn btn-default"><?= __('Year') ?></button>
 			<button id="chart-btn-m" type="button" class="btn btn-default"><?= __('Month') ?></button>
 			<button id="chart-btn-w" type="button" class="btn btn-default"><?= __('Week') ?></button>
@@ -222,10 +231,10 @@ $(function() {
 <?php $this->Html->scriptEnd(); ?>
 
 <?php $this->Html->scriptStart(['block' => true]); ?>
-<?= $this->element('Chart/doughnut', ['id' => 'outgoings-canvas', 'data' => $expense]) ?>
-<?= $this->element('Chart/doughnut', ['id' => 'incomings-canvas', 'data' => $income]) ?>
-
 $(function() {
+	<?= $this->element('Chart/doughnut', ['id' => 'outgoings-canvas', 'data' => $expense]) ?>
+	<?= $this->element('Chart/doughnut', ['id' => 'incomings-canvas', 'data' => $income]) ?>
+
 	$('#incomings-table').hide();
 	$('#incomings-btn-chart').addClass('active');
 
@@ -245,95 +254,153 @@ $(function() {
 		$('#incomings-table').show();
 	});
 
-	$('#outgogins-table').hide();
+	$('#outgoings-table').hide();
 	$('#outgoings-btn-chart').addClass('active');
 
 	$('#outgoings-btn-chart').click(function() {
 		$('#outgoings-btn-table').removeClass('active');
 		$('#outgoings-btn-chart').addClass('active');
 
-		$('#outgogins-table').hide();
-		$('#outgogins-chart').show();
+		$('#outgoings-table').hide();
+		$('#outgoings-chart').show();
 	});
 
 	$('#outgoings-btn-table').click(function() {
 		$('#outgoings-btn-chart').removeClass('active');
 		$('#outgoings-btn-table').addClass('active');
 
-		$('#outgogins-chart').hide();
-		$('#outgogins-table').show();
+		$('#outgoings-chart').hide();
+		$('#outgoings-table').show();
 	});
 });
 <?php $this->Html->scriptEnd(); ?>
 
 <?php $this->Html->scriptStart(['block' => true]); ?>
 $(function() {
-	var data_b = {
-		annual: <?= $this->element('Chart/Data/balance', ['data' => $balance['annual'], 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
-		monthly: <?= $this->element('Chart/Data/balance', ['data' => $balance['monthly'], 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
-		weekly: <?= $this->element('Chart/Data/balance', ['data' => $balance['weekly'], 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
-		daily: <?= $this->element('Chart/Data/balance', ['data' => $balance['daily'], 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
+	var data = {
+		balance: {
+			annual: <?= $this->element('Chart/Data/balance', ['data' => $balance['annual'], 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
+			monthly: <?= $this->element('Chart/Data/balance', ['data' => $balance['monthly'], 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
+			weekly: <?= $this->element('Chart/Data/balance', ['data' => $balance['weekly'], 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
+			daily: <?= $this->element('Chart/Data/balance', ['data' => $balance['daily'], 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
+		},
+		incomings: {
+			annual: <?= $this->element('Chart/Data/stacked', ['data' => $incomings['annual'], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
+			monthly: <?= $this->element('Chart/Data/stacked', ['data' => $incomings['monthly'], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
+			weekly: <?= $this->element('Chart/Data/stacked', ['data' => $incomings['weekly'], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
+			daily: <?= $this->element('Chart/Data/stacked', ['data' => $incomings['daily'], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
+		},
+		outgoings: {
+			annual: <?= $this->element('Chart/Data/stacked', ['data' => $outgoings['annual'], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
+			monthly: <?= $this->element('Chart/Data/stacked', ['data' => $outgoings['monthly'], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
+			weekly: <?= $this->element('Chart/Data/stacked', ['data' => $outgoings['weekly'], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
+			daily: <?= $this->element('Chart/Data/stacked', ['data' => $outgoings['daily'], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
+		}
 	};
+
+	function number_format(value, index, values) {
+		return value.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+
+	function number_format_tooltip(tooltipItem, data) {
+		return tooltipItem.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+
+	var option = {
+		balance: {
+			maintainAspectRatio: false,
+			tooltips: {callbacks: {label: number_format_tooltip}},
+			scales: {yAxes: [{ticks: {callback: number_format}}]}
+		},
+		incomings: {
+			maintainAspectRatio: false,
+			tooltips: {callbacks: {label: number_format_tooltip}},
+			scales: {
+				xAxes: [{stacked: true}],
+				yAxes: [{stacked: true, ticks: {callback: number_format}}]
+			}
+		},
+		outgoings: {
+			maintainAspectRatio: false,
+			tooltips: {callbacks: {label: number_format_tooltip}},
+			scales: {
+				xAxes: [{stacked: true}],
+				yAxes: [{stacked: true, ticks: {callback: number_format}}]
+			}
+		}
+	};
+
+	function chart_new(c, o, d) {
+		return new Chart(c, {type: 'line', options: o, data: d});
+	}
+
+	var view  = 'balance';
+	var scope = 'daily';
 
 	var ctx = document.getElementById('chart-canvas').getContext('2d');
 
-	var chart = new Chart(ctx, {
-		type: 'line',
-		options: {
-			maintainAspectRatio: false
-		},
-		data: data_b.daily
-	});
+	var chart = chart_new(ctx, option[view], data[view][scope]);
 
+	$('#chart-btn-b').addClass('active');
 	$('#chart-btn-d').addClass('active');
 
-	$('#chart-sel button').click(function() {
-		$('#chart-sel button').removeClass('active');
+	$('#chart-sel-view button').click(function() {
+		$('#chart-sel-view button').removeClass('active');
 		$(this).addClass('active');
 	});
 
-	$('#chart-btn-d').click(function() {
-		chart.destroy();
-		chart = new Chart(ctx, {
-			type: 'line',
-			options: {
-				maintainAspectRatio: false
-			},
-			data: data_b.daily
-		});
+	$('#chart-sel-scope button').click(function() {
+		$('#chart-sel-scope button').removeClass('active');
+		$(this).addClass('active');
 	});
 
-	$('#chart-btn-w').click(function() {
+	$('#chart-btn-b').click(function() {
+		view = 'balance';
+
 		chart.destroy();
-		chart = new Chart(ctx, {
-			type: 'line',
-			options: {
-				maintainAspectRatio: false
-			},
-			data: data_b.weekly
-		});
+		chart = chart_new(ctx, option[view], data[view][scope]);
 	});
 
-	$('#chart-btn-m').click(function() {
+	$('#chart-btn-i').click(function() {
+		view = 'incomings';
+
 		chart.destroy();
-		chart = new Chart(ctx, {
-			type: 'line',
-			options: {
-				maintainAspectRatio: false
-			},
-			data: data_b.monthly
-		});
+		chart = chart_new(ctx, option[view], data[view][scope]);
+	});
+
+	$('#chart-btn-o').click(function() {
+		view = 'outgoings';
+
+		chart.destroy();
+		chart = chart_new(ctx, option[view], data[view][scope]);
 	});
 
 	$('#chart-btn-y').click(function() {
+		scope = 'annual';
+
 		chart.destroy();
-		chart = new Chart(ctx, {
-			type: 'line',
-			options: {
-				maintainAspectRatio: false
-			},
-			data: data_b.annual
-		});
+		chart = chart_new(ctx, option[view], data[view][scope]);
+	});
+
+	$('#chart-btn-m').click(function() {
+		scope = 'monthly';
+
+		chart.destroy();
+		chart = chart_new(ctx, option[view], data[view][scope]);
+	});
+
+	$('#chart-btn-w').click(function() {
+		scope = 'weekly';
+
+		chart.destroy();
+		chart = chart_new(ctx, option[view], data[view][scope]);
+	});
+
+	$('#chart-btn-d').click(function() {
+		scope = 'daily';
+
+		chart.destroy();
+		chart = chart_new(ctx, option[view], data[view][scope]);
 	});
 });
 <?php $this->Html->scriptEnd(); ?>
