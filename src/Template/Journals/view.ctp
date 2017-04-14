@@ -53,8 +53,8 @@
   </div>
   <div class="col-md-3">
 	<div class="list-group">
-	  <?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i> ' . __('Edit Journal'), ['action' => 'edit', $journal->id], ['class' => 'list-group-item', 'escape' => false]) ?>
-	  <?= $this->Html->link('<i class="fa fa-copy" aria-hidden="true"></i> ' . __('Copy Journal'), ['action' => 'copy', $journal->id], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i> ' . __('Edit Journal'), ['action' => 'edit', $journal->id, '?' => ['back' => $back]], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fa fa-copy" aria-hidden="true"></i> ' . __('Copy Journal'), ['action' => 'copy', $journal->id, '?' => ['back' => $back]], ['class' => 'list-group-item', 'escape' => false]) ?>
 	  <?= $this->Form->postLink('<i class="fa fa-trash" aria-hidden="true"></i> ' . __('Delete Journal'), ['action' => 'delete', $journal->id], ['confirm' => __('Are you sure you want to delete # {0}?', $journal->id), 'class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
 	<div class="list-group">
