@@ -176,6 +176,11 @@ use Cake\Core\Configure;
 			<button id="chart-btn-w" type="button" class="btn btn-default"><?= __('Week') ?></button>
 			<button id="chart-btn-d" type="button" class="btn btn-default"><?= __('Day') ?></button>
 		  </div>
+		  <div id="chart-sel-accu" class="btn-group btn-group-sm" role="group" aria-label="Chart selector">
+			<button id="chart-btn-a" type="button" class="btn btn-default">
+			  <i class="fa fa-signal" aria-hidden="true"></i>
+			</button>
+		  </div>
 		</div>
 		<div>
 		  <canvas id="chart-canvas" width="400" height="400"></canvas>
@@ -277,7 +282,7 @@ $(function() {
 
 <?php $this->Html->scriptStart(['block' => true]); ?>
 $(function() {
-	var data = {
+	var normal = {
 		balance: {
 			annual: <?= $this->element('Chart/Data/balance', ['data' => $balance['annual'], 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
 			monthly: <?= $this->element('Chart/Data/balance', ['data' => $balance['monthly'], 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
@@ -297,6 +302,21 @@ $(function() {
 			daily: <?= $this->element('Chart/Data/stacked', ['data' => $outgoings['daily'], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
 		}
 	};
+
+	var accumulated = $.extend(true, {}, normal);
+
+	$.each(accumulated, function(i, u) {
+		$.each(u, function(j, v) {
+			v.datasets.forEach(function(w) {
+				var sum = 0;
+
+				w.data.forEach(function(val, index) {
+					w.data[index] += sum;
+					sum += val;
+				});
+			});
+		});
+	});
 
 	function number_format(value, index, values) {
 		return value.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -334,12 +354,15 @@ $(function() {
 		return new Chart(c, {type: 'line', options: o, data: d});
 	}
 
+	var data = {normal: normal, accumulated: accumulated};
+
 	var view  = 'balance';
 	var scope = 'daily';
+	var curve = 'normal';
 
 	var ctx = document.getElementById('chart-canvas').getContext('2d');
 
-	var chart = chart_new(ctx, option[view], data[view][scope]);
+	var chart = chart_new(ctx, option[view], data[curve][view][scope]);
 
 	$('#chart-btn-b').addClass('active');
 	$('#chart-btn-d').addClass('active');
@@ -358,49 +381,63 @@ $(function() {
 		view = 'balance';
 
 		chart.destroy();
-		chart = chart_new(ctx, option[view], data[view][scope]);
+		chart = chart_new(ctx, option[view], data[curve][view][scope]);
 	});
 
 	$('#chart-btn-i').click(function() {
 		view = 'incomings';
 
 		chart.destroy();
-		chart = chart_new(ctx, option[view], data[view][scope]);
+		chart = chart_new(ctx, option[view], data[curve][view][scope]);
 	});
 
 	$('#chart-btn-o').click(function() {
 		view = 'outgoings';
 
 		chart.destroy();
-		chart = chart_new(ctx, option[view], data[view][scope]);
+		chart = chart_new(ctx, option[view], data[curve][view][scope]);
 	});
 
 	$('#chart-btn-y').click(function() {
 		scope = 'annual';
 
 		chart.destroy();
-		chart = chart_new(ctx, option[view], data[view][scope]);
+		chart = chart_new(ctx, option[view], data[curve][view][scope]);
 	});
 
 	$('#chart-btn-m').click(function() {
 		scope = 'monthly';
 
 		chart.destroy();
-		chart = chart_new(ctx, option[view], data[view][scope]);
+		chart = chart_new(ctx, option[view], data[curve][view][scope]);
 	});
 
 	$('#chart-btn-w').click(function() {
 		scope = 'weekly';
 
 		chart.destroy();
-		chart = chart_new(ctx, option[view], data[view][scope]);
+		chart = chart_new(ctx, option[view], data[curve][view][scope]);
 	});
 
 	$('#chart-btn-d').click(function() {
 		scope = 'daily';
 
 		chart.destroy();
-		chart = chart_new(ctx, option[view], data[view][scope]);
+		chart = chart_new(ctx, option[view], data[curve][view][scope]);
+	});
+
+	$('#chart-btn-a').click(function() {
+		if ($(this).hasClass('active')) {
+			$(this).removeClass('active');
+			curve = 'normal';
+		}
+		else {
+			$(this).addClass('active');
+			curve = 'accumulated';
+		}
+
+		chart.destroy();
+		chart = chart_new(ctx, option[view], data[curve][view][scope]);
 	});
 });
 <?php $this->Html->scriptEnd(); ?>
