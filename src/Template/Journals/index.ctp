@@ -88,7 +88,7 @@ use Cake\Core\Configure;
 			  &nbsp;
 			  <?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i>', ['action' => 'edit', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Html->link('<i class="fa fa-copy" aria-hidden="true"></i> ', ['action' => 'copy', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fa fa-copy" aria-hidden="true"></i> ', ['action' => 'add', '?' => ['b' => $x->id, 'back' => $back]], ['escape' => false]) ?>
 			  &nbsp;
 			  <?= $this->Form->postLink('<i class="fa fa-trash" aria-hidden="true"></i>', ['action' => 'delete', $x->id, '?' => ['back' => $back]], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $x->id)]) ?>
 			</td>
@@ -123,7 +123,7 @@ use Cake\Core\Configure;
 			  &nbsp;
 			  <?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i>', ['action' => 'edit', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Html->link('<i class="fa fa-copy" aria-hidden="true"></i> ', ['action' => 'copy', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fa fa-copy" aria-hidden="true"></i> ', ['action' => 'add', '?' => ['b' => $x->id, 'back' => $back]], ['escape' => false]) ?>
 			  &nbsp;
 			  <?= $this->Form->postLink('<i class="fa fa-trash" aria-hidden="true"></i>', ['action' => 'delete', $x->id, '?' => ['back' => $back]], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $x->id), 'block' => true]) ?>
 			</span>

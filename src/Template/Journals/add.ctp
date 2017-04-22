@@ -16,9 +16,19 @@ use Cake\Core\Configure;
 		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<?= __('Popular selections') ?> <span class="caret"></span>
 		  </button>
-		  <ul class="dropdown-menu dropdown-menu-right">
+		  <ul class="dropdown-menu">
 			<?php foreach ($selections as $x): ?>
 			<li><a href="#" onClick="setCategory(<?= $x->debit_id ?>, <?= $x->credit_id ?>)"><?= h($x->debit->name) ?> / <?= h($x->credit->name) ?></a></li>
+			<?php endforeach; ?>
+		  </ul>
+		</div>
+		<div class="btn-group">
+		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<?= __('Templates') ?> <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu dropdown-menu-right">
+			<?php foreach ($templates as $key => $val): ?>
+			<li><?= $this->Html->link($val, ['?' => ['t' => $key, 'back' => $back]]) ?></li>
 			<?php endforeach; ?>
 		  </ul>
 		</div>

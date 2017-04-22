@@ -73,6 +73,7 @@ if (!$this->fetch('tb_nav')) {
           <ul class="dropdown-menu">
 			<!-- <li><a>Users</a></li > -->
 			<li><?= $this->Html->link(__('Categories'), ['controller' => 'categories']) ?></li>
+			<li><?= $this->Html->link(__('Templates'), ['controller' => 'templates']) ?></li>
 			<!-- <li><a>Settings</a></li> -->
           </ul>
         </li>
