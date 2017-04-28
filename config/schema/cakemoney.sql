@@ -28,3 +28,15 @@ CREATE TABLE `journals` (
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
 );
+
+CREATE TABLE `templates` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `debit_id` int(11) NOT NULL,
+  `credit_id` int(11) NOT NULL,
+  `amount` int(11),
+  `summary` varchar(255),
+  `description` text,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+);

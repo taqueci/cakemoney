@@ -75,6 +75,7 @@ use Cake\Utility\Security;
 try {
     Configure::config('default', new PhpConfig());
     Configure::load('app', 'default', false);
+    Configure::load('const', 'default');
 } catch (\Exception $e) {
     exit($e->getMessage() . "\n");
 }
@@ -224,20 +225,8 @@ if (Configure::read('debug')) {
 Plugin::load('Search');
 Plugin::load('BootstrapUI');
 
-// FIXME
-define('ACCOUNT_ASSET',     1);
-define('ACCOUNT_LIABILITY', 2);
-define('ACCOUNT_INCOME',    3);
-define('ACCOUNT_EXPENSE',   4);
-define('ACCOUNT_EQUITY',    5);
-
 \Cake\I18n\Date::setToStringFormat('yyyy-MM-dd');
 \Cake\I18n\FrozenDate::setToStringFormat('yyyy-MM-dd');
-
-define('JOURNAL_POPULAR_NUM', 10);
-
-define('REPORT_RECENT_NUM', 5);
-define('REPORT_SUMMARY_NUM', 7);
 
 use Cake\Routing\DispatcherFactory;
 DispatcherFactory::add('LocaleSelector');

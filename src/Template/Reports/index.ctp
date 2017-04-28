@@ -160,7 +160,7 @@ use Cake\Core\Configure;
   </div>
   <div class="col-md-3">
 	<div class="list-group">
-	  <?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add'], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add', '?' => ['back' => $back]], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
 	<div class="well">
 	  <?= $this->Form->create(null, ['id' => 'form-date', 'type' => 'get', 'url' => ['controller' => 'reports', 'action' => 'view']]) ?>

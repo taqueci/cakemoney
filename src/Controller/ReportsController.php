@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use Cake\Routing\Router;
 use Cake\ORM\TableRegistry;
 use App\Controller\AppController;
 
@@ -45,6 +46,8 @@ class ReportsController extends AppController
                 ->order(['year' => 'DESC'])
                 ->limit(REPORT_SUMMARY_NUM)
         ]);
+
+        $this->set('back', urlencode(Router::reverse($this->request, true)));
 
         $this->set('_serialize', ['summary']);
     }
@@ -118,6 +121,8 @@ class ReportsController extends AppController
                 ->order(['year' => 'ASC'])
         ]);
 
+        $this->set('back', urlencode(Router::reverse($this->request, true)));
+
         $this->set('_serialize', ['sum', 'income', 'expense', 'balance']);
     }
 
@@ -138,6 +143,8 @@ class ReportsController extends AppController
 
         $this->set(compact('start', 'end'));
         $this->set(compact('sum', 'expense', 'journals'));
+
+        $this->set('back', urlencode(Router::reverse($this->request, true)));
     }
 
     private function query_sum($start, $end)

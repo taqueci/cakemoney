@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+use Cake\Routing\Router;
+use Cake\ORM\TableRegistry;
 use App\Controller\AppController;
 
 /**
@@ -17,6 +19,7 @@ class JournalsController extends AppController
         $this->loadComponent('Search.Prg', [
             'actions' => ['index']
         ]);
+        $this->Templates = TableRegistry::get('Templates');
     }
 
     /**
@@ -60,6 +63,8 @@ class JournalsController extends AppController
             'start' => $s, 'end' => $e, 'debit' => $d, 'credit' => $c
         ]);
 
+        $this->set('back', urlencode(Router::reverse($this->request, true)));
+
         $this->set('_serialize', ['journals']);
     }
 
@@ -78,6 +83,8 @@ class JournalsController extends AppController
 
         $this->set(compact('journal'));
 
+        $this->set('back', $this->request->getQuery('back'));
+
         $this->set('_serialize', ['journal']);
     }
 
@@ -88,8 +95,12 @@ class JournalsController extends AppController
      */
     public function add()
     {
+        $cid = $this->request->getQuery('b');
+        $tid = $this->request->getQuery('t');
+
         $journal = $this->Journals->newEntity();
-        if ($this->request->is('post')) {
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
             $journal = $this->Journals->patchEntity($journal, $this->request->data);
 
             $journal->set($this->journal_data(
@@ -101,9 +112,17 @@ class JournalsController extends AppController
             if ($this->Journals->save($journal)) {
                 $this->Flash->success(__('The journal has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect_back();
             }
             $this->Flash->error(__('The journal could not be saved. Please, try again.'));
+        }
+
+        if ($cid) {
+            $journal = $this->Journals->get($cid);
+        } else if ($tid) {
+            $journal = $this->Templates->get($tid);
+            $journal->summary = $this->template_text($journal->summary);
+            $journal->description = $this->template_text($journal->description);
         }
 
         $options = $this->Category->options();
@@ -113,6 +132,9 @@ class JournalsController extends AppController
         $this->set('debits', $options);
         $this->set('credits', $options);
         $this->set('selections', $this->popular_selections());
+        $this->set('templates', $this->Templates->find('list'));
+
+        $this->set('back', $this->request->getQuery('back'));
 
         $this->set('_serialize', ['journal']);
     }
@@ -140,7 +162,7 @@ class JournalsController extends AppController
             if ($this->Journals->save($journal)) {
                 $this->Flash->success(__('The journal has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect_back();
             }
             $this->Flash->error(__('The journal could not be saved. Please, try again.'));
         }
@@ -148,47 +170,6 @@ class JournalsController extends AppController
         $options = $this->Category->options();
 
         $this->set(compact('journal'));
-
-        $this->set('debits', $options);
-        $this->set('credits', $options);
-        $this->set('selections', $this->popular_selections());
-
-        $this->set('_serialize', ['journal']);
-    }
-
-    /**
-     * Copy method
-     *
-     * @param string|null $id Journal id.
-     * @return \Cake\Network\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function copy($id = null)
-    {
-        $journal = $this->Journals->newEntity();
-
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $journal = $this->Journals->patchEntity($journal, $this->request->data);
-
-            $journal->set($this->journal_data(
-                $journal->amount,
-                $journal->debit_id,
-                $journal->credit_id
-            ));
-
-            if ($this->Journals->save($journal)) {
-                $this->Flash->success(__('The journal has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The journal could not be saved. Please, try again.'));
-        }
-
-        $base = $this->Journals->get($id);
-
-        $options = $this->Category->options();
-
-        $this->set('journal', $base);
 
         $this->set('debits', $options);
         $this->set('credits', $options);
@@ -214,7 +195,16 @@ class JournalsController extends AppController
             $this->Flash->error(__('The journal could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect_back();
+    }
+
+    private function redirect_back()
+    {
+        $back = $this->request->getQuery('back');
+
+        $url = $back ? urldecode($back) : ['action' => 'index'];
+
+        return $this->redirect($url);
     }
 
     private function popular_selections()
@@ -278,5 +268,14 @@ class JournalsController extends AppController
         }
 
         return $c;
+    }
+
+    private function template_text($str)
+    {
+        foreach (['d', 'j', 'z', 'W', 'F', 'm', 'M', 'n', 'Y', 'y'] as $x) {
+            $str = str_replace("%$x", date($x), $str);
+        }
+
+        return $str;
     }
 }
