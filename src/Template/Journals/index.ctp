@@ -70,6 +70,7 @@ use Cake\Core\Configure;
 			<th><?= $this->Paginator->sort('debit_id', __('Debit')) ?></th>
 			<th><?= $this->Paginator->sort('credit_id', __('Credit')) ?></th>
 			<th><?= $this->Paginator->sort('amount', __('Amount')) ?></th>
+			<th></th>
 			<th><?= $this->Paginator->sort('summary', __('Summary')) ?></th>
 			<th><?= __('Actions') ?></th>
 		  </tr>
@@ -82,6 +83,13 @@ use Cake\Core\Configure;
 			<td><?= $this->Html->link($x->debit->name, ['?' => ['s' => $filter['start'], 'e' => $filter['end'], 'd[]' => $x->debit_id]]) ?></td>
 			<td><?= $this->Html->link($x->credit->name, ['?' => ['s' => $filter['start'], 'e' => $filter['end'], 'c[]' => $x->credit_id]]) ?></td>
 			<td align="right"><?= number_format($x->amount) ?></td>
+			<td>
+			  <?php if (in_array($x->debit_id, $expenses)): ?>
+			  <span class="label label-danger"><?= __('Outgoing') ?></span>
+			  <?php elseif (in_array($x->credit_id, $incomes)): ?>
+			  <span class="label label-success"><?= __('Incoming') ?></span>
+			  <?php endif ?>
+			</td>
 			<td><?= h($x->summary) ?></td>
 			<td>
 			  <?= $this->Html->link('<i class="fa fa-list-alt" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
@@ -114,9 +122,20 @@ use Cake\Core\Configure;
 	  <ul class="list-group">
 		<?php foreach ($journals as $x): ?>
 		<li class="list-group-item">
-		  <span class="badge"><?= number_format($x->amount) ?></span>
+		  <span style="float: right">
+			<strong><?= number_format($x->amount) ?></strong>
+		  </span>
 		  <h4 class="list-group-item-heading"><?= h($x->date) ?></h4>
-		  <p><?= h($x->summary) ?></p>
+		  <p>
+			<?= h($x->summary) ?>
+			<span style="float: right">
+			  <?php if (in_array($x->debit_id, $expenses)): ?>
+			  <span class="label label-danger"><?= __('Outgoing') ?></span>
+			  <?php elseif (in_array($x->credit_id, $incomes)): ?>
+			  <span class="label label-success"><?= __('Incoming') ?></span>
+			  <?php endif ?>
+			</span>
+		  </p>
 		  <p>
 			<?= $this->Html->link($x->debit->name, ['?' => ['s' => $filter['start'], 'e' => $filter['end'], 'd[]' => $x->debit_id]]) ?>
 			/

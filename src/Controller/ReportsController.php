@@ -15,6 +15,7 @@ class ReportsController extends AppController
     public function initialize()
     {
         parent::initialize();
+        $this->loadComponent('Category');
         $this->Journals = TableRegistry::get('Journals');
     }
 
@@ -143,6 +144,9 @@ class ReportsController extends AppController
 
         $this->set(compact('start', 'end'));
         $this->set(compact('sum', 'expense', 'journals'));
+
+        $this->set('incomes',  $this->Category->incomes());
+        $this->set('expenses', $this->Category->expenses());
 
         $this->set('back', urlencode(Router::reverse($this->request, true)));
     }

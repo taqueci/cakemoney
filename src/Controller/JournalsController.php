@@ -65,6 +65,9 @@ class JournalsController extends AppController
 
         $this->set('back', urlencode(Router::reverse($this->request, true)));
 
+        $this->set('incomes',  $this->Category->incomes());
+        $this->set('expenses', $this->Category->expenses());
+
         $this->set('_serialize', ['journals']);
     }
 
