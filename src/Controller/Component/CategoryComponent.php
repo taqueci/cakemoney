@@ -50,37 +50,10 @@ class CategoryComponent extends Component
         return $this->Categories->find('list')->toArray();
     }
 
-    public function incomes()
+    public function accounts()
     {
-        $val = TableRegistry::get('Categories')
-            ->find()
-            ->select(['id'])
-            ->where(['account' => ACCOUNT_INCOME])
+        return TableRegistry::get('Categories')
+            ->find('list', ['keyField' => 'id', 'valueField' => 'account'])
             ->toArray();
-
-        $r = [];
-
-        foreach ($val as $x) {
-            $r[] = $x['id'];
-        }
-
-        return $r;
-    }
-
-    public function expenses()
-    {
-        $val = TableRegistry::get('Categories')
-            ->find()
-            ->select(['id'])
-            ->where(['account' => ACCOUNT_EXPENSE])
-            ->toArray();
-
-        $r = [];
-
-        foreach ($val as $x) {
-            $r[] = $x['id'];
-        }
-
-        return $r;
     }
 }

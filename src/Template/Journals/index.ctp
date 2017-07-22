@@ -84,10 +84,12 @@ use Cake\Core\Configure;
 			<td><?= $this->Html->link($x->credit->name, ['?' => ['s' => $filter['start'], 'e' => $filter['end'], 'c[]' => $x->credit_id]]) ?></td>
 			<td align="right"><?= number_format($x->amount) ?></td>
 			<td>
-			  <?php if (in_array($x->debit_id, $expenses)): ?>
+			  <?php if ($account[$x->debit_id] == ACCOUNT_EXPENSE): ?>
 			  <span class="label label-danger"><?= __('Outgoing') ?></span>
-			  <?php elseif (in_array($x->credit_id, $incomes)): ?>
+			  <?php elseif ($account[$x->credit_id] == ACCOUNT_INCOME): ?>
 			  <span class="label label-success"><?= __('Incoming') ?></span>
+			  <?php elseif ($account[$x->debit_id] == ACCOUNT_LIABILITY): ?>
+			  <span class="label label-warning"><?= __('Repayment') ?></span>
 			  <?php endif ?>
 			</td>
 			<td><?= h($x->summary) ?></td>
@@ -129,10 +131,12 @@ use Cake\Core\Configure;
 		  <p>
 			<?= h($x->summary) ?>
 			<span style="float: right">
-			  <?php if (in_array($x->debit_id, $expenses)): ?>
+			  <?php if ($account[$x->debit_id] == ACCOUNT_EXPENSE): ?>
 			  <span class="label label-danger"><?= __('Outgoing') ?></span>
-			  <?php elseif (in_array($x->credit_id, $incomes)): ?>
+			  <?php elseif ($account[$x->credit_id] == ACCOUNT_INCOME): ?>
 			  <span class="label label-success"><?= __('Incoming') ?></span>
+			  <?php elseif ($account[$x->debit_id] == ACCOUNT_LIABILITY): ?>
+			  <span class="label label-warning"><?= __('Repayment') ?></span>
 			  <?php endif ?>
 			</span>
 		  </p>

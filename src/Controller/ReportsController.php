@@ -145,8 +145,7 @@ class ReportsController extends AppController
         $this->set(compact('start', 'end'));
         $this->set(compact('sum', 'expense', 'journals'));
 
-        $this->set('incomes',  $this->Category->incomes());
-        $this->set('expenses', $this->Category->expenses());
+        $this->set('account',  $this->Category->accounts());
 
         $this->set('back', urlencode(Router::reverse($this->request, true)));
     }
