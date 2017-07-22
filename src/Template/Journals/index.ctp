@@ -79,8 +79,8 @@ use Cake\Core\Configure;
 		  <tr>
 			<td align="right"><?= $x->id ?></td>
 			<td><?= h($x->date) ?></td>
-			<td><?= h($x->debit->name) ?></td>
-			<td><?= h($x->credit->name) ?></td>
+			<td><?= $this->Html->link($x->debit->name, ['?' => ['s' => $filter['start'], 'e' => $filter['end'], 'd[]' => $x->debit_id]]) ?></td>
+			<td><?= $this->Html->link($x->credit->name, ['?' => ['s' => $filter['start'], 'e' => $filter['end'], 'c[]' => $x->credit_id]]) ?></td>
 			<td align="right"><?= number_format($x->amount) ?></td>
 			<td><?= h($x->summary) ?></td>
 			<td>
@@ -117,7 +117,10 @@ use Cake\Core\Configure;
 		  <span class="badge"><?= number_format($x->amount) ?></span>
 		  <h4 class="list-group-item-heading"><?= h($x->date) ?></h4>
 		  <p><?= h($x->summary) ?></p>
-		  <p><?= h($x->debit->name) . ' / ' . h($x->credit->name) ?>
+		  <p>
+			<?= $this->Html->link($x->debit->name, ['?' => ['s' => $filter['start'], 'e' => $filter['end'], 'd[]' => $x->debit_id]]) ?>
+			/
+			<?= $this->Html->link($x->credit->name, ['?' => ['s' => $filter['start'], 'e' => $filter['end'], 'c[]' => $x->credit_id]]) ?>
 			<span class="xs-icon" style="float: right">
 			  <?= $this->Html->link('<i class="fa fa-list-alt" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
 			  &nbsp;

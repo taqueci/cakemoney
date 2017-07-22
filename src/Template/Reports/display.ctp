@@ -89,7 +89,10 @@ use Cake\Core\Configure;
 			<span class="badge"><?= number_format($x->amount) ?></span>
 			<h4 class="list-group-item-heading"><?= h($x->date) ?></h4>
 			<p><?= h($x->summary) ?></p>
-			<p><?= h($x->debit->name) . ' / ' . h($x->credit->name) ?>
+			<p>
+			  <?= $this->Html->link($x->debit->name, ['controller' => 'journals', '?' => ['d[]' => $x->debit_id]]) ?>
+			  /
+			  <?= $this->Html->link($x->credit->name, ['controller' => 'journals', '?' => ['c[]' => $x->credit_id]]) ?>
 			  <span class="xs-icon" style="float: right">
 				<?= $this->Html->link('<i class="fa fa-list-alt" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'view', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
 				&nbsp;
