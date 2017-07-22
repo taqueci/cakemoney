@@ -86,9 +86,20 @@ use Cake\Core\Configure;
 		<ul class="list-group">
 		  <?php foreach ($journals as $x): ?>
 		  <li class="list-group-item">
-			<span class="badge"><?= number_format($x->amount) ?></span>
+			<span style="float: right">
+			  <strong><?= number_format($x->amount) ?></strong>
+			</span>
 			<h4 class="list-group-item-heading"><?= h($x->date) ?></h4>
-			<p><?= h($x->summary) ?></p>
+			<p>
+			  <?= h($x->summary) ?>
+			  <span style="float: right">
+				<?php if (in_array($x->debit_id, $expenses)): ?>
+				<span class="label label-danger"><?= __('Outgoing') ?></span>
+				<?php elseif (in_array($x->credit_id, $incomes)): ?>
+				<span class="label label-success"><?= __('Incoming') ?></span>
+				<?php endif ?>
+			  </span>
+			</p>
 			<p>
 			  <?= $this->Html->link($x->debit->name, ['controller' => 'journals', '?' => ['d[]' => $x->debit_id]]) ?>
 			  /
