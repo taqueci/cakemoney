@@ -86,13 +86,13 @@ use Cake\Core\Configure;
 		<ul class="list-group">
 		  <?php foreach ($journals as $x): ?>
 		  <li class="list-group-item">
-			<span style="float: right">
+			<span class="float-right">
 			  <strong><?= number_format($x->amount) ?></strong>
 			</span>
 			<h4 class="list-group-item-heading"><?= h($x->date) ?></h4>
 			<p>
 			  <?= h($x->summary) ?>
-			  <span style="float: right">
+			  <span class="float-right">
 				<?php if ($account[$x->debit_id] == ACCOUNT_EXPENSE): ?>
 				<span class="label label-danger"><?= __('Outgoing') ?></span>
 				<?php elseif ($account[$x->credit_id] == ACCOUNT_INCOME): ?>
@@ -106,7 +106,7 @@ use Cake\Core\Configure;
 			  <?= $this->Html->link($x->debit->name, ['controller' => 'journals', '?' => ['d[]' => $x->debit_id]]) ?>
 			  /
 			  <?= $this->Html->link($x->credit->name, ['controller' => 'journals', '?' => ['c[]' => $x->credit_id]]) ?>
-			  <span class="xs-icon" style="float: right">
+			  <span class="xs-icon float-right">
 				<?= $this->Html->link('<i class="fa fa-list-alt" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'view', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
 				&nbsp;
 				<?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'edit', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
