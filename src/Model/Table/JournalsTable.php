@@ -38,15 +38,7 @@ class JournalsTable extends Table
         $this->addBehavior('Search.Search');
 
         $this->searchManager()
-             ->add('q', 'Search.Like', [
-                 'before' => true,
-                 'after' => true,
-                 'fieldMode' => 'OR',
-                 'comparison' => 'LIKE',
-                 'wildcardAny' => '*',
-                 'wildcardOne' => '?',
-                 'field' => ['summary', 'description', 'Debits.name', 'Credits.name']
-             ]);
+             ->add('q', 'Search.Finder', ['finder' => 'keyword']);
 
         $this->table('journals');
         $this->displayField('id');
@@ -138,5 +130,29 @@ class JournalsTable extends Table
         $rules->add($rules->existsIn(['credit_id'], 'Credits'));
 
         return $rules;
+    }
+
+    public function findKeyword(Query $query, array $options)
+    {
+        $fields = [
+            'Journals.summary',
+            'Journals.description',
+            'Debits.name',
+            'Credits.name'
+        ];
+
+        $keywords = preg_split('/\s+/', $options['q']);
+
+        foreach ($keywords as $k) {
+            $exp = [];
+
+            foreach ($fields as $f) {
+                $exp[] = ["$f LIKE" => "%$k%"];
+            }
+
+            $query->where(['OR' => $exp]);
+        }
+
+        return $query;
     }
 }
