@@ -49,4 +49,11 @@ class CategoryComponent extends Component
 
         return $this->Categories->find('list')->toArray();
     }
+
+    public function accounts()
+    {
+        return TableRegistry::get('Categories')
+            ->find('list', ['keyField' => 'id', 'valueField' => 'account'])
+            ->toArray();
+    }
 }

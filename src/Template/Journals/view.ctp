@@ -16,9 +16,9 @@
 		  <dt><?= __('Date') ?></dt>
           <dd><?= h($journal->date) ?></dd>
 		  <dt><?= __('Debit') ?></dt>
-		  <dd><?= h($journal->debit->name) ?></dd>
+		  <dd><?= $this->Html->link($journal->debit->name, ['action' => 'index', '?' => ['d[]' => $journal->debit_id]]) ?></dd>
 		  <dt><?= __('Credit') ?></dt>
-		  <dd><?= h($journal->credit->name) ?></dd>
+		  <dd><?= $this->Html->link($journal->credit->name, ['action' => 'index', '?' => ['c[]' => $journal->credit_id]]) ?></dd>
 		  <dt><?= __('Amount') ?></dt>
 		  <dd><?= number_format($journal->amount) ?></dd>
 		</dl>

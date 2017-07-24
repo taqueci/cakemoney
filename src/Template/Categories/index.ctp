@@ -54,7 +54,7 @@
 		  <p><?= h($x->description) ?></p>
 		  <p>
 			<?= $account[$x->account] ?>
-			<span style="float: right">
+			<span class="float-right">
 			  <?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i>', array('action' => 'edit', $x->id), array('escape' => false)) ?>
 			</span>
 		  </p>

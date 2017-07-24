@@ -4,6 +4,16 @@
   */
 
 use Cake\Core\Configure;
+
+$css = <<<CSS
+<style>
+.has-margin-side {
+  margin-right: .5em;
+  margin-left: .5em;
+}
+</style>
+CSS;
+$this->append('css', $css);
 ?>
 <div class="row">
   <div class="col-md-12">
@@ -23,7 +33,7 @@ use Cake\Core\Configure;
 	<div class="panel panel-info">
 	  <div class="panel-body">
 		<?php if ($filter['start'] || $filter['end']): ?>
-		<div style="display: inline-block; margin: 0 0.5em">
+		<span class="inline-block has-margin-side">
 		  <small>
 			<strong>
 			  <i class="fa fa-filter" aria-hidden="true"></i>
@@ -32,10 +42,10 @@ use Cake\Core\Configure;
 			&nbsp;
 			<?= h($filter['start']) ?> &ndash; <?= h($filter['end']) ?>
 		  </small>
-		</div>
+		</span>
 		<?php endif; ?>
 		<?php if ($filter['debit']): ?>
-		<div style="display: inline-block; margin: 0 0.5em">
+		<span class="inline-block has-margin-side">
 		  <small>
 			<strong>
 			  <i class="fa fa-filter" aria-hidden="true"></i>
@@ -44,10 +54,10 @@ use Cake\Core\Configure;
 			&nbsp;
 			<?= join('&ensp;', array_values($filter['debit'])) ?>
 		  </small>
-		</div>
+		</span>
 		<?php endif; ?>
 		<?php if ($filter['credit']): ?>
-		<div style="display: inline-block; margin: 0 0.5em">
+		<span class="inline-block has-margin-side">
 		  <small>
 			<strong>
 			  <i class="fa fa-filter" aria-hidden="true"></i>
@@ -56,7 +66,7 @@ use Cake\Core\Configure;
 			&nbsp;
 			<?= join('&ensp;', array_values($filter['credit'])) ?>
 		  </small>
-		</div>
+		</span>
 		<?php endif; ?>
 	  </div>
 	</div>
@@ -70,6 +80,7 @@ use Cake\Core\Configure;
 			<th><?= $this->Paginator->sort('debit_id', __('Debit')) ?></th>
 			<th><?= $this->Paginator->sort('credit_id', __('Credit')) ?></th>
 			<th><?= $this->Paginator->sort('amount', __('Amount')) ?></th>
+			<th></th>
 			<th><?= $this->Paginator->sort('summary', __('Summary')) ?></th>
 			<th><?= __('Actions') ?></th>
 		  </tr>
@@ -79,9 +90,18 @@ use Cake\Core\Configure;
 		  <tr>
 			<td align="right"><?= $x->id ?></td>
 			<td><?= h($x->date) ?></td>
-			<td><?= h($x->debit->name) ?></td>
-			<td><?= h($x->credit->name) ?></td>
+			<td><?= $this->Html->link($x->debit->name, ['?' => ['s' => $filter['start'], 'e' => $filter['end'], 'd[]' => $x->debit_id]]) ?></td>
+			<td><?= $this->Html->link($x->credit->name, ['?' => ['s' => $filter['start'], 'e' => $filter['end'], 'c[]' => $x->credit_id]]) ?></td>
 			<td align="right"><?= number_format($x->amount) ?></td>
+			<td>
+			  <?php if ($account[$x->debit_id] == ACCOUNT_EXPENSE): ?>
+			  <span class="label label-danger"><?= __('Outgoing') ?></span>
+			  <?php elseif ($account[$x->credit_id] == ACCOUNT_INCOME): ?>
+			  <span class="label label-success"><?= __('Incoming') ?></span>
+			  <?php elseif ($account[$x->debit_id] == ACCOUNT_LIABILITY): ?>
+			  <span class="label label-warning"><?= __('Repayment') ?></span>
+			  <?php endif ?>
+			</td>
 			<td><?= h($x->summary) ?></td>
 			<td>
 			  <?= $this->Html->link('<i class="fa fa-list-alt" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
@@ -114,11 +134,27 @@ use Cake\Core\Configure;
 	  <ul class="list-group">
 		<?php foreach ($journals as $x): ?>
 		<li class="list-group-item">
-		  <span class="badge"><?= number_format($x->amount) ?></span>
+		  <span class="float-right">
+			<strong><?= number_format($x->amount) ?></strong>
+		  </span>
 		  <h4 class="list-group-item-heading"><?= h($x->date) ?></h4>
-		  <p><?= h($x->summary) ?></p>
-		  <p><?= h($x->debit->name) . ' / ' . h($x->credit->name) ?>
-			<span class="xs-icon" style="float: right">
+		  <p>
+			<?= h($x->summary) ?>
+			<span class="float-right">
+			  <?php if ($account[$x->debit_id] == ACCOUNT_EXPENSE): ?>
+			  <span class="label label-danger"><?= __('Outgoing') ?></span>
+			  <?php elseif ($account[$x->credit_id] == ACCOUNT_INCOME): ?>
+			  <span class="label label-success"><?= __('Incoming') ?></span>
+			  <?php elseif ($account[$x->debit_id] == ACCOUNT_LIABILITY): ?>
+			  <span class="label label-warning"><?= __('Repayment') ?></span>
+			  <?php endif ?>
+			</span>
+		  </p>
+		  <p>
+			<?= $this->Html->link($x->debit->name, ['?' => ['s' => $filter['start'], 'e' => $filter['end'], 'd[]' => $x->debit_id]]) ?>
+			/
+			<?= $this->Html->link($x->credit->name, ['?' => ['s' => $filter['start'], 'e' => $filter['end'], 'c[]' => $x->credit_id]]) ?>
+			<span class="xs-icon float-right">
 			  <?= $this->Html->link('<i class="fa fa-list-alt" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
 			  &nbsp;
 			  <?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i>', ['action' => 'edit', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>

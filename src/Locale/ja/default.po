@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2017-04-20 13:03+0000\n"
+"POT-Creation-Date: 2017-07-22 22:53+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -23,19 +23,19 @@ msgstr "カテゴリが保存されました"
 msgid "The category could not be saved. Please, try again."
 msgstr "カテゴリは保存されませんでした"
 
-#: Controller/JournalsController.php:113;159
+#: Controller/JournalsController.php:115;165
 msgid "The journal has been saved."
 msgstr "記録が保存されました"
 
-#: Controller/JournalsController.php:117;163
+#: Controller/JournalsController.php:119;169
 msgid "The journal could not be saved. Please, try again."
 msgstr "記録は保存されませんでした"
 
-#: Controller/JournalsController.php:189
+#: Controller/JournalsController.php:195
 msgid "The journal has been deleted."
 msgstr "記録が削除されました"
 
-#: Controller/JournalsController.php:191
+#: Controller/JournalsController.php:197
 msgid "The journal could not be deleted. Please, try again."
 msgstr "記録は削除されませんでした"
 
@@ -124,9 +124,9 @@ msgstr "カテゴリ"
 #: Template/Journals/view.ctp:32 Template/Templates/index.ctp:17;50
 #: Template/Templates/view.ctp:32
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
-#: Template/Categories/index.ctp:21 Template/Journals/index.ctp:74
+#: Template/Categories/index.ctp:21 Template/Journals/index.ctp:75
 #: Template/Reports/index.ctp:25;60;98;134 Template/Templates/index.ctp:23
 msgid "Actions"
 msgstr "アクション"
@@ -135,8 +135,8 @@ msgstr "アクション"
 msgid "New Category"
 msgstr "新しいカテゴリ"
 
-#: Template/Categories/index.ctp:73 Template/Journals/index.ctp:18;143
-#: Template/Reports/display.ctp:20;116 Template/Templates/index.ctp:87
+#: Template/Categories/index.ctp:73 Template/Journals/index.ctp:18;169
+#: Template/Reports/display.ctp:20;132 Template/Templates/index.ctp:87
 msgid "Search"
 msgstr "検索"
 
@@ -179,27 +179,27 @@ msgid "Templates"
 msgstr "テンプレート"
 
 #: Template/Journals/add.ctp:36 Template/Journals/edit.ctp:27
-#: Template/Journals/index.ctp:42;70;106;156 Template/Journals/view.ctp:18
+#: Template/Journals/index.ctp:42;70;116;182 Template/Journals/view.ctp:18
 #: Template/Templates/add.ctp:17 Template/Templates/edit.ctp:18
 #: Template/Templates/index.ctp:19 Template/Templates/view.ctp:16
 msgid "Debit"
 msgstr "借方"
 
 #: Template/Journals/add.ctp:37 Template/Journals/edit.ctp:28
-#: Template/Journals/index.ctp:54;71;109;157 Template/Journals/view.ctp:20
+#: Template/Journals/index.ctp:54;71;119;183 Template/Journals/view.ctp:20
 #: Template/Templates/add.ctp:18 Template/Templates/edit.ctp:19
 #: Template/Templates/index.ctp:20 Template/Templates/view.ctp:18
 msgid "Credit"
 msgstr "貸方"
 
 #: Template/Journals/add.ctp:38 Template/Journals/edit.ctp:29
-#: Template/Journals/index.ctp:69;103 Template/Journals/view.ctp:16
+#: Template/Journals/index.ctp:69;113 Template/Journals/view.ctp:16
 #: Template/Reports/index.ctp:20
 msgid "Date"
 msgstr "日付"
 
 #: Template/Journals/add.ctp:39 Template/Journals/edit.ctp:30
-#: Template/Journals/index.ctp:72;112 Template/Journals/view.ctp:22
+#: Template/Journals/index.ctp:72;122 Template/Journals/view.ctp:22
 #: Template/Reports/display.ctp:62 Template/Reports/view.ctp:99;141
 #: Template/Templates/add.ctp:19 Template/Templates/edit.ctp:20
 #: Template/Templates/index.ctp:21;56 Template/Templates/view.ctp:20
@@ -207,7 +207,7 @@ msgid "Amount"
 msgstr "金額"
 
 #: Template/Journals/add.ctp:40 Template/Journals/edit.ctp:31
-#: Template/Journals/index.ctp:73 Template/Reports/display.ctp:26
+#: Template/Journals/index.ctp:74 Template/Reports/display.ctp:26
 #: Template/Reports/view.ctp:34 Template/Templates/add.ctp:20
 #: Template/Templates/edit.ctp:21 Template/Templates/index.ctp:22
 #: Template/Templates/view.ctp:22
@@ -215,7 +215,7 @@ msgid "Summary"
 msgstr "サマリー"
 
 #: Template/Journals/add.ctp:48 Template/Journals/edit.ctp:39
-#: Template/Journals/view.ctp:61 Template/Reports/display.ctp:110
+#: Template/Journals/view.ctp:61 Template/Reports/display.ctp:126
 #: Template/Reports/view.ctp:199
 msgid "List Journals"
 msgstr "記録一覧"
@@ -228,21 +228,33 @@ msgstr "記録を編集"
 msgid "Journals"
 msgstr "記録"
 
-#: Template/Journals/index.ctp:17;139 Template/Reports/display.ctp:18;111
+#: Template/Journals/index.ctp:17;165 Template/Reports/display.ctp:18;127
 #: Template/Reports/index.ctp:163 Template/Reports/view.ctp:200
 msgid "New Journal"
 msgstr "新しい記録"
 
-#: Template/Journals/index.ctp:19;158
+#: Template/Journals/index.ctp:19;184
 msgid "Filter"
 msgstr "フィルタ"
 
-#: Template/Journals/index.ctp:30;149 Template/Reports/index.ctp:168
+#: Template/Journals/index.ctp:30;175 Template/Reports/index.ctp:168
 #: Template/Reports/view.ctp:205
 msgid "Scope"
 msgstr "スコープ"
 
-#: Template/Journals/index.ctp:93;128 Template/Journals/view.ctp:58
+#: Template/Journals/index.ctp:88;135 Template/Reports/display.ctp:97
+msgid "Outgoing"
+msgstr "支出"
+
+#: Template/Journals/index.ctp:90;137 Template/Reports/display.ctp:99
+msgid "Incoming"
+msgstr "収入"
+
+#: Template/Journals/index.ctp:92;139 Template/Reports/display.ctp:101
+msgid "Repayment"
+msgstr "返済"
+
+#: Template/Journals/index.ctp:103;154 Template/Journals/view.ctp:58
 #: Template/Templates/index.ctp:40;72 Template/Templates/view.ctp:45
 msgid "Are you sure you want to delete # {0}?"
 msgstr "本当に削除しますか # {0}"
@@ -301,11 +313,11 @@ msgstr "比率"
 msgid "Recent Journals"
 msgstr "最近の記録"
 
-#: Template/Reports/display.ctp:107
+#: Template/Reports/display.ctp:123
 msgid "View Report"
 msgstr "レポート表示"
 
-#: Template/Reports/display.ctp:112 Template/Reports/view.ctp:198
+#: Template/Reports/display.ctp:128 Template/Reports/view.ctp:198
 msgid "List Reports"
 msgstr "レポート一覧"
 

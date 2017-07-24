@@ -130,6 +130,12 @@ body {
 .font-xlarge {
   font-size: x-large;
 }
+.float-right {
+  float: right;
+}
+.inline-block {
+  display: inline-block;
+}
 </style>
 HTML;
 $this->prepend('css', $this->Html->css([Configure::read('Css.bootstrap'), Configure::read('Css.fontawesome')]));
