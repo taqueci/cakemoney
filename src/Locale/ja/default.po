@@ -124,7 +124,7 @@ msgstr "カテゴリ"
 #: Template/Journals/view.ctp:32 Template/Templates/index.ctp:17;50
 #: Template/Templates/view.ctp:32
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: Template/Categories/index.ctp:21 Template/Journals/index.ctp:75
 #: Template/Reports/index.ctp:25;60;98;134 Template/Templates/index.ctp:23
