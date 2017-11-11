@@ -30,7 +30,7 @@
 			<td><?= h($x->name) ?></td>
 			<td><?= h($x->debit->name) ?></td>
 			<td><?= h($x->credit->name) ?></td>
-			<td><?= number_format($x->amount) ?></td>
+			<td align="right"><?= number_format($x->amount) ?></td>
 			<td><?= h($x->summary) ?></td>
 			<td>
 			  <?= $this->Html->link('<i class="fa fa-list-alt" aria-hidden="true"></i>', ['action' => 'view', $x->id], ['escape' => false]) ?>
@@ -58,7 +58,9 @@
 	  <ul class="list-group">
 		<?php foreach ($templates as $x): ?>
 		<li class="list-group-item">
-		  <span class="badge"><?= number_format($x->amount) ?></span>
+		  <span class="float-right">
+			<strong><?= number_format($x->amount) ?></strong>
+		  </span>
 		  <h4 class="list-group-item-heading"><?= h($x->name) ?></h4>
 		  <p><?= h($x->summary) ?></p>
 		  <p><?= h($x->debit->name) . ' / ' . h($x->credit->name) ?>

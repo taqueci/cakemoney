@@ -24,22 +24,52 @@ use Cake\Core\Configure;
 	<div class="row">
 	  <div class="col-md-6">
 		<h3><?= __('Summary') ?></h3>
-		<table>
-		  <tr>
-			<td align="center"><small><span class="label label-default"><?= __('Incomings') ?></span></small></td>
-			<td>&emsp;&emsp;</td>
-			<td align="center"><small><span class="label label-default"><?= __('Outgoings') ?></span></small></td>
-			<td>&emsp;&emsp;</td>
-			<td align="center"><small><span class="label label-default"><?= __('Balance') ?></span></small></td>
-		  </tr>
-		  <tr>
-			<td align="center"><span class="font-large"><?= number_format($sum->income) ?></span></td>
-			<td align="center"><tt>-</tt></td>
-			<td align="center"><span class="font-large"><?= number_format($sum->expense) ?></span></td>
-			<td align="center"><tt>=</tt></td>
-			<td align="center"><span class="font-xlarge"><?= $this->element('Format/numberWithStatus', ['value' => $sum->income - $sum->expense]) ?></span></td>
-		  </tr>
-		</table>
+		<ul class="list-inline">
+		  <li>
+			<table>
+			  <tr>
+				<td align="center"><small><span class="label label-default"><?= __('Incomings') ?></span></small></td>
+			  </tr>
+			  <tr>
+				<td align="center"><span class="font-xlarge"></span><span class="font-large"><?= number_format($sum->income) ?></span></td>
+			  </tr>
+			</table>
+		  </li>
+		  <li>
+			<table>
+			  <tr>
+				<td><span class="font-xlarge"></span><tt>-</tt></td>
+			  </tr>
+			</table>
+		  </li>
+		  <li>
+			<table>
+			  <tr>
+				<td align="center"><small><span class="label label-default"><?= __('Outgoings') ?></span></small></td>
+			  </tr>
+			  <tr>
+				<td align="center"><span class="font-xlarge"></span><span class="font-large"><?= number_format($sum->expense) ?></span></td>
+			  </tr>
+			</table>
+		  </li>
+		  <li>
+			<table>
+			  <tr>
+				<td><span class="font-xlarge"></span><tt>=</tt></td>
+			  </tr>
+			</table>
+		  </li>
+		  <li>
+			<table>
+			  <tr>
+				<td align="center"><small><span class="label label-default"><?= __('Balance') ?></span></small></td>
+			  </tr>
+			  <tr>
+				<td align="center"><span class="font-xlarge"><?= $this->element('Format/numberWithStatus', ['value' => $sum->income - $sum->expense]) ?></span></td>
+			  </tr>
+			</table>
+		  </li>
+		</ul>
 		<h3><?= __('Outgoings') ?></h3>
 		<div align="right">
 		  <div class="btn-group" role="group" aria-label="Page navigation">
