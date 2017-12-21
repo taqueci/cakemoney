@@ -35,7 +35,7 @@ class CategoriesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Categories') ? [] : ['className' => 'App\Model\Table\CategoriesTable'];
+        $config = TableRegistry::exists('Categories') ? [] : ['className' => CategoriesTable::class];
         $this->Categories = TableRegistry::get('Categories', $config);
     }
 
