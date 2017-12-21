@@ -14,7 +14,7 @@ class AddStatusToCategories extends AbstractMigration
     {
         $table = $this->table('categories');
         $table->addColumn('status', 'integer', [
-            'default' => null,
+            'default' => 1,
             'limit' => 11,
             'null' => false,
         ]);
