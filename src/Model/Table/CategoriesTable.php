@@ -43,9 +43,9 @@ class CategoriesTable extends Table
                  'field' => ['name', 'description']
              ]);
 
-        $this->table('categories');
-        $this->displayField('name');
-        $this->primaryKey('id');
+        $this->setTable('categories');
+        $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
     }
 
     /**
@@ -72,6 +72,13 @@ class CategoriesTable extends Table
 
         $validator
             ->allowEmpty('description');
+
+		/*
+        $validator
+            ->integer('status')
+            ->requirePresence('status', 'create')
+            ->notEmpty('status');
+		*/
 
         return $validator;
     }

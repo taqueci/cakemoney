@@ -18,6 +18,7 @@
 			<th><?= $this->Paginator->sort('name', __('Name')) ?></th>
 			<th><?= $this->Paginator->sort('account_id', __('Account')) ?></th>
 			<th><?= $this->Paginator->sort('description', __('Description')) ?></th>
+			<th><?= $this->Paginator->sort('description', __('Status')) ?></th>
 			<th><?= __('Actions') ?></th>
 		  </tr>
 		</thead>
@@ -28,6 +29,13 @@
 			<td><?= h($x->name) ?></td>
 			<td><?= h($account[$x->account]) ?></td>
 			<td><?= h($x->description) ?></td>
+			<td>
+			  <?php if ($x->status): ?>
+			  <span class="label label-success"><?= __('Enabled') ?></span>
+			  <?php else: ?>
+			  <span class="label label-danger"><?= __('Disabled') ?></span>
+			  <?php endif ?>
+			</td>
 			<td>
 			  <?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i>', ['action' => 'edit', $x->id], ['escape' => false]) ?>
 			</td>
@@ -50,6 +58,13 @@
 	  <ul class="list-group">
 		<?php foreach ($categories as $x): ?>
 		<li class="list-group-item">
+		  <span class="float-right">
+			<?php if ($x->status): ?>
+			<span class="label label-success"><?= __('Enabled') ?></span>
+			<?php else: ?>
+			<span class="label label-danger"><?= __('Disabled') ?></span>
+			<?php endif ?>
+		  </span>
 		  <h4 class="list-group-item-heading"><?= h($x->name) ?></h4>
 		  <p><?= h($x->description) ?></p>
 		  <p>
