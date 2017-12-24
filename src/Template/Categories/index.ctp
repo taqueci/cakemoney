@@ -30,11 +30,7 @@
 			<td><?= h($account[$x->account]) ?></td>
 			<td><?= h($x->description) ?></td>
 			<td>
-			  <?php if ($x->status): ?>
-			  <span class="label label-success"><?= __('Enabled') ?></span>
-			  <?php else: ?>
-			  <span class="label label-danger"><?= __('Disabled') ?></span>
-			  <?php endif ?>
+			  <?= $this->element('Category/status', ['status' => $x->status]) ?>
 			</td>
 			<td>
 			  <?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i>', ['action' => 'edit', $x->id], ['escape' => false]) ?>
@@ -62,11 +58,7 @@
 		<?php foreach ($categories as $x): ?>
 		<li class="list-group-item">
 		  <span class="float-right">
-			<?php if ($x->status): ?>
-			<span class="label label-success"><?= __('Enabled') ?></span>
-			<?php else: ?>
-			<span class="label label-danger"><?= __('Disabled') ?></span>
-			<?php endif ?>
+			<?= $this->element('Category/status', ['status' => $x->status]) ?>
 		  </span>
 		  <h4 class="list-group-item-heading"><?= h($x->name) ?></h4>
 		  <p><?= h($x->description) ?></p>

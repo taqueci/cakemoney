@@ -35,11 +35,9 @@ $this->append('css', $css);
 			  <i class="fa fa-arrows-v" aria-hidden="true"></i>
 			  &nbsp;
 			  <?= $x->name ?>
-			  <?php if ($x->status): ?>
-			  <span class="label label-success float-right"><?= __('Enabled') ?></span>
-			  <?php else: ?>
-			  <span class="label label-danger float-right"><?= __('Disabled') ?></span>
-			  <?php endif; ?>
+			  <span class="float-right">
+				<?= $this->element('Category/status', ['status' => $x->status]) ?>
+			  </span>
 			</a>
 			<?php endforeach; ?>
 		  </div>
@@ -50,11 +48,9 @@ $this->append('css', $css);
 			  <i class="fa fa-arrows-v" aria-hidden="true"></i>
 			  &nbsp;
 			  <?= $x->name ?>
-			  <?php if ($x->status): ?>
-			  <span class="label label-success float-right"><?= __('Enabled') ?></span>
-			  <?php else: ?>
-			  <span class="label label-danger float-right"><?= __('Disabled') ?></span>
-			  <?php endif; ?>
+			  <span class="float-right">
+				<?= $this->element('Category/status', ['status' => $x->status]) ?>
+			  </span>
 			</a>
 			<?php endforeach; ?>
 		  </div>
@@ -65,11 +61,9 @@ $this->append('css', $css);
 			  <i class="fa fa-arrows-v" aria-hidden="true"></i>
 			  &nbsp;
 			  <?= $x->name ?>
-			  <?php if ($x->status): ?>
-			  <span class="label label-success float-right"><?= __('Enabled') ?></span>
-			  <?php else: ?>
-			  <span class="label label-danger float-right"><?= __('Disabled') ?></span>
-			  <?php endif; ?>
+			  <span class="float-right">
+				<?= $this->element('Category/status', ['status' => $x->status]) ?>
+			  </span>
 			</a>
 			<?php endforeach; ?>
 		  </div>
@@ -82,11 +76,9 @@ $this->append('css', $css);
 			  <i class="fa fa-arrows-v" aria-hidden="true"></i>
 			  &nbsp;
 			  <?= $x->name ?>
-			  <?php if ($x->status): ?>
-			  <span class="label label-success float-right"><?= __('Enabled') ?></span>
-			  <?php else: ?>
-			  <span class="label label-danger float-right"><?= __('Disabled') ?></span>
-			  <?php endif; ?>
+			  <span class="float-right">
+				<?= $this->element('Category/status', ['status' => $x->status]) ?>
+			  </span>
 			</a>
 			<?php endforeach; ?>
 		  </div>
@@ -99,11 +91,9 @@ $this->append('css', $css);
 			  <i class="fa fa-arrows-v" aria-hidden="true"></i>
 			  &nbsp;
 			  <?= $x->name ?>
-			  <?php if ($x->status): ?>
-			  <span class="label label-success float-right"><?= __('Enabled') ?></span>
-			  <?php else: ?>
-			  <span class="label label-danger float-right"><?= __('Disabled') ?></span>
-			  <?php endif; ?>
+			  <span class="float-right">
+				<?= $this->element('Category/status', ['status' => $x->status]) ?>
+			  </span>
 			</a>
 			<?php endforeach; ?>
 		  </div>
