@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2017-12-21 11:44+0000\n"
+"POT-Creation-Date: 2017-12-23 12:54+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -55,27 +55,28 @@ msgstr "テンプレートが削除されました"
 msgid "The template could not be deleted. Please, try again."
 msgstr "テンプレートは削除されませんでした"
 
-#: Controller/Component/AccountComponent.php:28
+#: Controller/Component/AccountComponent.php:28 Template/Categories/sort.ctp:32
 #: Template/Element/Category/filter.ctp:26;32;43 Template/Journals/view.ctp:40
 msgid "Asset"
 msgstr "資産"
 
-#: Controller/Component/AccountComponent.php:29
+#: Controller/Component/AccountComponent.php:29 Template/Categories/sort.ctp:47
 #: Template/Element/Category/filter.ctp:27;40;44 Template/Journals/view.ctp:42
 msgid "Liability"
 msgstr "負債"
 
-#: Controller/Component/AccountComponent.php:30
+#: Controller/Component/AccountComponent.php:30 Template/Categories/sort.ctp:64
 #: Template/Element/Category/filter.ctp:35 Template/Journals/view.ctp:44
 msgid "Income"
 msgstr "収入"
 
-#: Controller/Component/AccountComponent.php:31
+#: Controller/Component/AccountComponent.php:31 Template/Categories/sort.ctp:81
 #: Template/Element/Category/filter.ctp:23 Template/Journals/view.ctp:46
 msgid "Expense"
 msgstr "費用"
 
-#: Controller/Component/AccountComponent.php:32 Template/Journals/view.ctp:48
+#: Controller/Component/AccountComponent.php:32 Template/Categories/sort.ctp:17
+#: Template/Journals/view.ctp:48
 msgid "Equity"
 msgstr "資本"
 
@@ -103,12 +104,14 @@ msgid "Description"
 msgstr "説明"
 
 #: Template/Categories/add.ctp:15 Template/Categories/edit.ctp:17
-#: Template/Journals/add.ctp:43 Template/Journals/edit.ctp:34
-#: Template/Templates/add.ctp:23 Template/Templates/edit.ctp:24
+#: Template/Categories/sort.ctp:99 Template/Journals/add.ctp:43
+#: Template/Journals/edit.ctp:34 Template/Templates/add.ctp:23
+#: Template/Templates/edit.ctp:24
 msgid "Submit"
 msgstr "送信"
 
 #: Template/Categories/add.ctp:20 Template/Categories/edit.ctp:22
+#: Template/Categories/sort.ctp:104
 msgid "List Categoris"
 msgstr "カテゴリ一覧"
 
@@ -117,6 +120,7 @@ msgid "Edit Category"
 msgstr "カテゴリを編集"
 
 #: Template/Categories/edit.ctp:15 Template/Categories/index.ctp:34;63
+#: Template/Categories/sort.ctp:25;40;55;72;89
 msgid "Enabled"
 msgstr "有効"
 
@@ -140,6 +144,7 @@ msgid "Actions"
 msgstr "アクション"
 
 #: Template/Categories/index.ctp:36;65
+#: Template/Categories/sort.ctp:27;42;57;74;91
 msgid "Disabled"
 msgstr "無効"
 
@@ -147,10 +152,14 @@ msgstr "無効"
 msgid "New Category"
 msgstr "新しいカテゴリ"
 
-#: Template/Categories/index.ctp:88 Template/Journals/index.ctp:28;179
+#: Template/Categories/index.ctp:89 Template/Journals/index.ctp:28;179
 #: Template/Reports/display.ctp:20;162 Template/Templates/index.ctp:89
 msgid "Search"
 msgstr "検索"
+
+#: Template/Categories/sort.ctp:13
+msgid "Sort Categories"
+msgstr "カテゴリをソート"
 
 #: Template/Element/Category/filter.ctp:2
 #: Template/Element/Chart/Data/balance.ctp:19
