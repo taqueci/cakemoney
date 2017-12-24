@@ -85,4 +85,48 @@ class CategoriesController extends AppController
 
         $this->set('_serialize', ['category']);
     }
+
+    public function sort()
+    {
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+			$nerr = 0;
+			$n = 1;
+
+			foreach (explode(',', $this->request->data['position']) as $p) {
+				$c = $this->Categories->get($p);
+				$c->set('position', $n);
+
+				if ($this->Categories->save($c)) {
+				}
+				else {
+					$nerr++;
+				}
+
+				$n++;
+			}
+
+			if ($nerr == 0) {
+                $this->Flash->success(__('The category has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The category could not be saved. Please, try again.'));
+        }
+
+		$this->set('asset',     $this->category(ACCOUNT_ASSET));
+		$this->set('liability', $this->category(ACCOUNT_LIABILITY));
+		$this->set('income',    $this->category(ACCOUNT_INCOME));
+		$this->set('expense',   $this->category(ACCOUNT_EXPENSE));
+		$this->set('equity',    $this->category(ACCOUNT_EQUITY));
+
+//        $this->set('_serialize', ['categories']);
+    }
+
+	private function category($account) {
+		return $this->Categories
+			->find()
+			->where(['account' => $account])
+			->order(['position' => 'ASC']);
+	}
 }

@@ -356,6 +356,7 @@ return [
 
     'Js' => [
         'jquery' => 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js',
+		'jqueryui' => 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js',
         'bootstrap' => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
         'bootstrapDatepicker' => 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js',
         'chartjs' => 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js',
