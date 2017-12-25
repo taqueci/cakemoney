@@ -123,13 +123,7 @@ use Cake\Core\Configure;
 			<p>
 			  <?= h($x->summary) ?>
 			  <span class="float-right">
-				<?php if ($account[$x->debit_id] == ACCOUNT_EXPENSE): ?>
-				<span class="label label-danger"><?= __('Outgoing') ?></span>
-				<?php elseif ($account[$x->credit_id] == ACCOUNT_INCOME): ?>
-				<span class="label label-success"><?= __('Incoming') ?></span>
-				<?php elseif ($account[$x->debit_id] == ACCOUNT_LIABILITY): ?>
-				<span class="label label-warning"><?= __('Repayment') ?></span>
-				<?php endif ?>
+				<?= $this->element('Journal/label', ['debit' => $account[$x->debit_id], 'credit' => $account[$x->credit_id]]) ?>
 			  </span>
 			</p>
 			<p>

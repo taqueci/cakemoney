@@ -94,13 +94,7 @@ $this->append('css', $css);
 			<td><?= $this->Html->link($x->credit->name, ['?' => ['s' => $filter['start'], 'e' => $filter['end'], 'c[]' => $x->credit_id]]) ?></td>
 			<td align="right"><?= number_format($x->amount) ?></td>
 			<td>
-			  <?php if ($account[$x->debit_id] == ACCOUNT_EXPENSE): ?>
-			  <span class="label label-danger"><?= __('Outgoing') ?></span>
-			  <?php elseif ($account[$x->credit_id] == ACCOUNT_INCOME): ?>
-			  <span class="label label-success"><?= __('Incoming') ?></span>
-			  <?php elseif ($account[$x->debit_id] == ACCOUNT_LIABILITY): ?>
-			  <span class="label label-warning"><?= __('Repayment') ?></span>
-			  <?php endif ?>
+			  <?= $this->element('Journal/label', ['debit' => $account[$x->debit_id], 'credit' => $account[$x->credit_id]]) ?>
 			</td>
 			<td><?= h($x->summary) ?></td>
 			<td>
@@ -141,13 +135,7 @@ $this->append('css', $css);
 		  <p>
 			<?= h($x->summary) ?>
 			<span class="float-right">
-			  <?php if ($account[$x->debit_id] == ACCOUNT_EXPENSE): ?>
-			  <span class="label label-danger"><?= __('Outgoing') ?></span>
-			  <?php elseif ($account[$x->credit_id] == ACCOUNT_INCOME): ?>
-			  <span class="label label-success"><?= __('Incoming') ?></span>
-			  <?php elseif ($account[$x->debit_id] == ACCOUNT_LIABILITY): ?>
-			  <span class="label label-warning"><?= __('Repayment') ?></span>
-			  <?php endif ?>
+			  <?= $this->element('Journal/label', ['debit' => $account[$x->debit_id], 'credit' => $account[$x->credit_id]]) ?>
 			</span>
 		  </p>
 		  <p>
