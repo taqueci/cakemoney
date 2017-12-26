@@ -55,8 +55,6 @@ class CategoriesController extends AppController
         }
         $this->set(compact('category'));
 		$this->set('accounts', $this->Account->names());
-
-        $this->set('_serialize', ['category']);
     }
 
     /**
@@ -82,14 +80,11 @@ class CategoriesController extends AppController
         }
         $this->set(compact('category'));
 		$this->set('accounts', $this->Account->names());
-
-        $this->set('_serialize', ['category']);
     }
 
     public function sort()
     {
         if ($this->request->is(['patch', 'post', 'put'])) {
-
 			$nerr = 0;
 			$n = 1;
 
@@ -97,11 +92,7 @@ class CategoriesController extends AppController
 				$c = $this->Categories->get($p);
 				$c->set('position', $n);
 
-				if ($this->Categories->save($c)) {
-				}
-				else {
-					$nerr++;
-				}
+				if (! $this->Categories->save($c)) $nerr++;
 
 				$n++;
 			}
@@ -119,8 +110,6 @@ class CategoriesController extends AppController
 		$this->set('income',    $this->category(ACCOUNT_INCOME));
 		$this->set('expense',   $this->category(ACCOUNT_EXPENSE));
 		$this->set('equity',    $this->category(ACCOUNT_EQUITY));
-
-//        $this->set('_serialize', ['categories']);
     }
 
 	private function category($account) {

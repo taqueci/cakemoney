@@ -137,8 +137,6 @@ class JournalsController extends AppController
         $this->set('templates', $this->Templates->find('list'));
 
         $this->set('back', $this->request->getQuery('back'));
-
-        $this->set('_serialize', ['journal']);
     }
 
     /**
@@ -176,8 +174,6 @@ class JournalsController extends AppController
         $this->set('debits', $options);
         $this->set('credits', $options);
         $this->set('selections', $this->popular_selections());
-
-        $this->set('_serialize', ['journal']);
     }
 
     /**
