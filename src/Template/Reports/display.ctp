@@ -24,22 +24,52 @@ use Cake\Core\Configure;
 	<div class="row">
 	  <div class="col-md-6">
 		<h3><?= __('Summary') ?></h3>
-		<table>
-		  <tr>
-			<td align="center"><small><span class="label label-default"><?= __('Incomings') ?></span></small></td>
-			<td>&emsp;&emsp;</td>
-			<td align="center"><small><span class="label label-default"><?= __('Outgoings') ?></span></small></td>
-			<td>&emsp;&emsp;</td>
-			<td align="center"><small><span class="label label-default"><?= __('Balance') ?></span></small></td>
-		  </tr>
-		  <tr>
-			<td align="center"><span class="font-large"><?= number_format($sum->income) ?></span></td>
-			<td align="center"><tt>-</tt></td>
-			<td align="center"><span class="font-large"><?= number_format($sum->expense) ?></span></td>
-			<td align="center"><tt>=</tt></td>
-			<td align="center"><span class="font-xlarge"><?= $this->element('Format/numberWithStatus', ['value' => $sum->income - $sum->expense]) ?></span></td>
-		  </tr>
-		</table>
+		<ul class="list-inline">
+		  <li>
+			<table>
+			  <tr>
+				<td align="center"><small><span class="label label-default"><?= __('Incomings') ?></span></small></td>
+			  </tr>
+			  <tr>
+				<td align="center"><span class="font-xlarge"></span><span class="font-large"><?= number_format($sum->income) ?></span></td>
+			  </tr>
+			</table>
+		  </li>
+		  <li>
+			<table>
+			  <tr>
+				<td><span class="font-xlarge"></span><tt>-</tt></td>
+			  </tr>
+			</table>
+		  </li>
+		  <li>
+			<table>
+			  <tr>
+				<td align="center"><small><span class="label label-default"><?= __('Outgoings') ?></span></small></td>
+			  </tr>
+			  <tr>
+				<td align="center"><span class="font-xlarge"></span><span class="font-large"><?= number_format($sum->expense) ?></span></td>
+			  </tr>
+			</table>
+		  </li>
+		  <li>
+			<table>
+			  <tr>
+				<td><span class="font-xlarge"></span><tt>=</tt></td>
+			  </tr>
+			</table>
+		  </li>
+		  <li>
+			<table>
+			  <tr>
+				<td align="center"><small><span class="label label-default"><?= __('Balance') ?></span></small></td>
+			  </tr>
+			  <tr>
+				<td align="center"><span class="font-xlarge"><?= $this->element('Format/numberWithStatus', ['value' => $sum->income - $sum->expense]) ?></span></td>
+			  </tr>
+			</table>
+		  </li>
+		</ul>
 		<h3><?= __('Outgoings') ?></h3>
 		<div align="right">
 		  <div class="btn-group" role="group" aria-label="Page navigation">
@@ -93,13 +123,7 @@ use Cake\Core\Configure;
 			<p>
 			  <?= h($x->summary) ?>
 			  <span class="float-right">
-				<?php if ($account[$x->debit_id] == ACCOUNT_EXPENSE): ?>
-				<span class="label label-danger"><?= __('Outgoing') ?></span>
-				<?php elseif ($account[$x->credit_id] == ACCOUNT_INCOME): ?>
-				<span class="label label-success"><?= __('Incoming') ?></span>
-				<?php elseif ($account[$x->debit_id] == ACCOUNT_LIABILITY): ?>
-				<span class="label label-warning"><?= __('Repayment') ?></span>
-				<?php endif ?>
+				<?= $this->element('Journal/label', ['debit' => $account[$x->debit_id], 'credit' => $account[$x->credit_id]]) ?>
 			  </span>
 			</p>
 			<p>

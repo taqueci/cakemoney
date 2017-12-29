@@ -25,7 +25,9 @@ class CategoryComponent extends Component
         $this->Categories = TableRegistry::get('Categories');
 
         $categories = $this->Categories
-            ->find()->select(['id', 'name', 'account'])->toArray();
+            ->find()->select(['id', 'name', 'account'])->where(['status' => 1])
+			->order(['position' => 'ASC'])
+			->toArray();
 
         $c = [];
 

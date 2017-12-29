@@ -121,6 +121,9 @@ body {
 .has-margin-bottom {
   margin-bottom: 15px;
 }
+.has-margin-right {
+  margin-right: 15px;
+}
 .xs-icon {
   font-size: 110%;
 }

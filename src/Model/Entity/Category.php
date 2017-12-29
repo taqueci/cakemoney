@@ -10,6 +10,7 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property int $account
  * @property string $description
+ * @property int $status
  */
 class Category extends Entity
 {

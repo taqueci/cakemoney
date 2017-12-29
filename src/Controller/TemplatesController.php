@@ -77,8 +77,6 @@ class TemplatesController extends AppController
         $this->set('credits', $options);
 
         $this->set(compact('template'));
-
-        $this->set('_serialize', ['template']);
     }
 
     /**
@@ -110,8 +108,6 @@ class TemplatesController extends AppController
         $this->set('credits', $options);
 
         $this->set(compact('template'));
-
-        $this->set('_serialize', ['template']);
     }
 
     /**

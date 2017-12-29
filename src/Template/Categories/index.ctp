@@ -18,6 +18,7 @@
 			<th><?= $this->Paginator->sort('name', __('Name')) ?></th>
 			<th><?= $this->Paginator->sort('account_id', __('Account')) ?></th>
 			<th><?= $this->Paginator->sort('description', __('Description')) ?></th>
+			<th><?= $this->Paginator->sort('status', __('Status')) ?></th>
 			<th><?= __('Actions') ?></th>
 		  </tr>
 		</thead>
@@ -28,6 +29,9 @@
 			<td><?= h($x->name) ?></td>
 			<td><?= h($account[$x->account]) ?></td>
 			<td><?= h($x->description) ?></td>
+			<td>
+			  <?= $this->element('Category/status', ['status' => $x->status]) ?>
+			</td>
 			<td>
 			  <?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i>', ['action' => 'edit', $x->id], ['escape' => false]) ?>
 			</td>
@@ -46,10 +50,16 @@
 		&nbsp;
 		<i class="fa fa-sort" aria-hidden="true"></i>
 		<?= $this->Paginator->sort('account_id', __('Account')) ?>
+		&nbsp;
+		<i class="fa fa-sort" aria-hidden="true"></i>
+		<?= $this->Paginator->sort('status', __('Status')) ?>
 	  </p>
 	  <ul class="list-group">
 		<?php foreach ($categories as $x): ?>
 		<li class="list-group-item">
+		  <span class="float-right">
+			<?= $this->element('Category/status', ['status' => $x->status]) ?>
+		  </span>
 		  <h4 class="list-group-item-heading"><?= h($x->name) ?></h4>
 		  <p><?= h($x->description) ?></p>
 		  <p>
@@ -66,7 +76,8 @@
   </div>
   <div class="col-md-3">
 	<div class="list-group">
-		<?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Category'), array('action' => 'add'), array('class' => 'list-group-item', 'escape' => false)) ?>
+	  <?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Category'), array('action' => 'add'), array('class' => 'list-group-item', 'escape' => false)) ?>
+	  <?= $this->Html->link('<i class="fa fa-sort" aria-hidden="true"></i> ' . __('Sort Categories'), array('action' => 'sort'), array('class' => 'list-group-item', 'escape' => false)) ?>
 	</div>
     <?= $this->Form->create() ?>
 	<fieldset>

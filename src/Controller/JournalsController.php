@@ -137,8 +137,6 @@ class JournalsController extends AppController
         $this->set('templates', $this->Templates->find('list'));
 
         $this->set('back', $this->request->getQuery('back'));
-
-        $this->set('_serialize', ['journal']);
     }
 
     /**
@@ -176,8 +174,6 @@ class JournalsController extends AppController
         $this->set('debits', $options);
         $this->set('credits', $options);
         $this->set('selections', $this->popular_selections());
-
-        $this->set('_serialize', ['journal']);
     }
 
     /**
@@ -217,6 +213,7 @@ class JournalsController extends AppController
             ->contain(['Debits', 'Credits'])
             ->select(['debit_id', 'Debits.name', 'credit_id', 'Credits.name',
             'count' => $q->func()->count('*')])
+            ->where(['Debits.status' => 1, 'Credits.status' => 1])
             ->group(['debit_id', 'Debits.name', 'credit_id', 'Credits.name'])
             ->order(['count' => 'DESC'])
             ->limit(JOURNAL_POPULAR_NUM);

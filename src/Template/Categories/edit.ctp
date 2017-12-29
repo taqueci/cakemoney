@@ -12,6 +12,7 @@
 	  <?= $this->Form->input('name', ['label' => __('Name')]) ?>
 	  <?= $this->Form->input('account', ['label' => __('Account')]) ?>
 	  <?= $this->Form->input('description', ['label' => __('Description'), 'type' => 'textarea']) ?>
+	  <?= $this->Form->input('status', ['label' => __('Enabled'), 'type' => 'checkbox']) ?>
 	</fieldset>
 	<?= $this->Form->button('<i class="fa fa-check" aria-hidden="true"></i> ' . __('Submit'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
 	<?= $this->Form->end() ?>
