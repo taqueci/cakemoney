@@ -134,7 +134,8 @@ class JournalsController extends AppController
         $this->set('debits', $options);
         $this->set('credits', $options);
         $this->set('selections', $this->popular_selections());
-        $this->set('templates', $this->Templates->find('list'));
+        $this->set('templates',
+			$this->Templates->find('list')->order(['position' => 'ASC']));
 
         $this->set('back', $this->request->getQuery('back'));
     }

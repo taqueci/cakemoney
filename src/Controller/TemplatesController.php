@@ -129,4 +129,33 @@ class TemplatesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function sort()
+    {
+        if ($this->request->is(['patch', 'post', 'put'])) {
+			$nerr = 0;
+			$n = 1;
+
+			foreach (explode(',', $this->request->data['position']) as $p) {
+				$c = $this->Templates->get($p);
+				$c->set('position', $n);
+
+				if (! $this->Templates->save($c)) $nerr++;
+
+				$n++;
+			}
+
+			if ($nerr == 0) {
+                $this->Flash->success(__('The template has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The template could not be saved. Please, try again.'));
+        }
+
+		$templates = $this->Templates->find()->order(['position' => 'ASC']);
+
+        $this->set(compact('templates'));
+        $this->set('_serialize', ['templates']);
+	}
 }

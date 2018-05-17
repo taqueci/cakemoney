@@ -83,6 +83,7 @@
   <div class="col-md-3">
 	<div class="list-group">
 		<?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Template'), array('action' => 'add'), array('class' => 'list-group-item', 'escape' => false)) ?>
+		<?= $this->Html->link('<i class="fa fa-sort" aria-hidden="true"></i> ' . __('Sort Templates'), array('action' => 'sort'), array('class' => 'list-group-item', 'escape' => false)) ?>
 	</div>
     <?= $this->Form->create() ?>
 	<fieldset>
