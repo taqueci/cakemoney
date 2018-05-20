@@ -60,7 +60,8 @@ class JournalsController extends AppController
         $this->set('credits', $options);
 
         $this->set('filter', [
-            'start' => $s, 'end' => $e, 'debit' => $d, 'credit' => $c
+            'start' => $s, 'end' => $e, 'debit' => $d, 'credit' => $c,
+            'keyword' => $this->request->getQuery('q')
         ]);
 
         $this->set('back', urlencode(Router::reverse($this->request, true)));
@@ -134,7 +135,8 @@ class JournalsController extends AppController
         $this->set('debits', $options);
         $this->set('credits', $options);
         $this->set('selections', $this->popular_selections());
-        $this->set('templates', $this->Templates->find('list'));
+        $this->set('templates',
+			$this->Templates->find('list')->order(['position' => 'ASC']));
 
         $this->set('back', $this->request->getQuery('back'));
     }
