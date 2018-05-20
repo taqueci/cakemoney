@@ -278,6 +278,10 @@ msgstr "スコープ"
 msgid "Are you sure you want to delete # {0}?"
 msgstr "本当に削除しますか # {0}"
 
+#: Template/Journals/index.ctp:194
+msgid "Keyword"
+msgstr "キーワード"
+
 #: Template/Journals/view.ctp:34 Template/Templates/view.ctp:34
 msgid "Created"
 msgstr "作成"

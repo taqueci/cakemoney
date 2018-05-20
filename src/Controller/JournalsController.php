@@ -60,7 +60,8 @@ class JournalsController extends AppController
         $this->set('credits', $options);
 
         $this->set('filter', [
-            'start' => $s, 'end' => $e, 'debit' => $d, 'credit' => $c
+            'start' => $s, 'end' => $e, 'debit' => $d, 'credit' => $c,
+            'keyword' => $this->request->getQuery('q')
         ]);
 
         $this->set('back', urlencode(Router::reverse($this->request, true)));

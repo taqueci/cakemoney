@@ -81,14 +81,14 @@
     <?= $this->Paginator->numbers(['prev' => '&lsaquo;', 'next' => '&rsaquo;']) ?>
   </div>
   <div class="col-md-3">
-	<div class="list-group">
-		<?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Template'), array('action' => 'add'), array('class' => 'list-group-item', 'escape' => false)) ?>
-		<?= $this->Html->link('<i class="fa fa-sort" aria-hidden="true"></i> ' . __('Sort Templates'), array('action' => 'sort'), array('class' => 'list-group-item', 'escape' => false)) ?>
-	</div>
-    <?= $this->Form->create() ?>
+	<?= $this->Form->create() ?>
 	<fieldset>
 	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>']) ?>
 	</fieldset>
 	<?= $this->Form->end() ?>
+	<div class="list-group">
+	  <?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Template'), array('action' => 'add'), array('class' => 'list-group-item', 'escape' => false)) ?>
+	  <?= $this->Html->link('<i class="fa fa-sort" aria-hidden="true"></i> ' . __('Sort Templates'), array('action' => 'sort'), array('class' => 'list-group-item', 'escape' => false)) ?>
+	</div>
   </div>
 </div>
