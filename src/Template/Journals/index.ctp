@@ -171,17 +171,17 @@ $this->append('css', $css);
     <?= $this->Paginator->numbers(['prev' => '&lsaquo;', 'next' => '&rsaquo;']) ?>
   </div>
   <div class="col-md-3">
-	<div class="list-group">
-		<?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['action' => 'add', '?' => ['back' => $back]], ['class' => 'list-group-item', 'escape' => false]) ?>
-	</div>
-	<div class="list-group">
-	  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i> ' . __('View Report'), ['controller' => 'reports', 'action' => 'view', '?' => ['s' => $filter['start'], 'e' => $filter['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
-	</div>
-    <?= $this->Form->create() ?>
+	<?= $this->Form->create() ?>
 	<fieldset>
 	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>']) ?>
 	</fieldset>
 	<?= $this->Form->end() ?>
+	<div class="list-group">
+	  <?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['action' => 'add', '?' => ['back' => $back]], ['class' => 'list-group-item', 'escape' => false]) ?>
+	</div>
+	<div class="list-group">
+	  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i> ' . __('View Report'), ['controller' => 'reports', 'action' => 'view', '?' => ['s' => $filter['start'], 'e' => $filter['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
+	</div>
 	<div id="filter" class="well">
 	  <?= $this->Form->create(null, ['id' => 'form-date', 'type' => 'get']) ?>
 	  <div class="form-group">
