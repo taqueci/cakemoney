@@ -29,7 +29,7 @@ $this->append('css', $css);
 	  <a href="#filter" class="btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i> <?= __('Filter') ?></a>
 	  </div>
 	</div>
-	<?php if ($filter['start'] || $filter['end'] || $filter['debit'] || $filter['credit']): ?>
+	<?php if ($filter['start'] || $filter['end'] || $filter['debit'] || $filter['credit'] || $filter['keyword']): ?>
 	<div class="panel panel-info">
 	  <div class="panel-body">
 		<?php if ($filter['start'] || $filter['end']): ?>
@@ -65,6 +65,18 @@ $this->append('css', $css);
 			</strong>
 			&nbsp;
 			<?= join('&ensp;', array_values($filter['credit'])) ?>
+		  </small>
+		</span>
+		<?php endif; ?>
+		<?php if ($filter['keyword']): ?>
+		<span class="inline-block has-margin-side">
+		  <small>
+			<strong>
+			  <i class="fa fa-filter" aria-hidden="true"></i>
+			  <?= __('Keyword') ?>
+			</strong>
+			&nbsp;
+			<?= $filter['keyword'] ?>
 		  </small>
 		</span>
 		<?php endif; ?>
@@ -162,6 +174,9 @@ $this->append('css', $css);
 	<div class="list-group">
 		<?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['action' => 'add', '?' => ['back' => $back]], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
+	<div class="list-group">
+	  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i> ' . __('View Report'), ['controller' => 'reports', 'action' => 'view', '?' => ['s' => $filter['start'], 'e' => $filter['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
+	</div>
     <?= $this->Form->create() ?>
 	<fieldset>
 	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>']) ?>
@@ -179,6 +194,7 @@ $this->append('css', $css);
 	  </div>
 	  <?= $this->Form->input('d', ['label' => __('Debit'), 'showParents' => true, 'options' => $debits, 'multiple' => true]) ?>
 	  <?= $this->Form->input('c', ['label' => __('Credit'), 'showParents' => true, 'options' => $credits, 'multiple' => true]) ?>
+	  <?= $this->Form->input('q', ['label' => __('Keyword')]) ?>
 	  <?= $this->Form->button('<i class="fa fa-filter" aria-hidden="true"></i> ' . __('Filter'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
 	  <?= $this->Form->end() ?>
 	</div>
