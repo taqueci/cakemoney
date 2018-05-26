@@ -241,6 +241,7 @@ use Cake\Core\Configure;
 		<div align="right">
 		  <div id="chart-sel-view" class="btn-group btn-group-sm" role="group" aria-label="Chart selector">
 			<button id="chart-btn-b" type="button" class="btn btn-default"><?= __('Balance') ?></button>
+			<button id="chart-btn-n" type="button" class="btn btn-default"><?= __('Assets') ?></button>
 			<button id="chart-btn-i" type="button" class="btn btn-default"><?= __('Incomings') ?></button>
 			<button id="chart-btn-o" type="button" class="btn btn-default"><?= __('Outgoings') ?></button>
 		  </div>
@@ -363,6 +364,12 @@ $(function() {
 			weekly: <?= $this->element('Chart/Data/balance', ['data' => $balance['weekly'], 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
 			daily: <?= $this->element('Chart/Data/balance', ['data' => $balance['daily'], 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
 		},
+		asset: {
+			annual: <?= $this->element('Chart/Data/asset', ['data' => $balance['annual'], 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
+			monthly: <?= $this->element('Chart/Data/asset', ['data' => $balance['monthly'], 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
+			weekly: <?= $this->element('Chart/Data/asset', ['data' => $balance['weekly'], 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
+			daily: <?= $this->element('Chart/Data/asset', ['data' => $balance['daily'], 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
+		},
 		incomings: {
 			annual: <?= $this->element('Chart/Data/stacked', ['data' => $incomings['annual'], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
 			monthly: <?= $this->element('Chart/Data/stacked', ['data' => $incomings['monthly'], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
@@ -402,6 +409,11 @@ $(function() {
 
 	var option = {
 		balance: {
+			maintainAspectRatio: false,
+			tooltips: {callbacks: {label: number_format_tooltip}},
+			scales: {yAxes: [{ticks: {callback: number_format}}]}
+		},
+		asset: {
 			maintainAspectRatio: false,
 			tooltips: {callbacks: {label: number_format_tooltip}},
 			scales: {yAxes: [{ticks: {callback: number_format}}]}
@@ -453,6 +465,13 @@ $(function() {
 
 	$('#chart-btn-b').click(function() {
 		view = 'balance';
+
+		chart.destroy();
+		chart = chart_new(ctx, option[view], data[curve][view][scope]);
+	});
+
+	$('#chart-btn-n').click(function() {
+		view = 'asset';
 
 		chart.destroy();
 		chart = chart_new(ctx, option[view], data[curve][view][scope]);
