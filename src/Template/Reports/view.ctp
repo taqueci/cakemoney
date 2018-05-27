@@ -453,67 +453,35 @@ $(function() {
 	$('#chart-btn-b').addClass('active');
 	$('#chart-btn-d').addClass('active');
 
+	var view_index = {
+		'chart-btn-b': 'balance',
+		'chart-btn-n': 'asset',
+		'chart-btn-i': 'incomings',
+		'chart-btn-o': 'outgoings'
+	};
+
+	var scope_index = {
+		'chart-btn-y': 'annual',
+		'chart-btn-m': 'monthly',
+		'chart-btn-w': 'weekly',
+		'chart-btn-d': 'daily'
+	};
+
 	$('#chart-sel-view button').click(function() {
 		$('#chart-sel-view button').removeClass('active');
 		$(this).addClass('active');
+
+		view = view_index[$(this).attr('id')];
+
+		chart.destroy();
+		chart = chart_new(ctx, option[view], data[curve][view][scope]);
 	});
 
 	$('#chart-sel-scope button').click(function() {
 		$('#chart-sel-scope button').removeClass('active');
 		$(this).addClass('active');
-	});
 
-	$('#chart-btn-b').click(function() {
-		view = 'balance';
-
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
-	});
-
-	$('#chart-btn-n').click(function() {
-		view = 'asset';
-
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
-	});
-
-	$('#chart-btn-i').click(function() {
-		view = 'incomings';
-
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
-	});
-
-	$('#chart-btn-o').click(function() {
-		view = 'outgoings';
-
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
-	});
-
-	$('#chart-btn-y').click(function() {
-		scope = 'annual';
-
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
-	});
-
-	$('#chart-btn-m').click(function() {
-		scope = 'monthly';
-
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
-	});
-
-	$('#chart-btn-w').click(function() {
-		scope = 'weekly';
-
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
-	});
-
-	$('#chart-btn-d').click(function() {
-		scope = 'daily';
+		scope = scope_index[$(this).attr('id')];
 
 		chart.destroy();
 		chart = chart_new(ctx, option[view], data[curve][view][scope]);
