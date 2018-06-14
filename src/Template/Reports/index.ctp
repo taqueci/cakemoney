@@ -13,6 +13,40 @@ use Cake\Core\Configure;
 <div class="row">
   <div class="col-md-9">
     <div>
+	  <h3><?= __('Recently') ?></h3>
+	  <table class="table table-striped">
+		<thead>
+		  <tr>
+			<th><?= __('Span') ?></th>
+			<th><?= __('Incomings') ?></th>
+			<th><?= __('Outgoings') ?></th>
+			<th><?= __('Balance') ?></th>
+			<th>
+			  <span class="hidden-xs"><?= __('Actions') ?></span>
+			  <span class="visible-xs"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></span>
+			</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <?php foreach (['Week', 'Month', 'Year'] as $x): ?>
+		  <?php
+		  $start = $past[$x]->start;
+		  $end   = $past[$x]->end;
+		  ?>
+		  <tr>
+			<td>1 <?= __($x) ?></td>
+			<td align="right"><?= number_format($past[$x]->income) ?></td>
+			<td align="right"><?= number_format($past[$x]->expense) ?></td>
+			<td align="right"><?= $this->element('Format/numberWithStatus', ['value' => $past[$x]->income - $past[$x]->expense]) ?></td>
+			<td>
+			  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
+			  &nbsp;
+			  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i>', ['action' => 'view', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
+			</td>
+		  </tr>
+		  <?php endforeach; ?>
+		</tbody>
+	  </table>
 	  <h3><?= __('Daily') ?></h3>
 	  <table class="table table-striped">
 		<thead>

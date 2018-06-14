@@ -29,7 +29,9 @@ class ReportsController extends AppController
         $start = '1970-01-01';
         $end   = date('Y-12-31');
 
-        $this->set('summary', [
+		$this->set('past', $this->past_sums());
+
+		$this->set('summary', [
             'daily' => $this
                 ->query_sum_group($start, $end, ['year', 'month', 'day'])
                 ->order(['year' => 'DESC', 'month' => 'DESC', 'day' => 'DESC'])
@@ -150,7 +152,23 @@ class ReportsController extends AppController
         $this->set('back', urlencode(Router::reverse($this->request, true)));
     }
 
-    private function query_sum($start, $end)
+    private function past_sums()
+    {
+		$end = date('Y-m-d');
+		$sum = [];
+
+		foreach (['Week', 'Month', 'Year'] as $unit) {
+			$start = date('Y-m-d', strtotime("$end - 1 $unit + 1 day"));
+
+			$sum[$unit] = $this->query_sum($start, $end)->first();
+			$sum[$unit]['start'] = $start;
+			$sum[$unit]['end'] = $end;
+		}
+
+		return $sum;
+	}
+
+	private function query_sum($start, $end)
     {
         $q = $this->Journals->find();
 
