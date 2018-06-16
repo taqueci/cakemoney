@@ -246,10 +246,14 @@ use Cake\Core\Configure;
 			<button id="chart-btn-o" type="button" class="btn btn-default"><?= __('Outgoings') ?></button>
 		  </div>
 		  <div id="chart-sel-scope" class="btn-group btn-group-sm" role="group" aria-label="Chart selector">
-			<button id="chart-btn-y" type="button" class="btn btn-default"><?= __('Year') ?></button>
-			<button id="chart-btn-m" type="button" class="btn btn-default"><?= __('Month') ?></button>
-			<button id="chart-btn-w" type="button" class="btn btn-default"><?= __('Week') ?></button>
-			<button id="chart-btn-d" type="button" class="btn btn-default"><?= __('Day') ?></button>
+			<?php
+foreach (['Year', 'Month', 'Week', 'Day'] as $x) {
+	if (!array_key_exists($x, $chart)) continue;
+?>
+			<button id="chart-btn-<?= strtolower($x) ?>" type="button" class="btn btn-default"><?= __($x) ?></button>
+			<?php
+}
+?>
 		  </div>
 		  <div id="chart-sel-accu" class="btn-group btn-group-sm" role="group" aria-label="Chart selector">
 			<button id="chart-btn-a" type="button" class="btn btn-default">
@@ -359,28 +363,28 @@ $(function() {
 $(function() {
 	var normal = {
 		balance: {
-			annual: <?= $this->element('Chart/Data/balance', ['data' => $balance['annual'], 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
-			monthly: <?= $this->element('Chart/Data/balance', ['data' => $balance['monthly'], 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
-			weekly: <?= $this->element('Chart/Data/balance', ['data' => $balance['weekly'], 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
-			daily: <?= $this->element('Chart/Data/balance', ['data' => $balance['daily'], 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
+			annual: <?= $this->element('Chart/Data/balance', ['data' => array_key_exists('Year', $chart) ? $chart['Year']['sum'] : [], 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
+			monthly: <?= $this->element('Chart/Data/balance', ['data' => array_key_exists('Month', $chart) ? $chart['Month']['sum'] : [], 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
+			weekly: <?= $this->element('Chart/Data/balance', ['data' => array_key_exists('Week', $chart) ? $chart['Week']['sum'] : [], 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
+			daily: <?= $this->element('Chart/Data/balance', ['data' => array_key_exists('Day', $chart) ? $chart['Day']['sum'] : [], 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
 		},
 		asset: {
-			annual: <?= $this->element('Chart/Data/asset', ['data' => $balance['annual'], 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
-			monthly: <?= $this->element('Chart/Data/asset', ['data' => $balance['monthly'], 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
-			weekly: <?= $this->element('Chart/Data/asset', ['data' => $balance['weekly'], 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
-			daily: <?= $this->element('Chart/Data/asset', ['data' => $balance['daily'], 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
+			annual: <?= $this->element('Chart/Data/asset', ['data' => array_key_exists('Year', $chart) ? $chart['Year']['sum'] : [], 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
+			monthly: <?= $this->element('Chart/Data/asset', ['data' => array_key_exists('Month', $chart) ? $chart['Month']['sum'] : [], 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
+			weekly: <?= $this->element('Chart/Data/asset', ['data' => array_key_exists('Week', $chart) ? $chart['Week']['sum'] : [], 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
+			daily: <?= $this->element('Chart/Data/asset', ['data' => array_key_exists('Day', $chart) ? $chart['Day']['sum'] : [], 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
 		},
 		incomings: {
-			annual: <?= $this->element('Chart/Data/stacked', ['data' => $incomings['annual'], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
-			monthly: <?= $this->element('Chart/Data/stacked', ['data' => $incomings['monthly'], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
-			weekly: <?= $this->element('Chart/Data/stacked', ['data' => $incomings['weekly'], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
-			daily: <?= $this->element('Chart/Data/stacked', ['data' => $incomings['daily'], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
+			annual: <?= $this->element('Chart/Data/stacked', ['data' => array_key_exists('Year', $chart) ? $chart['Year']['income'] : [], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
+			monthly: <?= $this->element('Chart/Data/stacked', ['data' => array_key_exists('Month', $chart) ? $chart['Month']['income'] : [], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
+			weekly: <?= $this->element('Chart/Data/stacked', ['data' => array_key_exists('Week', $chart) ? $chart['Week']['income'] : [], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
+			daily: <?= $this->element('Chart/Data/stacked', ['data' => array_key_exists('Day', $chart) ? $chart['Day']['income'] : [], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
 		},
 		outgoings: {
-			annual: <?= $this->element('Chart/Data/stacked', ['data' => $outgoings['annual'], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
-			monthly: <?= $this->element('Chart/Data/stacked', ['data' => $outgoings['monthly'], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
-			weekly: <?= $this->element('Chart/Data/stacked', ['data' => $outgoings['weekly'], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
-			daily: <?= $this->element('Chart/Data/stacked', ['data' => $outgoings['daily'], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
+			annual: <?= $this->element('Chart/Data/stacked', ['data' => array_key_exists('Year', $chart) ? $chart['Year']['expense'] : [], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
+			monthly: <?= $this->element('Chart/Data/stacked', ['data' => array_key_exists('Month', $chart) ? $chart['Month']['expense'] : [], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
+			weekly: <?= $this->element('Chart/Data/stacked', ['data' => array_key_exists('Week', $chart) ? $chart['Week']['expense'] : [], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
+			daily: <?= $this->element('Chart/Data/stacked', ['data' => array_key_exists('Day', $chart) ? $chart['Day']['expense'] : [], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
 		}
 	};
 
@@ -436,22 +440,7 @@ $(function() {
 		}
 	};
 
-	function chart_new(c, o, d) {
-		return new Chart(c, {type: 'line', options: o, data: d});
-	}
-
 	var data = {normal: normal, accumulated: accumulated};
-
-	var view  = 'balance';
-	var scope = 'daily';
-	var curve = 'normal';
-
-	var ctx = document.getElementById('chart-canvas').getContext('2d');
-
-	var chart = chart_new(ctx, option[view], data[curve][view][scope]);
-
-	$('#chart-btn-b').addClass('active');
-	$('#chart-btn-d').addClass('active');
 
 	var view_index = {
 		'chart-btn-b': 'balance',
@@ -461,44 +450,72 @@ $(function() {
 	};
 
 	var scope_index = {
-		'chart-btn-y': 'annual',
-		'chart-btn-m': 'monthly',
-		'chart-btn-w': 'weekly',
-		'chart-btn-d': 'daily'
+		'chart-btn-year': 'annual',
+		'chart-btn-month': 'monthly',
+		'chart-btn-week': 'weekly',
+		'chart-btn-day': 'daily'
+	};
+
+	function ReportChart(ctx) {
+		this._ctx = ctx;
+		this._curve = 'normal';
+		this._view  = 'balance';
+		this._scope = 'daily';
+	}
+
+	ReportChart.prototype = {
+		setOption: function(x) {this._option = x},
+		setData: function(x) {this._data = x},
+		setCurve: function(x) {this._curve = x},
+		setView: function(x) {this._view = x},
+		setScope: function(x) {this._scope = x},
+		draw: function() {
+			if (this._obj) this._obj.destroy();
+
+			this._obj = new Chart(this._ctx, {
+				type: 'line',
+				options: this._option[this._view],
+				data: this._data[this._curve][this._view][this._scope]
+			});
+		}
 	};
 
 	$('#chart-sel-view button').click(function() {
 		$('#chart-sel-view button').removeClass('active');
 		$(this).addClass('active');
 
-		view = view_index[$(this).attr('id')];
-
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
+		chart.setView(view_index[$(this).attr('id')]);
+		chart.draw();
 	});
 
 	$('#chart-sel-scope button').click(function() {
 		$('#chart-sel-scope button').removeClass('active');
 		$(this).addClass('active');
 
-		scope = scope_index[$(this).attr('id')];
-
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
+		chart.setScope(scope_index[$(this).attr('id')]);
+		chart.draw();
 	});
 
 	$('#chart-btn-a').click(function() {
 		if ($(this).hasClass('active')) {
 			$(this).removeClass('active');
-			curve = 'normal';
+			chart.setCurve('normal');
 		}
 		else {
 			$(this).addClass('active');
-			curve = 'accumulated';
+			chart.setCurve('accumulated');
 		}
 
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
+		chart.draw();
 	});
+
+	var ctx = document.getElementById('chart-canvas').getContext('2d');
+	var chart = new ReportChart(ctx);
+
+	chart.setOption(option);
+	chart.setData(data);
+
+	$('#chart-btn-b').addClass('active');
+	$('#chart-sel-scope button').filter(':last').click();
 });
 <?php $this->Html->scriptEnd(); ?>
