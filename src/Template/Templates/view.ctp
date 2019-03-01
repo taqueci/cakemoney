@@ -41,11 +41,11 @@
   </div>
   <div class="col-md-3">
 	<div class="list-group">
-	  <?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i> ' . __('Edit Template'), ['action' => 'edit', $template->id], ['class' => 'list-group-item', 'escape' => false]) ?>
-	  <?= $this->Form->postLink('<i class="fa fa-trash" aria-hidden="true"></i> ' . __('Delete Template'), ['action' => 'delete', $template->id], ['confirm' => __('Are you sure you want to delete # {0}?', $template->id), 'class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fas fa-edit" aria-hidden="true"></i> ' . __('Edit Template'), ['action' => 'edit', $template->id], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Form->postLink('<i class="fas fa-trash" aria-hidden="true"></i> ' . __('Delete Template'), ['action' => 'delete', $template->id], ['confirm' => __('Are you sure you want to delete # {0}?', $template->id), 'class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
 	<div class="list-group">
-	  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i> ' . __('List Templates'), ['action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i> ' . __('List Templates'), ['action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
   </div>
 </div>

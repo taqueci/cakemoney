@@ -33,11 +33,11 @@
 			<td align="right"><?= number_format($x->amount) ?></td>
 			<td><?= h($x->summary) ?></td>
 			<td>
-			  <?= $this->Html->link('<i class="fa fa-list-alt" aria-hidden="true"></i>', ['action' => 'view', $x->id], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-list-alt" aria-hidden="true"></i>', ['action' => 'view', $x->id], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i>', ['action' => 'edit', $x->id], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-edit" aria-hidden="true"></i>', ['action' => 'edit', $x->id], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Form->postLink('<i class="fa fa-trash" aria-hidden="true"></i>', ['action' => 'delete', $x->id], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $x->id), 'block' => true]) ?>
+			  <?= $this->Form->postLink('<i class="fas fa-trash" aria-hidden="true"></i>', ['action' => 'delete', $x->id], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $x->id), 'block' => true]) ?>
 			</td>
 		  </tr>
 		  <?php endforeach; ?>
@@ -46,13 +46,13 @@
 	</div>
 	<div class="visible-xs">
 	  <p class="text-right">
-		<i class="fa fa-sort" aria-hidden="true"></i>
+		<i class="fas fa-sort" aria-hidden="true"></i>
 		<?= $this->Paginator->sort('id', __('ID')) ?>
 		&nbsp;
-		<i class="fa fa-sort" aria-hidden="true"></i>
+		<i class="fas fa-sort" aria-hidden="true"></i>
 		<?= $this->Paginator->sort('name', __('Name')) ?>
 		&nbsp;
-		<i class="fa fa-sort" aria-hidden="true"></i>
+		<i class="fas fa-sort" aria-hidden="true"></i>
 		<?= $this->Paginator->sort('amount', __('Amount')) ?>
 	  </p>
 	  <ul class="list-group">
@@ -65,13 +65,13 @@
 		  <p><?= h($x->summary) ?></p>
 		  <p><?= h($x->debit->name) . ' / ' . h($x->credit->name) ?>
 			<span class="xs-icon" style="float: right">
-			  <?= $this->Html->link('<i class="fa fa-list-alt" aria-hidden="true"></i>', ['action' => 'view', $x->id], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-list-alt" aria-hidden="true"></i>', ['action' => 'view', $x->id], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i>', ['action' => 'edit', $x->id], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-edit" aria-hidden="true"></i>', ['action' => 'edit', $x->id], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Html->link('<i class="fa fa-copy" aria-hidden="true"></i> ', ['action' => 'add'], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-copy" aria-hidden="true"></i> ', ['action' => 'add'], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Form->postLink('<i class="fa fa-trash" aria-hidden="true"></i>', ['action' => 'delete', $x->id], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $x->id), 'block' => true]) ?>
+			  <?= $this->Form->postLink('<i class="fas fa-trash" aria-hidden="true"></i>', ['action' => 'delete', $x->id], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $x->id), 'block' => true]) ?>
 			</span>
 		  </p>
 		</li>
@@ -83,12 +83,12 @@
   <div class="col-md-3">
 	<?= $this->Form->create() ?>
 	<fieldset>
-	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>']) ?>
+	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>']) ?>
 	</fieldset>
 	<?= $this->Form->end() ?>
 	<div class="list-group">
-	  <?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Template'), array('action' => 'add'), array('class' => 'list-group-item', 'escape' => false)) ?>
-	  <?= $this->Html->link('<i class="fa fa-sort" aria-hidden="true"></i> ' . __('Sort Templates'), array('action' => 'sort'), array('class' => 'list-group-item', 'escape' => false)) ?>
+	  <?= $this->Html->link('<i class="fas fa-plus" aria-hidden="true"></i> ' . __('New Template'), array('action' => 'add'), array('class' => 'list-group-item', 'escape' => false)) ?>
+	  <?= $this->Html->link('<i class="fas fa-sort" aria-hidden="true"></i> ' . __('Sort Templates'), array('action' => 'sort'), array('class' => 'list-group-item', 'escape' => false)) ?>
 	</div>
   </div>
 </div>

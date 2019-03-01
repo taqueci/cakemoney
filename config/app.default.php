@@ -348,7 +348,7 @@ return [
 
     'Css' => [
         'bootstrap' => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
-        'fontawesome' => '//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css',
+        'fontawesome' => 'https://use.fontawesome.com/releases/v5.7.2/css/all.css',
         'bootstrapDatepicker' => 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css',
         'select2' => 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css',
         'select2bootstrap' => 'https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css'
@@ -356,7 +356,7 @@ return [
 
     'Js' => [
         'jquery' => 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js',
-		'jqueryui' => 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js',
+         'jqueryui' => 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js',
         'bootstrap' => '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js',
         'bootstrapDatepicker' => 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js',
         'chartjs' => 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js',

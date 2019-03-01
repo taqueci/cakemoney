@@ -32,7 +32,7 @@ $this->append('css', $css);
 		  <div class="list-group list-group-no-radius sortable">
 			<?php foreach ($equity as $x): ?>
 			<a id="<?= $x->id ?>" class="list-group-item">
-			  <i class="fa fa-arrows-v" aria-hidden="true"></i>
+			  <i class="fas fa-arrows-alt-v" aria-hidden="true"></i>
 			  &nbsp;
 			  <?= $x->name ?>
 			  <span class="float-right">
@@ -45,7 +45,7 @@ $this->append('css', $css);
 		  <div class="list-group list-group-no-radius sortable">
 			<?php foreach ($asset as $x): ?>
 			<a id="<?= $x->id ?>" class="list-group-item">
-			  <i class="fa fa-arrows-v" aria-hidden="true"></i>
+			  <i class="fas fa-arrows-alt-v" aria-hidden="true"></i>
 			  &nbsp;
 			  <?= $x->name ?>
 			  <span class="float-right">
@@ -58,7 +58,7 @@ $this->append('css', $css);
 		  <div class="list-group list-group-no-radius sortable">
 			<?php foreach ($liability as $x): ?>
 			<a id="<?= $x->id ?>" class="list-group-item">
-			  <i class="fa fa-arrows-v" aria-hidden="true"></i>
+			  <i class="fas fa-arrows-alt-v" aria-hidden="true"></i>
 			  &nbsp;
 			  <?= $x->name ?>
 			  <span class="float-right">
@@ -73,7 +73,7 @@ $this->append('css', $css);
 		  <div class="list-group list-group-no-radius sortable">
 			<?php foreach ($income as $x): ?>
 			<a id="<?= $x->id ?>" class="list-group-item">
-			  <i class="fa fa-arrows-v" aria-hidden="true"></i>
+			  <i class="fas fa-arrows-alt-v" aria-hidden="true"></i>
 			  &nbsp;
 			  <?= $x->name ?>
 			  <span class="float-right">
@@ -88,7 +88,7 @@ $this->append('css', $css);
 		  <div class="list-group list-group-no-radius sortable">
 			<?php foreach ($expense as $x): ?>
 			<a id="<?= $x->id ?>" class="list-group-item">
-			  <i class="fa fa-arrows-v" aria-hidden="true"></i>
+			  <i class="fas fa-arrows-alt-v" aria-hidden="true"></i>
 			  &nbsp;
 			  <?= $x->name ?>
 			  <span class="float-right">
@@ -100,12 +100,12 @@ $this->append('css', $css);
 		</div>
 	  </div>
 	</fieldset>
-	<?= $this->Form->button('<i class="fa fa-check" aria-hidden="true"></i> ' . __('Submit'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
+	<?= $this->Form->button('<i class="fas fa-check" aria-hidden="true"></i> ' . __('Submit'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
 	<?= $this->Form->end() ?>
   </div>
   <div class="col-md-3">
 	<div class="list-group">
-	  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i> ' . __('List Categoris'), ['action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i> ' . __('List Categoris'), ['action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
   </div>
 </div>

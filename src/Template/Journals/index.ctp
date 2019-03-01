@@ -24,9 +24,9 @@ $this->append('css', $css);
   <div class="col-md-9">
 	<div class="visible-xs">
 	  <div class="has-margin-bottom">
-		<?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add', '?' => ['back' => $back]], ['class' => 'btn btn-default', 'escape' => false]) ?>
-	  <a href="#q" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> <?= __('Search') ?></a>
-	  <a href="#filter" class="btn btn-default"><i class="fa fa-filter" aria-hidden="true"></i> <?= __('Filter') ?></a>
+		<?= $this->Html->link('<i class="fas fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add', '?' => ['back' => $back]], ['class' => 'btn btn-default', 'escape' => false]) ?>
+	  <a href="#q" class="btn btn-default"><i class="fas fa-search" aria-hidden="true"></i> <?= __('Search') ?></a>
+	  <a href="#filter" class="btn btn-default"><i class="fas fa-filter" aria-hidden="true"></i> <?= __('Filter') ?></a>
 	  </div>
 	</div>
 	<?php if ($filter['start'] || $filter['end'] || $filter['debit'] || $filter['credit'] || $filter['keyword']): ?>
@@ -36,7 +36,7 @@ $this->append('css', $css);
 		<span class="inline-block has-margin-side">
 		  <small>
 			<strong>
-			  <i class="fa fa-filter" aria-hidden="true"></i>
+			  <i class="fas fa-filter" aria-hidden="true"></i>
 			  <?= __('Scope') ?>
 			</strong>
 			&nbsp;
@@ -48,7 +48,7 @@ $this->append('css', $css);
 		<span class="inline-block has-margin-side">
 		  <small>
 			<strong>
-			  <i class="fa fa-filter" aria-hidden="true"></i>
+			  <i class="fas fa-filter" aria-hidden="true"></i>
 			  <?= __('Debit') ?>
 			</strong>
 			&nbsp;
@@ -60,7 +60,7 @@ $this->append('css', $css);
 		<span class="inline-block has-margin-side">
 		  <small>
 			<strong>
-			  <i class="fa fa-filter" aria-hidden="true"></i>
+			  <i class="fas fa-filter" aria-hidden="true"></i>
 			  <?= __('Credit') ?>
 			</strong>
 			&nbsp;
@@ -72,7 +72,7 @@ $this->append('css', $css);
 		<span class="inline-block has-margin-side">
 		  <small>
 			<strong>
-			  <i class="fa fa-filter" aria-hidden="true"></i>
+			  <i class="fas fa-filter" aria-hidden="true"></i>
 			  <?= __('Keyword') ?>
 			</strong>
 			&nbsp;
@@ -110,13 +110,13 @@ $this->append('css', $css);
 			</td>
 			<td><?= h($x->summary) ?></td>
 			<td>
-			  <?= $this->Html->link('<i class="fa fa-list-alt" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-list-alt" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i>', ['action' => 'edit', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-edit" aria-hidden="true"></i>', ['action' => 'edit', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Html->link('<i class="fa fa-copy" aria-hidden="true"></i> ', ['action' => 'add', '?' => ['b' => $x->id, 'back' => $back]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-copy" aria-hidden="true"></i> ', ['action' => 'add', '?' => ['b' => $x->id, 'back' => $back]], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Form->postLink('<i class="fa fa-trash" aria-hidden="true"></i>', ['action' => 'delete', $x->id, '?' => ['back' => $back]], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $x->id)]) ?>
+			  <?= $this->Form->postLink('<i class="fas fa-trash" aria-hidden="true"></i>', ['action' => 'delete', $x->id, '?' => ['back' => $back]], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $x->id)]) ?>
 			</td>
 		  </tr>
 		  <?php endforeach; ?>
@@ -125,16 +125,16 @@ $this->append('css', $css);
 	</div>
 	<div class="visible-xs">
 	  <p class="text-right">
-		<i class="fa fa-sort" aria-hidden="true"></i>
+		<i class="fas fa-sort" aria-hidden="true"></i>
 		<?= $this->Paginator->sort('date', __('Date')) ?>
 		&nbsp;
-		<i class="fa fa-sort" aria-hidden="true"></i>
+		<i class="fas fa-sort" aria-hidden="true"></i>
 		<?= $this->Paginator->sort('debit_id', __('Debit')) ?>
 		&nbsp;
-		<i class="fa fa-sort" aria-hidden="true"></i>
+		<i class="fas fa-sort" aria-hidden="true"></i>
 		<?= $this->Paginator->sort('credit_id', __('Credit')) ?>
 		&nbsp;
-		<i class="fa fa-sort" aria-hidden="true"></i>
+		<i class="fas fa-sort" aria-hidden="true"></i>
 		<?= $this->Paginator->sort('amount', __('Amount')) ?>
 	  </p>
 	  <ul class="list-group">
@@ -155,13 +155,13 @@ $this->append('css', $css);
 			/
 			<?= $this->Html->link($x->credit->name, ['?' => ['s' => $filter['start'], 'e' => $filter['end'], 'c[]' => $x->credit_id]]) ?>
 			<span class="xs-icon float-right">
-			  <?= $this->Html->link('<i class="fa fa-list-alt" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-list-alt" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i>', ['action' => 'edit', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-edit" aria-hidden="true"></i>', ['action' => 'edit', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Html->link('<i class="fa fa-copy" aria-hidden="true"></i> ', ['action' => 'add', '?' => ['b' => $x->id, 'back' => $back]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-copy" aria-hidden="true"></i> ', ['action' => 'add', '?' => ['b' => $x->id, 'back' => $back]], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Form->postLink('<i class="fa fa-trash" aria-hidden="true"></i>', ['action' => 'delete', $x->id, '?' => ['back' => $back]], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $x->id), 'block' => true]) ?>
+			  <?= $this->Form->postLink('<i class="fas fa-trash" aria-hidden="true"></i>', ['action' => 'delete', $x->id, '?' => ['back' => $back]], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $x->id), 'block' => true]) ?>
 			</span>
 		  </p>
 		</li>
@@ -173,14 +173,14 @@ $this->append('css', $css);
   <div class="col-md-3">
 	<?= $this->Form->create() ?>
 	<fieldset>
-	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>']) ?>
+	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>']) ?>
 	</fieldset>
 	<?= $this->Form->end() ?>
 	<div class="list-group">
-	  <?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['action' => 'add', '?' => ['back' => $back]], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fas fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['action' => 'add', '?' => ['back' => $back]], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
 	<div class="list-group">
-	  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i> ' . __('View Report'), ['controller' => 'reports', 'action' => 'view', '?' => ['s' => $filter['start'], 'e' => $filter['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fas fa-chart-bar" aria-hidden="true"></i> ' . __('View Report'), ['controller' => 'reports', 'action' => 'view', '?' => ['s' => $filter['start'], 'e' => $filter['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
 	<div id="filter" class="well">
 	  <?= $this->Form->create(null, ['id' => 'form-date', 'type' => 'get']) ?>
@@ -195,7 +195,7 @@ $this->append('css', $css);
 	  <?= $this->Form->input('d', ['label' => __('Debit'), 'showParents' => true, 'options' => $debits, 'multiple' => true]) ?>
 	  <?= $this->Form->input('c', ['label' => __('Credit'), 'showParents' => true, 'options' => $credits, 'multiple' => true]) ?>
 	  <?= $this->Form->input('q', ['label' => __('Keyword')]) ?>
-	  <?= $this->Form->button('<i class="fa fa-filter" aria-hidden="true"></i> ' . __('Filter'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
+	  <?= $this->Form->button('<i class="fas fa-filter" aria-hidden="true"></i> ' . __('Filter'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
 	  <?= $this->Form->end() ?>
 	</div>
   </div>

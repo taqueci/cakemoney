@@ -23,7 +23,7 @@ use Cake\Core\Configure;
 			<th><?= __('Balance') ?></th>
 			<th>
 			  <span class="hidden-xs"><?= __('Actions') ?></span>
-			  <span class="visible-xs"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></span>
+			  <span class="visible-xs"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
 			</th>
 		  </tr>
 		</thead>
@@ -39,9 +39,9 @@ use Cake\Core\Configure;
 			<td align="right"><?= number_format($past[$x]->expense) ?></td>
 			<td align="right"><?= $this->element('Format/numberWithStatus', ['value' => $past[$x]->income - $past[$x]->expense]) ?></td>
 			<td>
-			  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i>', ['action' => 'view', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-chart-bar" aria-hidden="true"></i>', ['action' => 'view', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
 			</td>
 		  </tr>
 		  <?php endforeach; ?>
@@ -57,7 +57,7 @@ use Cake\Core\Configure;
 			<th><?= __('Balance') ?></th>
 			<th>
 			  <span class="hidden-xs"><?= __('Actions') ?></span>
-			  <span class="visible-xs"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></span>
+			  <span class="visible-xs"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
 			</th>
 		  </tr>
 		</thead>
@@ -73,10 +73,10 @@ use Cake\Core\Configure;
 			<td align="right"><?= number_format($x->expense) ?></td>
 			<td align="right"><?= number_format($x->income - $x->expense) ?></td>
 			<td>
-			  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
 			  &nbsp;
-			  <!-- <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i>', ['action' => 'view', $x->id], ['escape' => false]) ?> -->
-			  <i class="fa fa-bar-chart" aria-hidden="true"></i>
+			  <!-- <?= $this->Html->link('<i class="fas fa-chart-bar" aria-hidden="true"></i>', ['action' => 'view', $x->id], ['escape' => false]) ?> -->
+			  <i class="fas fa-chart-bar" aria-hidden="true"></i>
 			</td>
 		  </tr>
 		  <?php endforeach; ?>
@@ -92,7 +92,7 @@ use Cake\Core\Configure;
 			<th><?= __('Balance') ?></th>
 			<th>
 			  <span class="hidden-xs"><?= __('Actions') ?></span>
-			  <span class="visible-xs"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></span>
+			  <span class="visible-xs"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
 			</th>
 		  </tr>
 		</thead>
@@ -112,9 +112,9 @@ use Cake\Core\Configure;
 			<td align="right"><?= number_format($x->expense) ?></td>
 			<td align="right"><?= $this->element('Format/numberWithStatus', ['value' => $x->income - $x->expense]) ?></td>
 			<td>
-			  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-chart-bar" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
 			</td>
 		  </tr>
 		  <?php endforeach; ?>
@@ -130,7 +130,7 @@ use Cake\Core\Configure;
 			<th><?= __('Balance') ?></th>
 			<th>
 			  <span class="hidden-xs"><?= __('Actions') ?></span>
-			  <span class="visible-xs"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></span>
+			  <span class="visible-xs"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
 			</th>
 		  </tr>
 		</thead>
@@ -148,9 +148,9 @@ use Cake\Core\Configure;
 			<td align="right"><?= number_format($x->expense) ?></td>
 			<td align="right"><?= $this->element('Format/numberWithStatus', ['value' => $x->income - $x->expense]) ?></td>
 			<td>
-			  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-chart-bar" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
 			</td>
 		  </tr>
 		  <?php endforeach; ?>
@@ -166,7 +166,7 @@ use Cake\Core\Configure;
 			<th><?= __('Balance') ?></th>
 			<th>
 			  <span class="hidden-xs"><?= __('Actions') ?></span>
-			  <span class="visible-xs"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></span>
+			  <span class="visible-xs"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
 			</th>
 		  </tr>
 		</thead>
@@ -182,9 +182,9 @@ use Cake\Core\Configure;
 			<td align="right"><?= number_format($x->expense) ?></td>
 			<td align="right"><?= $this->element('Format/numberWithStatus', ['value' => $x->income - $x->expense]) ?></td>
 			<td>
-			  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
 			  &nbsp;
-			  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-chart-bar" aria-hidden="true"></i>', ['action' => 'view', $x->id, '?' => ['s' => $start, 'e' => $end]], ['escape' => false]) ?>
 			</td>
 		  </tr>
 		  <?php endforeach; ?>
@@ -194,7 +194,7 @@ use Cake\Core\Configure;
   </div>
   <div class="col-md-3">
 	<div class="list-group">
-	  <?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add', '?' => ['back' => $back]], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fas fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add', '?' => ['back' => $back]], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
 	<div class="well">
 	  <?= $this->Form->create(null, ['id' => 'form-date', 'type' => 'get', 'url' => ['controller' => 'reports', 'action' => 'view']]) ?>
@@ -206,7 +206,7 @@ use Cake\Core\Configure;
 		  <input id="e" type="text" class="input-sm form-control" name="e" />
 		</div>
 	  </div>
-	  <?= $this->Form->button('<i class="fa fa-bar-chart" aria-hidden="true"></i> ' . __('Report'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
+	  <?= $this->Form->button('<i class="fas fa-chart-bar" aria-hidden="true"></i> ' . __('Report'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
 	  <?= $this->Form->end() ?>
 	</div>
   </div>

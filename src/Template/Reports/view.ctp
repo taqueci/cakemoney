@@ -17,8 +17,8 @@ use Cake\Core\Configure;
 		<div class="col-md-12">
 		  <div class="has-margin-bottom" align="right">
 			<div class="btn-group" role="group" aria-label="Page navigation">
-			  <?= $this->Html->link('<i class="fa fa-arrow-left" aria-hidden="true"></i>', ['?' => ['s' => $page['prev']['start'], 'e' => $page['prev']['end']]], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
-			  <?= $this->Html->link('<i class="fa fa-arrow-right" aria-hidden="true"></i>', ['?' => ['s' => $page['next']['start'], 'e' => $page['next']['end']]], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-arrow-left" aria-hidden="true"></i>', ['?' => ['s' => $page['prev']['start'], 'e' => $page['prev']['end']]], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-arrow-right" aria-hidden="true"></i>', ['?' => ['s' => $page['next']['start'], 'e' => $page['next']['end']]], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
 			</div>
 		  </div>
 		</div>
@@ -155,10 +155,10 @@ use Cake\Core\Configure;
 		<div align="right">
 		  <div class="btn-group" role="group" aria-label="Page navigation">
 			<button id="incomings-btn-chart" class="btn btn-default btn-sm" type="button">
-			  <i class="fa fa-pie-chart" aria-hidden="true"></i>
+			  <i class="fas fa-chart-pie" aria-hidden="true"></i>
 			</button>
 			<button id="incomings-btn-table" class="btn btn-default btn-sm" type="button">
-			  <i class="fa fa-table" aria-hidden="true"></i>
+			  <i class="fas fa-table" aria-hidden="true"></i>
 			</button>
 		  </div>
 		</div>
@@ -172,7 +172,7 @@ use Cake\Core\Configure;
 				<th><?= __('Category') ?></th>
 				<th><?= __('Amount') ?></th>
 				<th><?= __('Ratio') ?></th>
-				<th><i class="fa fa-ellipsis-h" aria-hidden="true"></i></th>
+				<th><i class="fas fa-ellipsis-h" aria-hidden="true"></i></th>
 			  </tr>
 			</thead>
 			<tbody>
@@ -184,7 +184,7 @@ use Cake\Core\Configure;
 				<td align="right"><?= number_format($x->sum) ?></td>
 				<td align="right"><?= sprintf('%.1f %%', 100 * $x->sum / $sum->income) ?></td>
 				<td>
-				  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end, 'c[]' => $x->credit_id]], ['escape' => false]) ?>
+				  <?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end, 'c[]' => $x->credit_id]], ['escape' => false]) ?>
 				</td>
 			  </tr>
 			  <?php endforeach; ?>
@@ -197,10 +197,10 @@ use Cake\Core\Configure;
 		<div align="right">
 		  <div class="btn-group" role="group" aria-label="Page navigation">
 			<button id="outgoings-btn-chart" class="btn btn-default btn-sm" type="button">
-			  <i class="fa fa-pie-chart" aria-hidden="true"></i>
+			  <i class="fas fa-chart-pie" aria-hidden="true"></i>
 			</button>
 			<button id="outgoings-btn-table" class="btn btn-default btn-sm" type="button">
-			  <i class="fa fa-table" aria-hidden="true"></i>
+			  <i class="fas fa-table" aria-hidden="true"></i>
 			</button>
 		  </div>
 		</div>
@@ -214,7 +214,7 @@ use Cake\Core\Configure;
 				<th><?= __('Category') ?></th>
 				<th><?= __('Amount') ?></th>
 				<th><?= __('Ratio') ?></th>
-				<th><i class="fa fa-ellipsis-h" aria-hidden="true"></i></th>
+				<th><i class="fas fa-ellipsis-h" aria-hidden="true"></i></th>
 			  </tr>
 			</thead>
 			<tbody>
@@ -226,7 +226,7 @@ use Cake\Core\Configure;
 				<td align="right"><?= number_format($x->sum) ?></td>
 				<td align="right"><?= sprintf('%.1f %%', 100 * $x->sum / $sum->expense) ?></td>
 				<td>
-				  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end, 'd[]' => $x->debit_id]], ['escape' => false]) ?>
+				  <?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end, 'd[]' => $x->debit_id]], ['escape' => false]) ?>
 				</td>
 			  </tr>
 			  <?php endforeach; ?>
@@ -257,7 +257,7 @@ foreach (['Year', 'Month', 'Week', 'Day'] as $x) {
 		  </div>
 		  <div id="chart-sel-accu" class="btn-group btn-group-sm" role="group" aria-label="Chart selector">
 			<button id="chart-btn-a" type="button" class="btn btn-default">
-			  <i class="fa fa-signal" aria-hidden="true"></i>
+			  <i class="fas fa-signal" aria-hidden="true"></i>
 			</button>
 		  </div>
 		</div>
@@ -269,14 +269,14 @@ foreach (['Year', 'Month', 'Week', 'Day'] as $x) {
   </div>
   <div class="col-md-3">
 	<div class="list-group">
-		<?= $this->Html->link('<i class="fa fa-arrow-right" aria-hidden="true"></i> ' . __('Next Report'), ['?' => ['s' => $page['next']['start'], 'e' => $page['next']['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
-		<?= $this->Html->link('<i class="fa fa-arrow-left" aria-hidden="true"></i> ' . __('Previous Report'), ['?' => ['s' => $page['prev']['start'], 'e' => $page['prev']['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
-		<?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i> ' . __('Related Journals'), ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['class' => 'list-group-item', 'escape' => false]) ?>
+		<?= $this->Html->link('<i class="fas fa-arrow-right" aria-hidden="true"></i> ' . __('Next Report'), ['?' => ['s' => $page['next']['start'], 'e' => $page['next']['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
+		<?= $this->Html->link('<i class="fas fa-arrow-left" aria-hidden="true"></i> ' . __('Previous Report'), ['?' => ['s' => $page['prev']['start'], 'e' => $page['prev']['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
+		<?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i> ' . __('Related Journals'), ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
 	<div class="list-group">
-		<?= $this->Html->link('<i class="fa fa-list-ol" aria-hidden="true"></i> ' . __('List Reports'), ['controller' => 'reports', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
-	  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i> ' . __('List Journals'), ['controller' => 'journals', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
-		<?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add', '?' => ['back' => $back]], ['class' => 'list-group-item', 'escape' => false]) ?>
+		<?= $this->Html->link('<i class="fas fa-list-ol" aria-hidden="true"></i> ' . __('List Reports'), ['controller' => 'reports', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i> ' . __('List Journals'), ['controller' => 'journals', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
+		<?= $this->Html->link('<i class="fas fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add', '?' => ['back' => $back]], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
 	<div class="well">
 	  <?= $this->Form->create(null, ['id' => 'form-date', 'type' => 'get']) ?>
@@ -288,7 +288,7 @@ foreach (['Year', 'Month', 'Week', 'Day'] as $x) {
 		  <input id="e" type="text" class="input-sm form-control" name="e" />
 		</div>
 	  </div>
-	  <?= $this->Form->button('<i class="fa fa-bar-chart" aria-hidden="true"></i> ' . __('Report'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
+	  <?= $this->Form->button('<i class="fas fa-chart-bar" aria-hidden="true"></i> ' . __('Report'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
 	  <?= $this->Form->end() ?>
 	</div>
   </div>	

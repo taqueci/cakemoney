@@ -33,7 +33,7 @@
 			  <?= $this->element('Category/status', ['status' => $x->status]) ?>
 			</td>
 			<td>
-			  <?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i>', ['action' => 'edit', $x->id], ['escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-edit" aria-hidden="true"></i>', ['action' => 'edit', $x->id], ['escape' => false]) ?>
 			</td>
 		  </tr>
 		  <?php endforeach; ?>
@@ -42,16 +42,16 @@
 	</div>
 	<div class="visible-xs">
 	  <p class="text-right">
-		<i class="fa fa-sort" aria-hidden="true"></i>
+		<i class="fas fa-sort" aria-hidden="true"></i>
 		<?= $this->Paginator->sort('id', __('ID')) ?>
 		&nbsp;
-		<i class="fa fa-sort" aria-hidden="true"></i>
+		<i class="fas fa-sort" aria-hidden="true"></i>
 		<?= $this->Paginator->sort('name', __('Name')) ?>
 		&nbsp;
-		<i class="fa fa-sort" aria-hidden="true"></i>
+		<i class="fas fa-sort" aria-hidden="true"></i>
 		<?= $this->Paginator->sort('account_id', __('Account')) ?>
 		&nbsp;
-		<i class="fa fa-sort" aria-hidden="true"></i>
+		<i class="fas fa-sort" aria-hidden="true"></i>
 		<?= $this->Paginator->sort('status', __('Status')) ?>
 	  </p>
 	  <ul class="list-group">
@@ -65,7 +65,7 @@
 		  <p>
 			<?= $account[$x->account] ?>
 			<span class="float-right">
-			  <?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i>', array('action' => 'edit', $x->id), array('escape' => false)) ?>
+			  <?= $this->Html->link('<i class="fas fa-edit" aria-hidden="true"></i>', array('action' => 'edit', $x->id), array('escape' => false)) ?>
 			</span>
 		  </p>
 		</li>
@@ -77,12 +77,12 @@
   <div class="col-md-3">
 	<?= $this->Form->create() ?>
 	<fieldset>
-	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>']) ?>
+	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>']) ?>
 	</fieldset>
 	<?= $this->Form->end() ?>
 	<div class="list-group">
-	  <?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Category'), array('action' => 'add'), array('class' => 'list-group-item', 'escape' => false)) ?>
-	  <?= $this->Html->link('<i class="fa fa-sort" aria-hidden="true"></i> ' . __('Sort Categories'), array('action' => 'sort'), array('class' => 'list-group-item', 'escape' => false)) ?>
+	  <?= $this->Html->link('<i class="fas fa-plus" aria-hidden="true"></i> ' . __('New Category'), array('action' => 'add'), array('class' => 'list-group-item', 'escape' => false)) ?>
+	  <?= $this->Html->link('<i class="fas fa-sort" aria-hidden="true"></i> ' . __('Sort Categories'), array('action' => 'sort'), array('class' => 'list-group-item', 'escape' => false)) ?>
 	</div>
   </div>
 </div>
