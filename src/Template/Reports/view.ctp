@@ -17,8 +17,8 @@ use Cake\Core\Configure;
 		<div class="col-md-12">
 		  <div class="has-margin-bottom" align="right">
 			<div class="btn-group" role="group" aria-label="Page navigation">
-			  <?= $this->Html->link('<i class="fa fa-arrow-left" aria-hidden="true"></i>', ['?' => ['s' => $page['prev']['start'], 'e' => $page['prev']['end']]], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
-			  <?= $this->Html->link('<i class="fa fa-arrow-right" aria-hidden="true"></i>', ['?' => ['s' => $page['next']['start'], 'e' => $page['next']['end']]], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-arrow-left" aria-hidden="true"></i>', ['?' => ['s' => $page['prev']['start'], 'e' => $page['prev']['end']]], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
+			  <?= $this->Html->link('<i class="fas fa-arrow-right" aria-hidden="true"></i>', ['?' => ['s' => $page['next']['start'], 'e' => $page['next']['end']]], ['class' => 'btn btn-default btn-sm', 'escape' => false]) ?>
 			</div>
 		  </div>
 		</div>
@@ -155,10 +155,10 @@ use Cake\Core\Configure;
 		<div align="right">
 		  <div class="btn-group" role="group" aria-label="Page navigation">
 			<button id="incomings-btn-chart" class="btn btn-default btn-sm" type="button">
-			  <i class="fa fa-pie-chart" aria-hidden="true"></i>
+			  <i class="fas fa-chart-pie" aria-hidden="true"></i>
 			</button>
 			<button id="incomings-btn-table" class="btn btn-default btn-sm" type="button">
-			  <i class="fa fa-table" aria-hidden="true"></i>
+			  <i class="fas fa-table" aria-hidden="true"></i>
 			</button>
 		  </div>
 		</div>
@@ -172,7 +172,7 @@ use Cake\Core\Configure;
 				<th><?= __('Category') ?></th>
 				<th><?= __('Amount') ?></th>
 				<th><?= __('Ratio') ?></th>
-				<th><i class="fa fa-ellipsis-h" aria-hidden="true"></i></th>
+				<th><i class="fas fa-ellipsis-h" aria-hidden="true"></i></th>
 			  </tr>
 			</thead>
 			<tbody>
@@ -184,7 +184,7 @@ use Cake\Core\Configure;
 				<td align="right"><?= number_format($x->sum) ?></td>
 				<td align="right"><?= sprintf('%.1f %%', 100 * $x->sum / $sum->income) ?></td>
 				<td>
-				  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end, 'c[]' => $x->credit_id]], ['escape' => false]) ?>
+				  <?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end, 'c[]' => $x->credit_id]], ['escape' => false]) ?>
 				</td>
 			  </tr>
 			  <?php endforeach; ?>
@@ -197,10 +197,10 @@ use Cake\Core\Configure;
 		<div align="right">
 		  <div class="btn-group" role="group" aria-label="Page navigation">
 			<button id="outgoings-btn-chart" class="btn btn-default btn-sm" type="button">
-			  <i class="fa fa-pie-chart" aria-hidden="true"></i>
+			  <i class="fas fa-chart-pie" aria-hidden="true"></i>
 			</button>
 			<button id="outgoings-btn-table" class="btn btn-default btn-sm" type="button">
-			  <i class="fa fa-table" aria-hidden="true"></i>
+			  <i class="fas fa-table" aria-hidden="true"></i>
 			</button>
 		  </div>
 		</div>
@@ -214,7 +214,7 @@ use Cake\Core\Configure;
 				<th><?= __('Category') ?></th>
 				<th><?= __('Amount') ?></th>
 				<th><?= __('Ratio') ?></th>
-				<th><i class="fa fa-ellipsis-h" aria-hidden="true"></i></th>
+				<th><i class="fas fa-ellipsis-h" aria-hidden="true"></i></th>
 			  </tr>
 			</thead>
 			<tbody>
@@ -226,7 +226,7 @@ use Cake\Core\Configure;
 				<td align="right"><?= number_format($x->sum) ?></td>
 				<td align="right"><?= sprintf('%.1f %%', 100 * $x->sum / $sum->expense) ?></td>
 				<td>
-				  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end, 'd[]' => $x->debit_id]], ['escape' => false]) ?>
+				  <?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end, 'd[]' => $x->debit_id]], ['escape' => false]) ?>
 				</td>
 			  </tr>
 			  <?php endforeach; ?>
@@ -241,18 +241,23 @@ use Cake\Core\Configure;
 		<div align="right">
 		  <div id="chart-sel-view" class="btn-group btn-group-sm" role="group" aria-label="Chart selector">
 			<button id="chart-btn-b" type="button" class="btn btn-default"><?= __('Balance') ?></button>
+			<button id="chart-btn-n" type="button" class="btn btn-default"><?= __('Assets') ?></button>
 			<button id="chart-btn-i" type="button" class="btn btn-default"><?= __('Incomings') ?></button>
 			<button id="chart-btn-o" type="button" class="btn btn-default"><?= __('Outgoings') ?></button>
 		  </div>
 		  <div id="chart-sel-scope" class="btn-group btn-group-sm" role="group" aria-label="Chart selector">
-			<button id="chart-btn-y" type="button" class="btn btn-default"><?= __('Year') ?></button>
-			<button id="chart-btn-m" type="button" class="btn btn-default"><?= __('Month') ?></button>
-			<button id="chart-btn-w" type="button" class="btn btn-default"><?= __('Week') ?></button>
-			<button id="chart-btn-d" type="button" class="btn btn-default"><?= __('Day') ?></button>
+			<?php
+foreach (['Year', 'Month', 'Week', 'Day'] as $x) {
+	if (!array_key_exists($x, $chart)) continue;
+?>
+			<button id="chart-btn-<?= strtolower($x) ?>" type="button" class="btn btn-default"><?= __($x) ?></button>
+			<?php
+}
+?>
 		  </div>
 		  <div id="chart-sel-accu" class="btn-group btn-group-sm" role="group" aria-label="Chart selector">
 			<button id="chart-btn-a" type="button" class="btn btn-default">
-			  <i class="fa fa-signal" aria-hidden="true"></i>
+			  <i class="fas fa-signal" aria-hidden="true"></i>
 			</button>
 		  </div>
 		</div>
@@ -264,14 +269,14 @@ use Cake\Core\Configure;
   </div>
   <div class="col-md-3">
 	<div class="list-group">
-		<?= $this->Html->link('<i class="fa fa-arrow-right" aria-hidden="true"></i> ' . __('Next Report'), ['?' => ['s' => $page['next']['start'], 'e' => $page['next']['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
-		<?= $this->Html->link('<i class="fa fa-arrow-left" aria-hidden="true"></i> ' . __('Previous Report'), ['?' => ['s' => $page['prev']['start'], 'e' => $page['prev']['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
-		<?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i> ' . __('Related Journals'), ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['class' => 'list-group-item', 'escape' => false]) ?>
+		<?= $this->Html->link('<i class="fas fa-arrow-right" aria-hidden="true"></i> ' . __('Next Report'), ['?' => ['s' => $page['next']['start'], 'e' => $page['next']['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
+		<?= $this->Html->link('<i class="fas fa-arrow-left" aria-hidden="true"></i> ' . __('Previous Report'), ['?' => ['s' => $page['prev']['start'], 'e' => $page['prev']['end']]], ['class' => 'list-group-item', 'escape' => false]) ?>
+		<?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i> ' . __('Related Journals'), ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end]], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
 	<div class="list-group">
-		<?= $this->Html->link('<i class="fa fa-list-ol" aria-hidden="true"></i> ' . __('List Reports'), ['controller' => 'reports', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
-	  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i> ' . __('List Journals'), ['controller' => 'journals', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
-		<?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add', '?' => ['back' => $back]], ['class' => 'list-group-item', 'escape' => false]) ?>
+		<?= $this->Html->link('<i class="fas fa-list-ol" aria-hidden="true"></i> ' . __('List Reports'), ['controller' => 'reports', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i> ' . __('List Journals'), ['controller' => 'journals', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
+		<?= $this->Html->link('<i class="fas fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add', '?' => ['back' => $back]], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
 	<div class="well">
 	  <?= $this->Form->create(null, ['id' => 'form-date', 'type' => 'get']) ?>
@@ -283,7 +288,7 @@ use Cake\Core\Configure;
 		  <input id="e" type="text" class="input-sm form-control" name="e" />
 		</div>
 	  </div>
-	  <?= $this->Form->button('<i class="fa fa-bar-chart" aria-hidden="true"></i> ' . __('Report'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
+	  <?= $this->Form->button('<i class="fas fa-chart-bar" aria-hidden="true"></i> ' . __('Report'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
 	  <?= $this->Form->end() ?>
 	</div>
   </div>	
@@ -358,22 +363,28 @@ $(function() {
 $(function() {
 	var normal = {
 		balance: {
-			annual: <?= $this->element('Chart/Data/balance', ['data' => $balance['annual'], 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
-			monthly: <?= $this->element('Chart/Data/balance', ['data' => $balance['monthly'], 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
-			weekly: <?= $this->element('Chart/Data/balance', ['data' => $balance['weekly'], 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
-			daily: <?= $this->element('Chart/Data/balance', ['data' => $balance['daily'], 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
+			annual: <?= $this->element('Chart/Data/balance', ['data' => array_key_exists('Year', $chart) ? $chart['Year']['sum'] : [], 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
+			monthly: <?= $this->element('Chart/Data/balance', ['data' => array_key_exists('Month', $chart) ? $chart['Month']['sum'] : [], 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
+			weekly: <?= $this->element('Chart/Data/balance', ['data' => array_key_exists('Week', $chart) ? $chart['Week']['sum'] : [], 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
+			daily: <?= $this->element('Chart/Data/balance', ['data' => array_key_exists('Day', $chart) ? $chart['Day']['sum'] : [], 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
+		},
+		asset: {
+			annual: <?= $this->element('Chart/Data/asset', ['data' => array_key_exists('Year', $chart) ? $chart['Year']['sum'] : [], 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
+			monthly: <?= $this->element('Chart/Data/asset', ['data' => array_key_exists('Month', $chart) ? $chart['Month']['sum'] : [], 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
+			weekly: <?= $this->element('Chart/Data/asset', ['data' => array_key_exists('Week', $chart) ? $chart['Week']['sum'] : [], 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
+			daily: <?= $this->element('Chart/Data/asset', ['data' => array_key_exists('Day', $chart) ? $chart['Day']['sum'] : [], 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
 		},
 		incomings: {
-			annual: <?= $this->element('Chart/Data/stacked', ['data' => $incomings['annual'], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
-			monthly: <?= $this->element('Chart/Data/stacked', ['data' => $incomings['monthly'], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
-			weekly: <?= $this->element('Chart/Data/stacked', ['data' => $incomings['weekly'], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
-			daily: <?= $this->element('Chart/Data/stacked', ['data' => $incomings['daily'], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
+			annual: <?= $this->element('Chart/Data/stacked', ['data' => array_key_exists('Year', $chart) ? $chart['Year']['income'] : [], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
+			monthly: <?= $this->element('Chart/Data/stacked', ['data' => array_key_exists('Month', $chart) ? $chart['Month']['income'] : [], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
+			weekly: <?= $this->element('Chart/Data/stacked', ['data' => array_key_exists('Week', $chart) ? $chart['Week']['income'] : [], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
+			daily: <?= $this->element('Chart/Data/stacked', ['data' => array_key_exists('Day', $chart) ? $chart['Day']['income'] : [], 'category' => $incoming_category, 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
 		},
 		outgoings: {
-			annual: <?= $this->element('Chart/Data/stacked', ['data' => $outgoings['annual'], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
-			monthly: <?= $this->element('Chart/Data/stacked', ['data' => $outgoings['monthly'], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
-			weekly: <?= $this->element('Chart/Data/stacked', ['data' => $outgoings['weekly'], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
-			daily: <?= $this->element('Chart/Data/stacked', ['data' => $outgoings['daily'], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
+			annual: <?= $this->element('Chart/Data/stacked', ['data' => array_key_exists('Year', $chart) ? $chart['Year']['expense'] : [], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d', $x->year);}]) ?>,
+			monthly: <?= $this->element('Chart/Data/stacked', ['data' => array_key_exists('Month', $chart) ? $chart['Month']['expense'] : [], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d-%02d', $x->year, $x->month);}]) ?>,
+			weekly: <?= $this->element('Chart/Data/stacked', ['data' => array_key_exists('Week', $chart) ? $chart['Week']['expense'] : [], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d-W%02d', $x->year, $x->week);}]) ?>,
+			daily: <?= $this->element('Chart/Data/stacked', ['data' => array_key_exists('Day', $chart) ? $chart['Day']['expense'] : [], 'category' => $outgoing_category, 'format' => function ($x) {return sprintf('%d-%02d-%02d', $x->year, $x->month, $x->day);}]) ?>
 		}
 	};
 
@@ -406,6 +417,11 @@ $(function() {
 			tooltips: {callbacks: {label: number_format_tooltip}},
 			scales: {yAxes: [{ticks: {callback: number_format}}]}
 		},
+		asset: {
+			maintainAspectRatio: false,
+			tooltips: {callbacks: {label: number_format_tooltip}},
+			scales: {yAxes: [{ticks: {callback: number_format}}]}
+		},
 		incomings: {
 			maintainAspectRatio: false,
 			tooltips: {callbacks: {label: number_format_tooltip}},
@@ -424,94 +440,82 @@ $(function() {
 		}
 	};
 
-	function chart_new(c, o, d) {
-		return new Chart(c, {type: 'line', options: o, data: d});
-	}
-
 	var data = {normal: normal, accumulated: accumulated};
 
-	var view  = 'balance';
-	var scope = 'daily';
-	var curve = 'normal';
+	var view_index = {
+		'chart-btn-b': 'balance',
+		'chart-btn-n': 'asset',
+		'chart-btn-i': 'incomings',
+		'chart-btn-o': 'outgoings'
+	};
 
-	var ctx = document.getElementById('chart-canvas').getContext('2d');
+	var scope_index = {
+		'chart-btn-year': 'annual',
+		'chart-btn-month': 'monthly',
+		'chart-btn-week': 'weekly',
+		'chart-btn-day': 'daily'
+	};
 
-	var chart = chart_new(ctx, option[view], data[curve][view][scope]);
+	function ReportChart(ctx) {
+		this._ctx = ctx;
+		this._curve = 'normal';
+		this._view  = 'balance';
+		this._scope = 'daily';
+	}
 
-	$('#chart-btn-b').addClass('active');
-	$('#chart-btn-d').addClass('active');
+	ReportChart.prototype = {
+		setOption: function(x) {this._option = x},
+		setData: function(x) {this._data = x},
+		setCurve: function(x) {this._curve = x},
+		setView: function(x) {this._view = x},
+		setScope: function(x) {this._scope = x},
+		draw: function() {
+			if (this._obj) this._obj.destroy();
+
+			this._obj = new Chart(this._ctx, {
+				type: 'line',
+				options: this._option[this._view],
+				data: this._data[this._curve][this._view][this._scope]
+			});
+		}
+	};
 
 	$('#chart-sel-view button').click(function() {
 		$('#chart-sel-view button').removeClass('active');
 		$(this).addClass('active');
+
+		chart.setView(view_index[$(this).attr('id')]);
+		chart.draw();
 	});
 
 	$('#chart-sel-scope button').click(function() {
 		$('#chart-sel-scope button').removeClass('active');
 		$(this).addClass('active');
-	});
 
-	$('#chart-btn-b').click(function() {
-		view = 'balance';
-
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
-	});
-
-	$('#chart-btn-i').click(function() {
-		view = 'incomings';
-
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
-	});
-
-	$('#chart-btn-o').click(function() {
-		view = 'outgoings';
-
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
-	});
-
-	$('#chart-btn-y').click(function() {
-		scope = 'annual';
-
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
-	});
-
-	$('#chart-btn-m').click(function() {
-		scope = 'monthly';
-
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
-	});
-
-	$('#chart-btn-w').click(function() {
-		scope = 'weekly';
-
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
-	});
-
-	$('#chart-btn-d').click(function() {
-		scope = 'daily';
-
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
+		chart.setScope(scope_index[$(this).attr('id')]);
+		chart.draw();
 	});
 
 	$('#chart-btn-a').click(function() {
 		if ($(this).hasClass('active')) {
 			$(this).removeClass('active');
-			curve = 'normal';
+			chart.setCurve('normal');
 		}
 		else {
 			$(this).addClass('active');
-			curve = 'accumulated';
+			chart.setCurve('accumulated');
 		}
 
-		chart.destroy();
-		chart = chart_new(ctx, option[view], data[curve][view][scope]);
+		chart.draw();
 	});
+
+	var ctx = document.getElementById('chart-canvas').getContext('2d');
+	var chart = new ReportChart(ctx);
+
+	chart.setOption(option);
+	chart.setData(data);
+
+	$('#chart-btn-b').addClass('active');
+	$('#chart-sel-scope button').filter(':last').click();
 });
 <?php $this->Html->scriptEnd(); ?>

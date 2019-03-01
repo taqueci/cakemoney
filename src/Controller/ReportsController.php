@@ -29,7 +29,9 @@ class ReportsController extends AppController
         $start = '1970-01-01';
         $end   = date('Y-12-31');
 
-        $this->set('summary', [
+		$this->set('past', $this->past_sums());
+
+		$this->set('summary', [
             'daily' => $this
                 ->query_sum_group($start, $end, ['year', 'month', 'day'])
                 ->order(['year' => 'DESC', 'month' => 'DESC', 'day' => 'DESC'])
@@ -70,57 +72,12 @@ class ReportsController extends AppController
         $income  = $this->query_income($start, $end)->order(['sum' => 'DESC']);
         $expense = $this->query_expense($start, $end)->order(['sum' => 'DESC']);
 
-        $page = $this->page_next_prev($start, $end);
+        $this->set('page', $this->page_next_prev($start, $end));
 
         $this->set(compact('start', 'end'));
         $this->set(compact('sum', 'income', 'expense'));
 
-        $this->set(compact('page'));
-
-        $this->set('balance', [
-            'daily' => $this
-                ->query_sum_group($start, $end, ['year', 'month', 'day'])
-                ->order(['year' => 'ASC', 'month' => 'ASC', 'day' => 'ASC']),
-            'weekly' => $this
-                ->query_sum_group($start, $end, ['year', 'week'])
-                ->order(['year' => 'ASC', 'week' => 'ASC']),
-            'monthly' => $this
-                ->query_sum_group($start, $end, ['year', 'month'])
-                ->order(['year' => 'ASC', 'month' => 'ASC']),
-            'annual' => $this
-                ->query_sum_group($start, $end, ['year'])
-                ->order(['year' => 'ASC'])
-        ]);
-
-        $this->set('incomings', [
-            'daily' => $this
-                ->query_income_group($start, $end, ['year', 'month', 'day'])
-                ->order(['year' => 'ASC', 'month' => 'ASC', 'day' => 'ASC']),
-            'weekly' => $this
-                ->query_income_group($start, $end, ['year', 'week'])
-                ->order(['year' => 'ASC', 'week' => 'ASC']),
-            'monthly' => $this
-                ->query_income_group($start, $end, ['year', 'month'])
-                ->order(['year' => 'ASC', 'month' => 'ASC']),
-            'annual' => $this
-                ->query_income_group($start, $end, ['year'])
-                ->order(['year' => 'ASC'])
-        ]);
-
-        $this->set('outgoings', [
-            'daily' => $this
-                ->query_expense_group($start, $end, ['year', 'month', 'day'])
-                ->order(['year' => 'ASC', 'month' => 'ASC', 'day' => 'ASC']),
-            'weekly' => $this
-                ->query_expense_group($start, $end, ['year', 'week'])
-                ->order(['year' => 'ASC', 'week' => 'ASC']),
-            'monthly' => $this
-                ->query_expense_group($start, $end, ['year', 'month'])
-                ->order(['year' => 'ASC', 'month' => 'ASC']),
-            'annual' => $this
-                ->query_expense_group($start, $end, ['year'])
-                ->order(['year' => 'ASC'])
-        ]);
+        $this->set('chart', $this->chart_data($start, $end));
 
         $this->set('back', urlencode(Router::reverse($this->request, true)));
 
@@ -150,7 +107,23 @@ class ReportsController extends AppController
         $this->set('back', urlencode(Router::reverse($this->request, true)));
     }
 
-    private function query_sum($start, $end)
+    private function past_sums()
+    {
+		$end = date('Y-m-d');
+		$sum = [];
+
+		foreach (['Week', 'Month', 'Year'] as $unit) {
+			$start = date('Y-m-d', strtotime("$end - 1 $unit + 1 day"));
+
+			$sum[$unit] = $this->query_sum($start, $end)->first();
+			$sum[$unit]['start'] = $start;
+			$sum[$unit]['end'] = $end;
+		}
+
+		return $sum;
+	}
+
+	private function query_sum($start, $end)
     {
         $q = $this->Journals->find();
 
@@ -233,7 +206,7 @@ class ReportsController extends AppController
 
         $days = date_diff($s, $e)->days + 1;
 
-        if ($days >= 356) {
+        if ($days >= 365) {
             $unit = 'year';
             $num = intval($days / 365);
         }
@@ -293,5 +266,65 @@ class ReportsController extends AppController
         else {
             return date('Y-m-d', strtotime("$date - $num month"));
         }
+    }
+
+    private function chart_data($start, $end)
+    {
+        $chart = [];
+
+        $s = date_create($start);
+        $e = date_create($end);
+
+        $days = date_diff($s, $e)->days + 1;
+
+        if ($days > 365) {
+            $chart['Year']['sum'] = $this
+                ->query_sum_group($start, $end, ['year'])
+                ->order(['year' => 'ASC']);
+            $chart['Year']['income'] = $this
+                ->query_income_group($start, $end, ['year'])
+                ->order(['year' => 'ASC']);
+            $chart['Year']['expense'] = $this
+                ->query_expense_group($start, $end, ['year'])
+                ->order(['year' => 'ASC']);
+        }
+
+        if ($days > 28) {
+            $chart['Month']['sum'] = $this
+                ->query_sum_group($start, $end, ['year', 'month'])
+                ->order(['year' => 'ASC', 'month' => 'ASC']);
+            $chart['Month']['income'] = $this
+                ->query_income_group($start, $end, ['year', 'month'])
+                ->order(['year' => 'ASC', 'month' => 'ASC']);
+            $chart['Month']['expense'] = $this
+                ->query_expense_group($start, $end, ['year', 'month'])
+                ->order(['year' => 'ASC', 'month' => 'ASC']);
+        }
+
+        if (($days > 7) && ($days <= 365 * 5)) {
+            $chart['Week']['sum'] = $this
+                ->query_sum_group($start, $end, ['year', 'week'])
+                ->order(['year' => 'ASC', 'week' => 'ASC']);
+            $chart['Week']['income'] = $this
+                ->query_income_group($start, $end, ['year', 'week'])
+                ->order(['year' => 'ASC', 'week' => 'ASC']);
+            $chart['Week']['expense'] = $this
+                ->query_expense_group($start, $end, ['year', 'week'])
+                ->order(['year' => 'ASC', 'week' => 'ASC']);
+        }
+
+        if ($days <= 365) {
+            $chart['Day']['sum'] = $this
+                ->query_sum_group($start, $end, ['year', 'month', 'day'])
+                ->order(['year' => 'ASC', 'month' => 'ASC', 'day' => 'ASC']);
+            $chart['Day']['income'] = $this
+                ->query_income_group($start, $end, ['year', 'month', 'day'])
+                ->order(['year' => 'ASC', 'month' => 'ASC', 'day' => 'ASC']);
+            $chart['Day']['expense'] = $this
+                ->query_expense_group($start, $end, ['year', 'month', 'day'])
+                ->order(['year' => 'ASC', 'month' => 'ASC', 'day' => 'ASC']);
+        }
+
+        return $chart;
     }
 }

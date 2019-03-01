@@ -43,6 +43,6 @@ var myDoughnutChart = new Chart(
 	}
 );
 <?php else: ?>
-$('#<?= h($id) ?>').after('<div class="alert alert-warning" role="alert"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <?= __('No data') ?></div>');
+$('#<?= h($id) ?>').after('<div class="alert alert-warning" role="alert"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> <?= __('No data') ?></div>');
 $('#<?= h($id) ?>').hide();
 <?php endif ?>

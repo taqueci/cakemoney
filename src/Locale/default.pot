@@ -1,0 +1,528 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2018-05-30 12:50+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/CategoriesController.php:50;75;101
+msgid "The category has been saved."
+msgstr ""
+
+#: Controller/CategoriesController.php:54;79;105
+msgid "The category could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/JournalsController.php:116;165
+msgid "The journal has been saved."
+msgstr ""
+
+#: Controller/JournalsController.php:120;169
+msgid "The journal could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/JournalsController.php:193
+msgid "The journal has been deleted."
+msgstr ""
+
+#: Controller/JournalsController.php:195
+msgid "The journal could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/TemplatesController.php:67;98;149
+msgid "The template has been saved."
+msgstr ""
+
+#: Controller/TemplatesController.php:71;102;153
+msgid "The template could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/TemplatesController.php:125
+msgid "The template has been deleted."
+msgstr ""
+
+#: Controller/TemplatesController.php:127
+msgid "The template could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/Component/AccountComponent.php:28
+#: Template/Categories/sort.ctp:44
+#: Template/Element/Category/filter.ctp:26;32;43
+#: Template/Journals/view.ctp:40
+msgid "Asset"
+msgstr ""
+
+#: Controller/Component/AccountComponent.php:29
+#: Template/Categories/sort.ctp:57
+#: Template/Element/Category/filter.ctp:27;40;44
+#: Template/Journals/view.ctp:42
+msgid "Liability"
+msgstr ""
+
+#: Controller/Component/AccountComponent.php:30
+#: Template/Categories/sort.ctp:72
+#: Template/Element/Category/filter.ctp:35
+#: Template/Journals/view.ctp:44
+msgid "Income"
+msgstr ""
+
+#: Controller/Component/AccountComponent.php:31
+#: Template/Categories/sort.ctp:87
+#: Template/Element/Category/filter.ctp:23
+#: Template/Journals/view.ctp:46
+msgid "Expense"
+msgstr ""
+
+#: Controller/Component/AccountComponent.php:32
+#: Template/Categories/sort.ctp:31
+#: Template/Journals/view.ctp:48
+msgid "Equity"
+msgstr ""
+
+#: Template/Categories/add.ctp:10
+msgid "Add Category"
+msgstr ""
+
+#: Template/Categories/add.ctp:11
+#: Template/Categories/edit.ctp:12
+#: Template/Categories/index.ctp:18;49
+#: Template/Templates/add.ctp:16
+#: Template/Templates/edit.ctp:17
+#: Template/Templates/index.ctp:18;53
+msgid "Name"
+msgstr ""
+
+#: Template/Categories/add.ctp:12
+#: Template/Categories/edit.ctp:13
+#: Template/Categories/index.ctp:19;52
+msgid "Account"
+msgstr ""
+
+#: Template/Categories/add.ctp:13
+#: Template/Categories/edit.ctp:14
+#: Template/Categories/index.ctp:20
+#: Template/Journals/add.ctp:41
+#: Template/Journals/edit.ctp:32
+#: Template/Journals/view.ctp:26
+#: Template/Templates/add.ctp:21
+#: Template/Templates/edit.ctp:22
+#: Template/Templates/view.ctp:26
+msgid "Description"
+msgstr ""
+
+#: Template/Categories/add.ctp:15
+#: Template/Categories/edit.ctp:17
+#: Template/Categories/sort.ctp:103
+#: Template/Journals/add.ctp:43
+#: Template/Journals/edit.ctp:34
+#: Template/Templates/add.ctp:23
+#: Template/Templates/edit.ctp:24
+#: Template/Templates/sort.ctp:39
+msgid "Submit"
+msgstr ""
+
+#: Template/Categories/add.ctp:20
+#: Template/Categories/edit.ctp:22
+#: Template/Categories/sort.ctp:108
+msgid "List Categoris"
+msgstr ""
+
+#: Template/Categories/edit.ctp:10
+msgid "Edit Category"
+msgstr ""
+
+#: Template/Categories/edit.ctp:15
+#: Template/Element/Category/status.ctp:2
+msgid "Enabled"
+msgstr ""
+
+#: Template/Categories/index.ctp:8
+#: Template/Layout/default.ctp:75
+msgid "Categories"
+msgstr ""
+
+#: Template/Categories/index.ctp:17;46
+#: Template/Journals/index.ctp:90
+#: Template/Journals/view.ctp:32
+#: Template/Templates/index.ctp:17;50
+#: Template/Templates/view.ctp:32
+msgid "ID"
+msgstr ""
+
+#: Template/Categories/index.ctp:21;55
+msgid "Status"
+msgstr ""
+
+#: Template/Categories/index.ctp:22
+#: Template/Journals/index.ctp:97
+#: Template/Reports/index.ctp:25;59;94;132;168
+#: Template/Templates/index.ctp:23
+msgid "Actions"
+msgstr ""
+
+#: Template/Categories/index.ctp:80
+#: Template/Journals/index.ctp:28;176
+#: Template/Reports/display.ctp:20;148
+#: Template/Templates/index.ctp:86
+msgid "Search"
+msgstr ""
+
+#: Template/Categories/index.ctp:84
+msgid "New Category"
+msgstr ""
+
+#: Template/Categories/index.ctp:85
+#: Template/Categories/sort.ctp:28
+msgid "Sort Categories"
+msgstr ""
+
+#: Template/Element/Category/filter.ctp:2
+#: Template/Element/Chart/Data/balance.ctp:19
+#: Template/Reports/display.ctp:48;73
+#: Template/Reports/index.ctp:22;56;91;129;165
+#: Template/Reports/view.ctp:59;196;246
+msgid "Outgoings"
+msgstr ""
+
+#: Template/Element/Category/filter.ctp:3
+#: Template/Element/Chart/Data/balance.ctp:15
+#: Template/Reports/display.ctp:31
+#: Template/Reports/index.ctp:21;55;90;128;164
+#: Template/Reports/view.ctp:42;154;245
+msgid "Incomings"
+msgstr ""
+
+#: Template/Element/Category/filter.ctp:4
+msgid "Repayments"
+msgstr ""
+
+#: Template/Element/Category/filter.ctp:5
+msgid "Other"
+msgstr ""
+
+#: Template/Element/Category/status.ctp:4
+msgid "Disabled"
+msgstr ""
+
+#: Template/Element/Chart/doughnut.ctp:46
+msgid "No data"
+msgstr ""
+
+#: Template/Element/Chart/Data/asset.ctp:15
+#: Template/Reports/view.ctp:91;244
+msgid "Assets"
+msgstr ""
+
+#: Template/Element/Chart/Data/asset.ctp:19
+#: Template/Reports/view.ctp:108
+msgid "Liabilities"
+msgstr ""
+
+#: Template/Element/Journal/label.ctp:2
+msgid "Outgoing"
+msgstr ""
+
+#: Template/Element/Journal/label.ctp:4
+msgid "Incoming"
+msgstr ""
+
+#: Template/Element/Journal/label.ctp:6
+msgid "Repayment"
+msgstr ""
+
+#: Template/Journals/add.ctp:12
+msgid "Add Journal"
+msgstr ""
+
+#: Template/Journals/add.ctp:17
+#: Template/Journals/edit.ctp:17
+msgid "Popular selections"
+msgstr ""
+
+#: Template/Journals/add.ctp:27
+#: Template/Layout/default.ctp:76
+#: Template/Templates/index.ctp:8
+msgid "Templates"
+msgstr ""
+
+#: Template/Journals/add.ctp:36
+#: Template/Journals/edit.ctp:27
+#: Template/Journals/index.ctp:52;92;132;195
+#: Template/Journals/view.ctp:18
+#: Template/Templates/add.ctp:17
+#: Template/Templates/edit.ctp:18
+#: Template/Templates/index.ctp:19
+#: Template/Templates/view.ctp:16
+msgid "Debit"
+msgstr ""
+
+#: Template/Journals/add.ctp:37
+#: Template/Journals/edit.ctp:28
+#: Template/Journals/index.ctp:64;93;135;196
+#: Template/Journals/view.ctp:20
+#: Template/Templates/add.ctp:18
+#: Template/Templates/edit.ctp:19
+#: Template/Templates/index.ctp:20
+#: Template/Templates/view.ctp:18
+msgid "Credit"
+msgstr ""
+
+#: Template/Journals/add.ctp:38
+#: Template/Journals/edit.ctp:29
+#: Template/Journals/index.ctp:91;129
+#: Template/Journals/view.ctp:16
+#: Template/Reports/index.ctp:54
+msgid "Date"
+msgstr ""
+
+#: Template/Journals/add.ctp:39
+#: Template/Journals/edit.ctp:30
+#: Template/Journals/index.ctp:94;138
+#: Template/Journals/view.ctp:22
+#: Template/Reports/display.ctp:92
+#: Template/Reports/view.ctp:173;215
+#: Template/Templates/add.ctp:19
+#: Template/Templates/edit.ctp:20
+#: Template/Templates/index.ctp:21;56
+#: Template/Templates/view.ctp:20
+msgid "Amount"
+msgstr ""
+
+#: Template/Journals/add.ctp:40
+#: Template/Journals/edit.ctp:31
+#: Template/Journals/index.ctp:96
+#: Template/Reports/display.ctp:26
+#: Template/Reports/view.ctp:34
+#: Template/Templates/add.ctp:20
+#: Template/Templates/edit.ctp:21
+#: Template/Templates/index.ctp:22
+#: Template/Templates/view.ctp:22
+msgid "Summary"
+msgstr ""
+
+#: Template/Journals/add.ctp:48
+#: Template/Journals/edit.ctp:39
+#: Template/Journals/view.ctp:61
+#: Template/Reports/display.ctp:155
+#: Template/Reports/view.ctp:274
+msgid "List Journals"
+msgstr ""
+
+#: Template/Journals/edit.ctp:12
+#: Template/Journals/view.ctp:56
+msgid "Edit Journal"
+msgstr ""
+
+#: Template/Journals/index.ctp:20
+#: Template/Layout/default.ctp:63
+msgid "Journals"
+msgstr ""
+
+#: Template/Journals/index.ctp:27;180
+#: Template/Reports/display.ctp:18;156
+#: Template/Reports/index.ctp:197
+#: Template/Reports/view.ctp:275
+msgid "New Journal"
+msgstr ""
+
+#: Template/Journals/index.ctp:29;198
+msgid "Filter"
+msgstr ""
+
+#: Template/Journals/index.ctp:40;188
+#: Template/Reports/index.ctp:202
+#: Template/Reports/view.ctp:280
+msgid "Scope"
+msgstr ""
+
+#: Template/Journals/index.ctp:76;197
+msgid "Keyword"
+msgstr ""
+
+#: Template/Journals/index.ctp:119;164
+#: Template/Journals/view.ctp:58
+#: Template/Templates/index.ctp:40;74
+#: Template/Templates/view.ctp:45
+msgid "Are you sure you want to delete # {0}?"
+msgstr ""
+
+#: Template/Journals/index.ctp:183
+#: Template/Reports/display.ctp:152
+msgid "View Report"
+msgstr ""
+
+#: Template/Journals/view.ctp:34
+#: Template/Templates/view.ctp:34
+msgid "Created"
+msgstr ""
+
+#: Template/Journals/view.ctp:36
+#: Template/Templates/view.ctp:36
+msgid "Modified"
+msgstr ""
+
+#: Template/Journals/view.ctp:57
+msgid "Copy Journal"
+msgstr ""
+
+#: Template/Journals/view.ctp:58
+msgid "Delete Journal"
+msgstr ""
+
+#: Template/Layout/default.ctp:64
+#: Template/Reports/index.ctp:10
+msgid "Reports"
+msgstr ""
+
+#: Template/Layout/error.ctp:35
+msgid "Error"
+msgstr ""
+
+#: Template/Layout/error.ctp:43
+msgid "Back"
+msgstr ""
+
+#: Template/Reports/display.ctp:10
+msgid "Dashboard"
+msgstr ""
+
+#: Template/Reports/display.ctp:19
+#: Template/Reports/index.ctp:209
+#: Template/Reports/view.ctp:10;287
+msgid "Report"
+msgstr ""
+
+#: Template/Reports/display.ctp:65
+#: Template/Reports/index.ctp:23;57;92;130;166
+#: Template/Reports/view.ctp:37;76;243
+msgid "Balance"
+msgstr ""
+
+#: Template/Reports/display.ctp:91
+#: Template/Reports/view.ctp:172;214
+msgid "Category"
+msgstr ""
+
+#: Template/Reports/display.ctp:93
+#: Template/Reports/view.ctp:174;216
+msgid "Ratio"
+msgstr ""
+
+#: Template/Reports/display.ctp:115
+msgid "Recent Journals"
+msgstr ""
+
+#: Template/Reports/display.ctp:157
+#: Template/Reports/view.ctp:273
+msgid "List Reports"
+msgstr ""
+
+#: Template/Reports/index.ctp:16
+msgid "Recently"
+msgstr ""
+
+#: Template/Reports/index.ctp:20
+msgid "Span"
+msgstr ""
+
+#: Template/Reports/index.ctp:37
+msgid "1 {0}"
+msgstr ""
+
+#: Template/Reports/index.ctp:50
+msgid "Daily"
+msgstr ""
+
+#: Template/Reports/index.ctp:85
+msgid "Weekly"
+msgstr ""
+
+#: Template/Reports/index.ctp:89
+#: Template/Reports/view.ctp:251
+msgid "Week"
+msgstr ""
+
+#: Template/Reports/index.ctp:123
+msgid "Monthly"
+msgstr ""
+
+#: Template/Reports/index.ctp:127
+#: Template/Reports/view.ctp:250
+msgid "Month"
+msgstr ""
+
+#: Template/Reports/index.ctp:159
+msgid "Annual"
+msgstr ""
+
+#: Template/Reports/index.ctp:163
+#: Template/Reports/view.ctp:249
+msgid "Year"
+msgstr ""
+
+#: Template/Reports/view.ctp:86;125
+msgid "Net Assets"
+msgstr ""
+
+#: Template/Reports/view.ctp:135;140
+msgid "Equities"
+msgstr ""
+
+#: Template/Reports/view.ctp:240
+msgid "Chart"
+msgstr ""
+
+#: Template/Reports/view.ctp:252
+msgid "Day"
+msgstr ""
+
+#: Template/Reports/view.ctp:268
+msgid "Next Report"
+msgstr ""
+
+#: Template/Reports/view.ctp:269
+msgid "Previous Report"
+msgstr ""
+
+#: Template/Reports/view.ctp:270
+msgid "Related Journals"
+msgstr ""
+
+#: Template/Templates/add.ctp:12
+msgid "Add Template"
+msgstr ""
+
+#: Template/Templates/add.ctp:28
+#: Template/Templates/edit.ctp:29
+#: Template/Templates/sort.ctp:44
+#: Template/Templates/view.ctp:48
+msgid "List Templates"
+msgstr ""
+
+#: Template/Templates/edit.ctp:12
+#: Template/Templates/view.ctp:44
+msgid "Edit Template"
+msgstr ""
+
+#: Template/Templates/index.ctp:90
+msgid "New Template"
+msgstr ""
+
+#: Template/Templates/index.ctp:91
+#: Template/Templates/sort.ctp:28
+msgid "Sort Templates"
+msgstr ""
+
+#: Template/Templates/view.ctp:45
+msgid "Delete Template"
+msgstr ""
+

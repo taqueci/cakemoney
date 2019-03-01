@@ -35,17 +35,17 @@ use Cake\Core\Configure;
 	  </div>
 	  <?= $this->Form->input('debit_id', ['label' => __('Debit'), 'showParents' => true]) ?>
 	  <?= $this->Form->input('credit_id', ['label' => __('Credit'), 'showParents' => true]) ?>
-	  <?= $this->Form->input('date', ['label' => __('Date'), 'type'=>'text', 'append' => '<button id="datepicker" class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>', 'value' => date('Y-m-d')]) ?>
+	  <?= $this->Form->input('date', ['label' => __('Date'), 'type'=>'text', 'append' => '<button id="datepicker" class="btn btn-default" type="button"><i class="fas fa-calendar"></i></button>', 'value' => date('Y-m-d')]) ?>
 	  <?= $this->Form->input('amount', ['label' => __('Amount')]) ?>
 	  <?= $this->Form->input('summary', ['label' => __('Summary')]) ?>
 	  <?= $this->Form->input('description', ['label' => __('Description'), 'type' => 'textarea']) ?>
 	</fieldset>
-	<?= $this->Form->button('<i class="fa fa-check" aria-hidden="true"></i> ' . __('Submit'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
+	<?= $this->Form->button('<i class="fas fa-check" aria-hidden="true"></i> ' . __('Submit'), ['class' => 'btn btn-primary', 'type' => 'submit', 'espace' => false]) ?>
 	<?= $this->Form->end() ?>
   </div>
   <div class="col-md-3">
 	<div class="list-group">
-	  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i> ' . __('List Journals'), ['action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i> ' . __('List Journals'), ['action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
   </div>
 </div>

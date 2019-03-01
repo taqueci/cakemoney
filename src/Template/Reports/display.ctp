@@ -15,9 +15,9 @@ use Cake\Core\Configure;
 	<div class="visible-xs">
 	  <div class="row">
 		<div class="col-md-12">
-		  <?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add', '?' => ['back' => $back]], ['class' => 'btn btn-default', 'escape' => false]) ?>
-		  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i> ' . __('Report'), ['controller' => 'reports', 'action' => 'view'], ['class' => 'btn btn-default', 'escape' => false]) ?>
-		  <a href="#q" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> <?= __('Search') ?></a>
+		  <?= $this->Html->link('<i class="fas fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add', '?' => ['back' => $back]], ['class' => 'btn btn-default', 'escape' => false]) ?>
+		  <?= $this->Html->link('<i class="fas fa-chart-bar" aria-hidden="true"></i> ' . __('Report'), ['controller' => 'reports', 'action' => 'view'], ['class' => 'btn btn-default', 'escape' => false]) ?>
+		  <a href="#q" class="btn btn-default"><i class="fas fa-search" aria-hidden="true"></i> <?= __('Search') ?></a>
 		</div>
 	  </div>
 	</div>
@@ -74,10 +74,10 @@ use Cake\Core\Configure;
 		<div align="right">
 		  <div class="btn-group" role="group" aria-label="Page navigation">
 			<button id="outgoings-btn-chart" class="btn btn-default btn-sm" type="button">
-			  <i class="fa fa-pie-chart" aria-hidden="true"></i>
+			  <i class="fas fa-chart-pie" aria-hidden="true"></i>
 			</button>
 			<button id="outgoings-btn-table" class="btn btn-default btn-sm" type="button">
-			  <i class="fa fa-table" aria-hidden="true"></i>
+			  <i class="fas fa-table" aria-hidden="true"></i>
 			</button>
 		  </div>
 		</div>
@@ -91,7 +91,7 @@ use Cake\Core\Configure;
 				<th><?= __('Category') ?></th>
 				<th><?= __('Amount') ?></th>
 				<th><?= __('Ratio') ?></th>
-				<th><i class="fa fa-ellipsis-h" aria-hidden="true"></i></th>
+				<th><i class="fas fa-ellipsis-h" aria-hidden="true"></i></th>
 			  </tr>
 			</thead>
 			<tbody>
@@ -103,7 +103,7 @@ use Cake\Core\Configure;
 				<td align="right"><?= number_format($x->sum) ?></td>
 				<td align="right"><?= sprintf('%.1f %%', 100 * $x->sum / $sum->expense) ?></td>
 				<td>
-				  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end, 'd[]' => $x->debit_id]], ['escape' => false]) ?>
+				  <?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'index', '?' => ['s' => $start, 'e' => $end, 'd[]' => $x->debit_id]], ['escape' => false]) ?>
 				</td>
 			  </tr>
 			  <?php endforeach; ?>
@@ -131,9 +131,9 @@ use Cake\Core\Configure;
 			  /
 			  <?= $this->Html->link($x->credit->name, ['controller' => 'journals', '?' => ['c[]' => $x->credit_id]]) ?>
 			  <span class="xs-icon float-right">
-				<?= $this->Html->link('<i class="fa fa-list-alt" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'view', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
+				<?= $this->Html->link('<i class="fas fa-list-alt" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'view', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
 				&nbsp;
-				<?= $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'edit', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
+				<?= $this->Html->link('<i class="fas fa-edit" aria-hidden="true"></i>', ['controller' => 'journals', 'action' => 'edit', $x->id, '?' => ['back' => $back]], ['escape' => false]) ?>
 			  </span>
 			</p>
 		  </li>
@@ -145,16 +145,16 @@ use Cake\Core\Configure;
   <div class="col-md-3">
     <?= $this->Form->create(null, ['url' => ['controller' => 'journals', 'action' => 'index']]) ?>
 	<fieldset>
-	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>']) ?>
+	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>']) ?>
 	</fieldset>
 	<?= $this->Form->end() ?>
 	<div class="list-group">
-	  <?= $this->Html->link('<i class="fa fa-bar-chart" aria-hidden="true"></i> ' . __('View Report'), ['controller' => 'reports', 'action' => 'view'], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fas fa-chart-bar" aria-hidden="true"></i> ' . __('View Report'), ['controller' => 'reports', 'action' => 'view'], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
 	<div class="list-group">
-	  <?= $this->Html->link('<i class="fa fa-list" aria-hidden="true"></i> ' . __('List Journals'), ['controller' => 'journals', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
-	  <?= $this->Html->link('<i class="fa fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add', '?' => ['back' => $back]], ['class' => 'list-group-item', 'escape' => false]) ?>
-	  <?= $this->Html->link('<i class="fa fa-list-ol" aria-hidden="true"></i> ' . __('List Reports'), ['controller' => 'reports', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fas fa-list" aria-hidden="true"></i> ' . __('List Journals'), ['controller' => 'journals', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fas fa-plus" aria-hidden="true"></i> ' . __('New Journal'), ['controller' => 'journals', 'action' => 'add', '?' => ['back' => $back]], ['class' => 'list-group-item', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fas fa-list-ol" aria-hidden="true"></i> ' . __('List Reports'), ['controller' => 'reports', 'action' => 'index'], ['class' => 'list-group-item', 'escape' => false]) ?>
 	</div>
   </div>	
 </div>

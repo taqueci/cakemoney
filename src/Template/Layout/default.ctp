@@ -49,7 +49,7 @@ if (!$this->fetch('tb_nav')) {
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-	  <?= $this->Html->link('<i class="fa fa-money fa-lg" aria-hidden="true"></i>', '/', ['class' => 'navbar-brand', 'escape' => false]) ?>
+	  <?= $this->Html->link('<i class="fas fa-piggy-bank fa-lg" aria-hidden="true"></i>', '/', ['class' => 'navbar-brand', 'escape' => false]) ?>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 		<span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
@@ -66,7 +66,7 @@ if (!$this->fetch('tb_nav')) {
       <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-			<i class="fa fa-cog fa-lg" aria-hidden="true"></i>
+			<i class="fas fa-cog fa-lg" aria-hidden="true"></i>
 			&nbsp;
 			<span class="caret"></span>
 		  </a>
