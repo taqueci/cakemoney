@@ -1,40 +1,20 @@
 <?php
 /**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ * @link          https://cakephp.org CakePHP(tm) Project
  * @since         0.10.8
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-// You can remove this if you are confident that your PHP version is sufficient.
-if (version_compare(PHP_VERSION, '5.6.0') < 0) {
-    trigger_error('Your PHP version must be equal or higher than 5.6.0 to use CakePHP.', E_USER_ERROR);
-}
-
 /*
- *  You can remove this if you are confident you have intl installed.
- */
-if (!extension_loaded('intl')) {
-    trigger_error('You must enable the intl extension to use CakePHP.', E_USER_ERROR);
-}
-
-/*
- * You can remove this if you are confident you have mbstring installed.
- */
-if (!extension_loaded('mbstring')) {
-    trigger_error('You must enable the mbstring extension to use CakePHP.', E_USER_ERROR);
-}
-
-/*
- * Configure paths required to find CakePHP + general filepath
- * constants
+ * Configure paths required to find CakePHP + general filepath constants
  */
 require __DIR__ . '/paths.php';
 
@@ -51,18 +31,35 @@ require CORE_PATH . 'config' . DS . 'bootstrap.php';
 
 use Cake\Cache\Cache;
 use Cake\Console\ConsoleErrorHandler;
-use Cake\Core\App;
 use Cake\Core\Configure;
 use Cake\Core\Configure\Engine\PhpConfig;
 use Cake\Core\Plugin;
 use Cake\Database\Type;
 use Cake\Datasource\ConnectionManager;
 use Cake\Error\ErrorHandler;
+use Cake\Http\ServerRequest;
 use Cake\Log\Log;
 use Cake\Mailer\Email;
-use Cake\Network\Request;
+use Cake\Mailer\TransportFactory;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
+
+/**
+ * Uncomment block of code below if you want to use `.env` file during development.
+ * You should copy `config/.env.default to `config/.env` and set/modify the
+ * variables as required.
+ *
+ * It is HIGHLY discouraged to use a .env file in production, due to security risks
+ * and decreased performance on each request. The purpose of the .env file is to emulate
+ * the presence of the environment variables like they would be present in production.
+ */
+// if (!env('APP_NAME') && file_exists(CONFIG . '.env')) {
+//     $dotenv = new \josegonzalez\Dotenv\Loader([CONFIG . '.env']);
+//     $dotenv->parse()
+//         ->putenv()
+//         ->toEnv()
+//         ->toServer();
+// }
 
 /*
  * Read configuration file and inject configuration into various
@@ -94,11 +91,13 @@ try {
 if (Configure::read('debug')) {
     Configure::write('Cache._cake_model_.duration', '+2 minutes');
     Configure::write('Cache._cake_core_.duration', '+2 minutes');
+    // disable router cache during development
+    Configure::write('Cache._cake_routes_.duration', '+2 seconds');
 }
 
 /*
- * Set server timezone to UTC. You can change it to another timezone of your
- * choice but using UTC makes time calculations / conversions easier.
+ * Set the default server timezone. Using UTC makes time calculations / conversions easier.
+ * Check http://php.net/manual/en/timezones.php for list of valid timezone strings.
  */
 date_default_timezone_set('UTC');
 
@@ -149,12 +148,12 @@ if (!Configure::read('App.fullBaseUrl')) {
     unset($httpHost, $s);
 }
 
-Cache::config(Configure::consume('Cache'));
-ConnectionManager::config(Configure::consume('Datasources'));
-Email::configTransport(Configure::consume('EmailTransport'));
-Email::config(Configure::consume('Email'));
-Log::config(Configure::consume('Log'));
-Security::salt(Configure::consume('Security.salt'));
+Cache::setConfig(Configure::consume('Cache'));
+ConnectionManager::setConfig(Configure::consume('Datasources'));
+TransportFactory::setConfig(Configure::consume('EmailTransport'));
+Email::setConfig(Configure::consume('Email'));
+Log::setConfig(Configure::consume('Log'));
+Security::setSalt(Configure::consume('Security.salt'));
 
 /*
  * The default crypto extension in 3.0 is OpenSSL.
@@ -166,12 +165,12 @@ Security::salt(Configure::consume('Security.salt'));
 /*
  * Setup detectors for mobile and tablet.
  */
-Request::addDetector('mobile', function ($request) {
+ServerRequest::addDetector('mobile', function ($request) {
     $detector = new \Detection\MobileDetect();
 
     return $detector->isMobile();
 });
-Request::addDetector('tablet', function ($request) {
+ServerRequest::addDetector('tablet', function ($request) {
     $detector = new \Detection\MobileDetect();
 
     return $detector->isTablet();
@@ -183,7 +182,7 @@ Request::addDetector('tablet', function ($request) {
  * You can enable default locale format parsing by adding calls
  * to `useLocaleParser()`. This enables the automatic conversion of
  * locale specific date formats. For details see
- * @link http://book.cakephp.org/3.0/en/core-libraries/internationalization-and-localization.html#parsing-localized-datetime-data
+ * @link https://book.cakephp.org/3.0/en/core-libraries/internationalization-and-localization.html#parsing-localized-datetime-data
  */
 Type::build('time')
     ->useImmutable();
@@ -213,17 +212,6 @@ Type::build('timestamp')
  * Plugin::load('Migrations'); //Loads a single plugin named Migrations
  *
  */
-
-/*
- * Only try to load DebugKit in development mode
- * Debug Kit should not be installed on a production system
- */
-if (Configure::read('debug')) {
-    Plugin::load('DebugKit', ['bootstrap' => true]);
-}
-
-Plugin::load('Search');
-Plugin::load('BootstrapUI');
 
 \Cake\I18n\Date::setToStringFormat('yyyy-MM-dd');
 \Cake\I18n\FrozenDate::setToStringFormat('yyyy-MM-dd');
