@@ -171,7 +171,7 @@ $this->append('css', $css);
     <?= $this->Paginator->numbers(['prev' => '&lsaquo;', 'next' => '&rsaquo;']) ?>
   </div>
   <div class="col-md-3">
-	<?= $this->Form->create() ?>
+	<?= $this->Form->create(null, ['type' => 'get']) ?>
 	<fieldset>
 	  <?= $this->Form->input('q', ['label' => false, 'placeholder' => __('Search'), 'append' => '<button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>']) ?>
 	</fieldset>
